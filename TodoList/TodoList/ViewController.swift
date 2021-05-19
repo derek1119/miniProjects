@@ -19,11 +19,30 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Tasks"
-        // 현재 저장된 모든 tasks를 불러오기.
+       
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        // Setup
+        
+        if !UserDefaults().bool(forKey: "setup") {
+            UserDefaults().set(true, forKey: "setup")
+            UserDefaults().set(0, forKey: "count")
+        }
+        //UserDefaults란 간단히 얘기해서 "데이터 저장소"이다. UserDefaults를 이용하면 앱의 어느 곳에서나 데이터를 쉽게 읽고 저장할 수 있게된다. UserDefaults는 사용자 기본 설정과 단일 데이터 값에 적합하다. UserDefaults는 [데이터, 키(key)]으로 데이터를 저장한다. 이때 key의 값은 string이다. 이때 key값은 여러개의 데이터를 저장해야할 때를 위해 이 key값을 이용하므로 하고싶은 문자열로 저장하면 된다.
+        // 만일 "setup"이 되어있지 않다면 setup 키에 해당하는 데이터를 true로 하고 "count"에 해당하는 값을 0으로하여라. 
+        
+        
+        // 현재 저장된 모든 tasks를 불러오기.
+        updateTasks()
+        //view가 다 만들어지면 업데이트를 하여라
     }
+    
+    func updateTasks() {
+        
+    }
+    //task에 대한 데이터를 업데이트하는 함수
     
     @IBAction func addButtonTapped() {
         
@@ -32,6 +51,11 @@ class ViewController: UIViewController {
         //storyboard안에 기입한 storyboardID를 가지고 스토리보드 데이터를 초기화 해 viewController를 만든다.
         //instantiateViewController는 새로운 뷰로 넘어갈 때 사용해야 한다. 
         vc.title = "New Task"
+        vc.update = {
+            self.updateTasks()
+        }
+        //viewController를 초기화하면서 update변수에 updateTask함수를 넣음..? 클로저 ..? 함수의 변수화
+        //그냥 이해하자면 뷰컨트롤러의 updateTasks함수를 실행한다?
         navigationController?.pushViewController(vc, animated: true)
         // 위 방식은 네비게이션컨트롤러를 사용하여 화면 전환하는 방법이다.
     }

@@ -14,6 +14,8 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
     //task 입력을 위한 textfield outlet 연결
     @IBOutlet var field: UITextField!
     
+    var update: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         field.delegate = self
@@ -30,15 +32,21 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     //텍스트 필드에 무슨 일이 발생하고 반환값이 있다라는 함수, 델리게이트를 '구현'하는 과정이다.
-    //'사용자가 텍스트필드에 어떤 일을 하고 리턴될 것이다.'의 의미, 여기서 return은 엔터
+    //'사용자가 텍스트필드에 어떤 일을 하고 리턴될 것이다.'의 의미
     
     @objc func saveTask() {
         
-        guard let text = field.text, !text.isEmpty else {
-            return
-        }
+        guard let text = field.text, !text.isEmpty else { return }
+        //textfield의 텍스트가 있고 text가 뭔가 적혀져있다면 다음으로 넘어가 저장단계를 거치고 아니라면 return해라
         
-        
+        guard let count = UserDefaults.value(forKey: "count") as? Int else { return }
+        //count는 데이터의 갯수(task)의 개수를 의미하며 이 값이 있다면 다음으로 가면서 타입캐스팅을 int로 하여라
+        let newCount = count + 1
+        UserDefaults().set(newCount, forKey: "count")
+        //다음 데이터는 count + 1으로 새로운 키값 제공
+        UserDefaults().set(text, forKey: "task_\(newCount)")
+        //task의 고유번호에 대해 text를 저장(task 명이 될 것)
+
     }
     //#selector에서 사용되려면 @objc func이 되어야한다.
 }
