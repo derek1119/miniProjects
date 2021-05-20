@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         
         // Setup
         
-        if !UserDefaults().bool(forKey: "setup") {
+        if UserDefaults().bool(forKey: "setup") {
             UserDefaults().set(true, forKey: "setup")
             UserDefaults().set(0, forKey: "count")
         }
@@ -40,9 +40,17 @@ class ViewController: UIViewController {
     }
     
     func updateTasks() {
+        guard let count = UserDefaults().value(forKey: "count") as? Int else { return }
+        
+        for x in 0..<count {
+            if let task = UserDefaults().value(forKey: "task_\(x+1)") as? String {
+                tasks.append(task)
+            }
+        }
         
     }
     //task에 대한 데이터를 업데이트하는 함수
+    //count라는 상수를 가지고 UserDefaults의 task 데이터를 훑어본 뒤에 빈 배열인 tasks에 추가한다.
     
     @IBAction func addButtonTapped() {
         
@@ -52,10 +60,17 @@ class ViewController: UIViewController {
         //instantiateViewController는 새로운 뷰로 넘어갈 때 사용해야 한다. 
         vc.title = "New Task"
         vc.update = {
-            self.updateTasks()
+            DispatchQueue.main.async {
+                self.updateTasks()
+            }
         }
         //viewController를 초기화하면서 update변수에 updateTask함수를 넣음..? 클로저 ..? 함수의 변수화
-        //그냥 이해하자면 뷰컨트롤러의 updateTasks함수를 실행한다?
+        //add 버튼을 탭하는 이벤트가 발생하고 그냥 이해하자면 뷰컨트롤러의 updateTasks함수를 실행한다?
+
+        //Queue란 영화 티켓을 살 때 줄 서는 것과 같다. 먼저 온 순서대로 먼저 나가는 것이다. FIFO(first in first out)자료구조
+        //DispatchQueue는 작업항목의 실행을 관리하는 클래스이다. 대기열(Queue)에 추가된 작업항목은 시스템이 관리하는 스레드풀에서 처리하고 작업을 완료하면 알아서 해제한다.
+        //.main은 현 프로세스의 main thread와 관련된 dispatch queue이다. 
+        //async와 sync는 비동기와 동기의 차이이다. synchronous 함수는 작업이 다 끝난 다음에만 현재의 queue에게 컨트롤을 넘기며 그 전까지 현재의 queue는 block되어 작업이 끝날 때까지 기다려야한다. asynchronous 함수는 작업을 수행할 다른 큐에게 작업을 넘기자마자 현재의 queue에게 컨트롤을 돌려준다. 작업이 끝나기 전까지 기다릴 필요가 없으며 현재의 queue도 block되지 않는다.
         navigationController?.pushViewController(vc, animated: true)
         // 위 방식은 네비게이션컨트롤러를 사용하여 화면 전환하는 방법이다.
     }
