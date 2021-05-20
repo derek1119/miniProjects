@@ -14,7 +14,7 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
     //task 입력을 위한 textfield outlet 연결
     @IBOutlet var field: UITextField!
     
-    var update: (() -> Void)?
+    var update : (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -40,6 +40,10 @@ class ViewController: UIViewController {
     }
     
     func updateTasks() {
+        
+        tasks.removeAll()
+        //아래의 for문을 실행하게 되면 tasks에 중복으로 들어가기 때문에 먼저 비운다.
+
         guard let count = UserDefaults().value(forKey: "count") as? Int else { return }
         
         for x in 0..<count {
@@ -48,11 +52,15 @@ class ViewController: UIViewController {
             }
         }
         
+        tableView.reloadData()
+        //그리고 나서 다시 입력된 데이터를 불러온다. 
+        
     }
     //task에 대한 데이터를 업데이트하는 함수
     //count라는 상수를 가지고 UserDefaults의 task 데이터를 훑어본 뒤에 빈 배열인 tasks에 추가한다.
     
     @IBAction func addButtonTapped() {
+        
         
         let vc = storyboard?.instantiateViewController(identifier: "entry") as! EntryViewController
         //위 코드는 스토리보드 파일로부터 데이터를 불러와서 viewController를 생성하고 메모리 공간의 allocation을 의미한다.
@@ -84,6 +92,12 @@ extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //셀이 선택되면 애니메이션 작동
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let vc = storyboard?.instantiateViewController(identifier: "task") as! TaskViewController
+        vc.title = "New Task"
+        vc.task = tasks[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+        //cell 선택시 taskViewController로 이동
     }
 }
 
