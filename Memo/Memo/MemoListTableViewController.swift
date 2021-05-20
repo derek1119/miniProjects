@@ -39,7 +39,6 @@ class MemoListTableViewController: UITableViewController {
         cell.detailTextLabel?.text = target.insertDate.description
         //description은 date 값을 string으로 변환시켜줌
         
-        
 
         return cell
     }
