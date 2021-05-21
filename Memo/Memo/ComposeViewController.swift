@@ -8,14 +8,18 @@
 import UIKit
 
 class ComposeViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+        //화면을 닫는 메소드
+    }
+    
     /*
     // MARK: - Navigation
 
