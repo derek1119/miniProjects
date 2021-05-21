@@ -15,6 +15,7 @@
 		3586B3C12656750100D318BF /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586B3C02656750100D318BF /* Model.swift */; };
 		3586B3C526567A7100D318BF /* MemoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586B3C426567A7100D318BF /* MemoListTableViewController.swift */; };
 		3586B3C726577D9300D318BF /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586B3C626577D9300D318BF /* ComposeViewController.swift */; };
+		3586B3C926577FEC00D318BF /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586B3C826577FEC00D318BF /* UIViewController+Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3586B3C02656750100D318BF /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		3586B3C426567A7100D318BF /* MemoListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTableViewController.swift; sourceTree = "<group>"; };
 		3586B3C626577D9300D318BF /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		3586B3C826577FEC00D318BF /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				3586B3AD2656405200D318BF /* SceneDelegate.swift */,
 				3586B3B12656405200D318BF /* Main.storyboard */,
 				3586B3C626577D9300D318BF /* ComposeViewController.swift */,
+				3586B3C826577FEC00D318BF /* UIViewController+Alert.swift */,
 				3586B3C426567A7100D318BF /* MemoListTableViewController.swift */,
 				3586B3B42656405400D318BF /* Assets.xcassets */,
 				3586B3B62656405400D318BF /* LaunchScreen.storyboard */,
@@ -154,6 +157,7 @@
 				3586B3C726577D9300D318BF /* ComposeViewController.swift in Sources */,
 				3586B3C12656750100D318BF /* Model.swift in Sources */,
 				3586B3AC2656405200D318BF /* AppDelegate.swift in Sources */,
+				3586B3C926577FEC00D318BF /* UIViewController+Alert.swift in Sources */,
 				3586B3AE2656405200D318BF /* SceneDelegate.swift in Sources */,
 				3586B3C526567A7100D318BF /* MemoListTableViewController.swift in Sources */,
 			);
