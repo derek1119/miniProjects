@@ -13,14 +13,45 @@ class MemoListTableViewController: UITableViewController {
         f.dateStyle = .long
         f.timeStyle = .short
         f.locale = Locale(identifier: "Ko_kr")
-        //날짜 표시 형식을 한국 형식으로 바꿔줌 
+        //날짜 표시 형식을 한국 형식으로 바꿔줌
         
         return f
     }()
     //DateFormatter로 날짜 표시 형식을 long, 시간 형식을 short으로 설정, fomatter라는 새로운 속성은 클로저를 활용해 초기화를 했음.
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+//        tableView.reloadData()
+//        //reloadDate()만 호출하면 데이터 소스가 전달해주는 최신 데이터로 업데이트한다.
+//        print("View Will Appear")
+    }
+    // 뷰컨트롤러가 관리하는 뷰가 화면에 표시되기 직전에 자동으로 호출되는 메소드.
+    
+    var token : NSObjectProtocol?
+    //토큰을 저장할 속성을 추가
+    deinit {
+        if let token = token {
+            NotificationCenter.default.removeObserver(token)
+        }
+    }
+    //viewDidLoad에서 추가한 옵저버는 뷰가 화면에서 사라지기 전에 해제하거나 소멸자(deinit?)에서 해제한다. 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        token = NotificationCenter.default.addObserver(
+            forName: ComposeViewController.newMemoDidInsert,
+            //옵저버를 추가할 노티피케이션의 이름을 전달한다.
+            object: nil,
+            //특별한 이유가 없다면 nil
+            queue: OperationQueue.main
+            //노티피케이션이 전달되면 테이블 뷰를 업데이트해야한다. 다시 말해 UI를 update해야한다. UI update코드는 반드시 main thread에서 실행해야한다. 모든 프로그래밍에서 기본 중의 기본이다. iOS에서는 쓰레드를 직접 처리하지 않고 dispatchQueue나 operationQueue를 사용한다. 이렇게하면 옵저버가 실행하는 코드가 메인쓰레드에서 실행된다.
+        ) { [weak self] (noti) in self?.tableView.reloadData()
+            //마지막 파라미터에는 클로저를 실행한다. 노티피케이션이 전달되면 4번째 파라미터로 전달한 클로저가 3번째 파리미터로 전달한 쓰레드에서 실행된다.
+        }
+        //옵저버는 한번만 만들어놓으면 되기때문에 viewDidLoad에서 호출한다.
+        //노티피케이션을 구현할 때 가장 중요한 것은 옵저버를 해제하는 것이다. 해제하지 않으면 내부적으로 메모리가 낭비된다. 위 코드에서 addObserver 메소드는 옵저버를 해제할 때 사용하는 객체를 리턴해준다. 보통 이 객체를 토큰이라고 부른다. 따라서 token을 만들고 addObserver가 리턴하는 토큰을 token에 저장하는 과정이다.
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,6 +59,7 @@ class MemoListTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    //viewController가 생성된 후에 자동으로 호출된다. 주로 한번만 호출하는 초기화 코드를 여기서 호출한다.
 
     // MARK: - Table view data source
 
