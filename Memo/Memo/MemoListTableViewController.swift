@@ -19,6 +19,19 @@ class MemoListTableViewController: UITableViewController {
     }()
     //DateFormatter로 날짜 표시 형식을 long, 시간 형식을 short으로 설정, fomatter라는 새로운 속성은 클로저를 활용해 초기화를 했음.
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let cell = sender as? UITableViewCell, /*sender를 UITableViewCell로 타입캐스팅*/
+           let indexPath = tableView.indexPath(for: cell) /* 바인딩된 셀을 테이블뷰로 전달해서 indexPath가져오기, 이를 통해 indexPath를 통해서 몇 번째 셀인지 확인할 수 있다. */ {
+            if let vc = segue.destination as? DetailViewController {
+                vc.memo = Memo.dummyMemoList[indexPath.row]
+                //DetailViewController로 타입케스팅된 vc 내부에 memo 변수에 indexPath.row 값을 이용하여 배열의 몇 번째인지 찾아내어 저장한다. 
+            }
+        }
+        //segue.source : 세그웨이를 실행하는 화면 / segue.destination : 새롭게 표시되는 화면
+        //destination의 속성을 보면 그저 UIViewController이기 때문에 타입캐스팅을 해야한다.
+    }
+    //이 메소드는 세그웨이가 연결된 화면을 생성하고 화면을 전환하기 직전에 호출된다.
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

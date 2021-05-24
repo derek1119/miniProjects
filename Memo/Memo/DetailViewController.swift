@@ -9,6 +9,21 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    var memo : Memo?
+    //viewController가 초기화되는 시점에는 값이 없기 때문에 옵셔널로 선언해줌
+    //이전 화면에서 전달한 메모가 저장된다. 
+    
+    let formatter : DateFormatter = {
+        let f = DateFormatter()
+        f.dateStyle = .long
+        f.timeStyle = .short
+        f.locale = Locale(identifier: "Ko_kr")
+        //날짜 표시 형식을 한국 형식으로 바꿔줌
+        
+        return f
+    }()
+    //dateCell에 날짜 정보를 넣기 위한 날짜 formatter 복사 붙여넣기
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,9 +54,13 @@ extension DetailViewController : UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath)
             
+            cell.textLabel?.text = memo?.content
+            
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell", for: indexPath)
+            
+            cell.textLabel?.text = formatter.string(for: memo?.insertDate)
             
             return cell
         default :
