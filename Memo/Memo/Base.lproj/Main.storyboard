@@ -70,16 +70,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yoS-sm-dSh">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
-                                <items>
-                                    <barButtonItem systemItem="compose" id="EMq-TQ-5I3">
-                                        <connections>
-                                            <segue destination="dAi-UL-cdP" kind="presentation" id="1qE-sU-huK"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VxN-bs-z5R">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -123,6 +113,23 @@
                                     <outlet property="dataSource" destination="YV3-ca-W9j" id="4xr-Eo-r3K"/>
                                 </connections>
                             </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yoS-sm-dSh">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem systemItem="trash" id="9Pw-90-RrX">
+                                        <color key="tintColor" systemColor="systemRedColor"/>
+                                        <connections>
+                                            <action selector="deleteMemo:" destination="YV3-ca-W9j" id="XLi-yY-lIB"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UpB-jt-Uit"/>
+                                    <barButtonItem systemItem="compose" id="EMq-TQ-5I3">
+                                        <connections>
+                                            <segue destination="dAi-UL-cdP" kind="presentation" id="1qE-sU-huK"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="q49-fe-DVH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -235,6 +242,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

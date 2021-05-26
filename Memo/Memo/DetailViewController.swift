@@ -48,6 +48,21 @@ class DetailViewController: UIViewController {
         })
 
     }
+    @IBAction func deleteMemo(_ sender: Any) {
+        let alert = UIAlertController(title: "삭제 확인", message: "메모를 삭제할까요?", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "삭제", style: .destructive) { [weak self] (action) in
+            DataManager.shared.deleteMemo(self?.memo)
+            self?.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        //어떤 버튼을 선택하든 항상 경고창이 자동으로 사라지기 때문에 경고창을 닫는 코드는 직접 구현할 필요가 없기 때문에 핸들러에 nil을 전달함
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
     
 
     /*

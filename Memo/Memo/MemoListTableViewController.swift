@@ -100,30 +100,41 @@ class MemoListTableViewController: UITableViewController {
         cell.detailTextLabel?.text = formatter.string(for: target.insertDate)
         //formatter에서 string(from: )메소드를 호출하고 날짜를 전달하면 위에서 지정한 스타일로 포맷팅해서 문자열로 리턴해준다.
         
-
+        
         return cell
     }
     //그리고 위 메소드를 호출하여 각 셀의 어떤 정보를 어떤 디자인으로 할지 답변을 받는다. 이때 indexPath파라미터로 몇 번째 셀인지 확인하며 셀을 생성할 때 마다 위 메소드를 반복적으로 호출된다.
-
-    /*
+    
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
-
-    /*
+    //테이블뷰의 편집기능 활성화 하는 메소드
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            
+            let target = DataManager.shared.memoList[indexPath.row]
+            DataManager.shared.deleteMemo(target)
+            //데이터 베이스에서 메모 삭제
+            DataManager.shared.memoList.remove(at: indexPath.row)
+            //테이블 뷰에 표시하는 데이터는 memoList에 저장되어 있기 때문에 삭제해줘야함 안그러면 앱이 크래쉬가 난다.
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
+            //테이블 뷰 셀 삭제
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
