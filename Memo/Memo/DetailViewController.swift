@@ -9,6 +9,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    @IBOutlet var memoTableView: UITableView!
     var memo : Memo?
     //viewController가 초기화되는 시점에는 값이 없기 때문에 옵셔널로 선언해줌
     //이전 화면에서 전달한 메모가 저장된다. 
@@ -24,10 +25,28 @@ class DetailViewController: UIViewController {
     }()
     //dateCell에 날짜 정보를 넣기 위한 날짜 formatter 복사 붙여넣기
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination.children.first as? ComposeViewController {
+            vc.editTarget = memo
+        }
+    }
+    
+    var token : NSObjectProtocol?
+    //노티피케이션 토큰 저장
+    deinit {
+        if let token = token {
+            NotificationCenter.default.removeObserver(token)
+        }
+    }
+    //옵저버 해제 코드
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        token = NotificationCenter.default.addObserver(forName: ComposeViewController.memoDidChange, object: nil, queue: OperationQueue.main, using: { [weak self] (noti) in
+            self?.memoTableView.reloadData()
+        })
 
-        // Do any additional setup after loading the view.
     }
     
 

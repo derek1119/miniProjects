@@ -61,7 +61,7 @@ class DataManager {
         //context를 저장하는 메소드는 아래 메소드이다.
         
         memoList.insert(newMemo, at: 0)
-        //메모리스트에 추가하여 업데이트까지 
+        //메모리스트에 추가하여 업데이트까지
         
         saveContext()
     }
