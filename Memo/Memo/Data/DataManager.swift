@@ -50,6 +50,24 @@ class DataManager {
     // 데이터를 데이터 베이스에서 읽어오는 것을 표현하는 다양한 용어가 있는데 iOS에서는 이것을 fetch라고 한다.
     // 데이터 베이스에서 데이터를 읽어올때는 먼저 fetch Request를 만들어야한다.
     
+    func addNewMemo(_ memo : String) {
+        let newMemo = Memo(context: mainContext)
+        //여기서 Memo는 Core Data가 만들어준 클래스이다. 따라서 새로운 인스턴스를 만들 때, 생성자로 context를 전달해야한다.
+        //이 방법으로 데이터 베이스에 메모를 저장하는데 필요한 비어있는 인스턴스 생성
+        //아래는 비어있는 메모 채우기
+        newMemo.content = memo
+        newMemo.insertDate = Date()
+        //이렇게만 한다고 메모가 데이터 베이스에 저장되는 것은 아니다. 이를 하기 위해서는 context를 저장해야하는데
+        //context를 저장하는 메소드는 아래 메소드이다.
+        
+        memoList.insert(newMemo, at: 0)
+        //메모리스트에 추가하여 업데이트까지 
+        
+        saveContext()
+    }
+    
+    
+    
     
     // MARK: - Core Data stack
     

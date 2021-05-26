@@ -35,6 +35,8 @@ class ComposeViewController: UIViewController {
 //        Memo.dummyMemoList.append(newMemo)
 //        //이 텍스트를 dummyMemoList에 추가함.
         
+        DataManager.shared.addNewMemo(memo)
+        
         NotificationCenter.default.post(name: ComposeViewController.newMemoDidInsert, object: nil)
         //이 코드는 라디오 방송국에서 라디오 방송을 브로드케스팅(방송하는 것)과 같다. 노티피케이션은 특정 개체에게 바로 전달되지 않는다. 이를 유니케스트라고 부른다. 노티피케이션은 브로드 케스트이다. 앱을 구성하는 모든 개체로 전달된다. 이는 잘못된 설명이지만 처음 단계에서는 이렇게 이해해도 된다. 이제 여기서 전달한 노티피케이션을 처리해야한다. 옵저버를 등록하고 필요한 코드를 구현하는 방식으로 처리한다. 이는 마치 라디오 주파수를 맞추는 것에 비유할 수 있다. 
         
