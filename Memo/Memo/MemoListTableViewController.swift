@@ -23,7 +23,7 @@ class MemoListTableViewController: UITableViewController {
         if let cell = sender as? UITableViewCell, /*sender를 UITableViewCell로 타입캐스팅*/
            let indexPath = tableView.indexPath(for: cell) /* 바인딩된 셀을 테이블뷰로 전달해서 indexPath가져오기, 이를 통해 indexPath를 통해서 몇 번째 셀인지 확인할 수 있다. */ {
             if let vc = segue.destination as? DetailViewController {
-                vc.memo = Memo.dummyMemoList[indexPath.row]
+                vc.memo = DataManager.shared.memoList[indexPath.row]
                 //DetailViewController로 타입케스팅된 vc 내부에 memo 변수에 indexPath.row 값을 이용하여 배열의 몇 번째인지 찾아내어 저장한다. 
             }
         }
@@ -34,6 +34,9 @@ class MemoListTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        DataManager.shared.fetchMemo()
+        tableView.reloadData()
         
 //        tableView.reloadData()
 //        //reloadDate()만 호출하면 데이터 소스가 전달해주는 최신 데이터로 업데이트한다.
@@ -79,7 +82,7 @@ class MemoListTableViewController: UITableViewController {
     //table view는 바보이기 때문에 몇 개의 셀이 필요하고 각 셀을 어떤 디자인으로 해야할지 모른다.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return Memo.dummyMemoList.count
+        return DataManager.shared.memoList.count
         //Model의 Memo 클래스의 dummyMemoList의 갯수만큼 행을 생성
     }
     //먼저 위 메소드를 호출하여 몇 개의 셀을 생성해야하는지 답변을 받는다.
@@ -90,11 +93,11 @@ class MemoListTableViewController: UITableViewController {
         //indexPath는 목록 내에서 특정 셀 위치를 표현할 때 사용한다.
         
         // Configure the cell...
-        let target = Memo.dummyMemoList[indexPath.row]
+        let target = DataManager.shared.memoList[indexPath.row]
         //해당 행과 일치하는 배열의 값을 target 상수로 만듬
         cell.textLabel?.text = target.content
         //cell의 textLabel에 content 데이터를 입력함
-        cell.detailTextLabel?.text = formatter.string(from: target.insertDate)
+        cell.detailTextLabel?.text = formatter.string(for: target.insertDate)
         //formatter에서 string(from: )메소드를 호출하고 날짜를 전달하면 위에서 지정한 스타일로 포맷팅해서 문자열로 리턴해준다.
         
 

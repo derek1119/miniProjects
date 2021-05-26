@@ -30,10 +30,10 @@ class ComposeViewController: UIViewController {
         }
         // memo.count > 0 인 이유는 텍스트가 입력되었는지 확인하는 것이고 만일 어떤 입력도 받지 않았다면 alert를 하고 return, 만일 텍스트가 입력되었다면 가드문 다음의 코드가 실행된다.
         
-        let newMemo = Memo(content: memo)
-        //memo를 Memo 모델의 컨텐트로 상수화 시키고
-        Memo.dummyMemoList.append(newMemo)
-        //이 텍스트를 dummyMemoList에 추가함.
+//        let newMemo = Memo(content: memo)
+//        //memo를 Memo 모델의 컨텐트로 상수화 시키고
+//        Memo.dummyMemoList.append(newMemo)
+//        //이 텍스트를 dummyMemoList에 추가함.
         
         NotificationCenter.default.post(name: ComposeViewController.newMemoDidInsert, object: nil)
         //이 코드는 라디오 방송국에서 라디오 방송을 브로드케스팅(방송하는 것)과 같다. 노티피케이션은 특정 개체에게 바로 전달되지 않는다. 이를 유니케스트라고 부른다. 노티피케이션은 브로드 케스트이다. 앱을 구성하는 모든 개체로 전달된다. 이는 잘못된 설명이지만 처음 단계에서는 이렇게 이해해도 된다. 이제 여기서 전달한 노티피케이션을 처리해야한다. 옵저버를 등록하고 필요한 코드를 구현하는 방식으로 처리한다. 이는 마치 라디오 주파수를 맞추는 것에 비유할 수 있다. 
