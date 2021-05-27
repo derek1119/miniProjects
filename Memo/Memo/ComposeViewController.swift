@@ -16,6 +16,23 @@ class ComposeViewController: UIViewController {
     @IBOutlet var memoTextView: UITextView!
     //memoTextView 아울렛으로 연결 -> 이를 컨트롤하기 위함.
     
+    //토큰을 저장할 속성 생성
+    var willShowToken : NSObjectProtocol?
+    var willHideToken : NSObjectProtocol?
+    //위의 속성들은 옵저버를 해제할 때 사용된다.
+    
+    deinit {
+    //소멸자
+        if let token = willShowToken {
+            NotificationCenter.default.removeObserver(token)
+        }
+        
+        if let token = willHideToken {
+            NotificationCenter.default.removeObserver(token)
+        }
+    }
+    //위 코드로 인해 화면이 해제되는 시점에 옵저버도 해제된다.
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,11 +46,48 @@ class ComposeViewController: UIViewController {
         }
         
         memoTextView.delegate = self
+        
+        //옵저버 등록 코드
+        //키보드가 표시되기 전에 전달되는 노티피케이션
+        willShowToken = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: OperationQueue.main, using: {[weak self] (noti) in
+            //키보드 높이만큼 여백 추가
+            guard let strongSelf = self else {return}
+            
+            if let frame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let height = frame.cgRectValue.height
+                var inset = strongSelf.memoTextView.contentInset
+                
+                inset.bottom = height
+                strongSelf.memoTextView.contentInset = inset
+                
+                //텍스트뷰 오른쪽 스크롤바에도 여백을 추가해야 한다.
+                inset = strongSelf.memoTextView.scrollIndicatorInsets
+                inset.bottom = height
+                strongSelf.memoTextView.scrollIndicatorInsets = inset
+                
+            }
+        })
+        
+        willHideToken = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: OperationQueue.main, using: { [weak self] (noti) in
+            guard let strongSelf = self else { return }
+            
+            var inset = strongSelf.memoTextView.contentInset
+            inset.bottom = 0
+            strongSelf.memoTextView.contentInset = inset
+            
+            inset = strongSelf.memoTextView.scrollIndicatorInsets
+            inset.bottom = 0
+            strongSelf.memoTextView.scrollIndicatorInsets = inset
+        })
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        memoTextView.becomeFirstResponder()
+        //입력 포커스가 되며 자동으로 키보드가 올라옴 
         navigationController?.presentationController?.delegate = self
         //편집화면이 표시되기 직전에 델리게이트로 설정됨
     }
@@ -41,6 +95,8 @@ class ComposeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        memoTextView.resignFirstResponder()
+        //입력 포커스가 사라지고 키보드가 내려감
         navigationController?.presentationController?.delegate = nil
         //편집화면이 사라지기 직전에 델리게이트 해제
     }
