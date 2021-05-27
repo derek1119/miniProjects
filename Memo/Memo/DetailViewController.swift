@@ -64,11 +64,15 @@ class DetailViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func share(_ sender: Any) {
+    @IBAction func share(_ sender: UIBarButtonItem) {
         
         guard let memo = memo?.content else { return }
         let vc = UIActivityViewController(activityItems: [memo], applicationActivities: nil)
         present(vc, animated: true, completion: nil)
+        
+        if let pc = vc.popoverPresentationController {
+            pc.barButtonItem = sender
+        }
     }
     //이 3줄의 코드로 공유기능 완성 나머지느 iOS가 알아서 처리함
     
