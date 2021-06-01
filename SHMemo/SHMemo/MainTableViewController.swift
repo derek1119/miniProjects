@@ -9,6 +9,15 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
 
+    let formatter : DateFormatter = {
+        let f = DateFormatter()
+        f.dateStyle = .long
+        f.timeStyle = .short
+        f.locale = Locale(identifier: "Ko_kr")
+        
+        return f
+    }()
+    
     var memo = Memo(title: "", content: "")
     
     override func viewDidLoad() {
@@ -40,7 +49,7 @@ class MainTableViewController: UITableViewController {
         let myMemo = Memo.dummyData[indexPath.row]
         
         cell.textLabel?.text = myMemo.title
-        cell.detailTextLabel?.text = myMemo.content
+        cell.detailTextLabel?.text = formatter.string(for: myMemo.date)
         
         return cell
     }
@@ -88,15 +97,8 @@ class MainTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
             if let vc = segue.destination as? ComposeViewController {
-                vc.contentTextView.text = Memo.dummyData[indexPath.row].content
-                vc.titleTextField.text = Memo.dummyData[indexPath.row].title
-            }
-        }
-        
-        if (sender as? UIBarButtonItem) != nil {
-            if let vc = segue.destination as? ComposeViewController {
-                vc.contentTextView?.text = " "
-                vc.titleTextField?.text = " "
+                vc.contentTextView!.text = Memo.dummyData[indexPath.row].content
+                vc.titleTextField!.text = Memo.dummyData[indexPath.row].title
             }
         }
     }
