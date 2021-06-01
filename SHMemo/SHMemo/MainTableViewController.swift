@@ -81,14 +81,25 @@ class MainTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+            if let vc = segue.destination as? ComposeViewController {
+                vc.contentTextView.text = Memo.dummyData[indexPath.row].content
+                vc.titleTextField.text = Memo.dummyData[indexPath.row].title
+            }
+        }
+        
+        if (sender as? UIBarButtonItem) != nil {
+            if let vc = segue.destination as? ComposeViewController {
+                vc.contentTextView?.text = " "
+                vc.titleTextField?.text = " "
+            }
+        }
     }
-    */
+    
 
 }
