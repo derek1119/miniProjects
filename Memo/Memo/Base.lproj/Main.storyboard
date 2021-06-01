@@ -257,7 +257,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="MyLabelColor">
-            <color red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.32899999618530273" blue="0.57499998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
