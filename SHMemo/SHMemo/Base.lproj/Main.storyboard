@@ -53,7 +53,7 @@
                     <navigationItem key="navigationItem" title="SHMemo" largeTitleDisplayMode="always" id="ASU-18-C3L">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="MRR-LV-6fh">
                             <connections>
-                                <segue destination="R5A-5Z-otl" kind="show" id="hbm-K5-PPP"/>
+                                <segue destination="R5A-5Z-otl" kind="show" identifier="memoSegue" id="hbm-K5-PPP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -73,13 +73,18 @@
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zYy-JB-jZB">
                                 <rect key="frame" x="0.0" y="88" width="414" height="777"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="4Wp-D4-g6N">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wv0-bF-e9g">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="2R5-kR-KWu"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ROZ-ir-SEm">
-                                        <rect key="frame" x="0.0" y="34" width="414" height="743"/>
+                                        <rect key="frame" x="0.0" y="50" width="414" height="727"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" systemColor="labelColor"/>
@@ -88,19 +93,19 @@
                                     </textView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="ROZ-ir-SEm" firstAttribute="top" secondItem="4Wp-D4-g6N" secondAttribute="bottom" id="psB-sf-R6Z"/>
+                                    <constraint firstItem="ROZ-ir-SEm" firstAttribute="top" secondItem="Wv0-bF-e9g" secondAttribute="bottom" id="D57-EN-RVW"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="J4A-4n-rHf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="4Wp-D4-g6N" firstAttribute="top" secondItem="J4A-4n-rHf" secondAttribute="top" id="2VO-he-xFn"/>
+                            <constraint firstItem="Wv0-bF-e9g" firstAttribute="leading" secondItem="J4A-4n-rHf" secondAttribute="leading" id="7fK-Yi-Bus"/>
                             <constraint firstItem="ROZ-ir-SEm" firstAttribute="leading" secondItem="J4A-4n-rHf" secondAttribute="leading" id="AT4-Yr-a1K"/>
                             <constraint firstItem="ROZ-ir-SEm" firstAttribute="bottom" secondItem="J4A-4n-rHf" secondAttribute="bottom" constant="3" id="CyG-CW-z85"/>
-                            <constraint firstItem="J4A-4n-rHf" firstAttribute="trailing" secondItem="4Wp-D4-g6N" secondAttribute="trailing" id="Pwq-Aq-z3b"/>
+                            <constraint firstItem="Wv0-bF-e9g" firstAttribute="top" secondItem="J4A-4n-rHf" secondAttribute="top" id="GV6-tz-CjO"/>
+                            <constraint firstItem="J4A-4n-rHf" firstAttribute="trailing" secondItem="Wv0-bF-e9g" secondAttribute="trailing" id="Twa-rY-0fZ"/>
                             <constraint firstItem="J4A-4n-rHf" firstAttribute="trailing" secondItem="ROZ-ir-SEm" secondAttribute="trailing" id="Xnt-bf-FXc"/>
-                            <constraint firstItem="4Wp-D4-g6N" firstAttribute="leading" secondItem="J4A-4n-rHf" secondAttribute="leading" id="cZ9-w7-0bD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8Ru-9Z-FwT">
@@ -108,7 +113,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="contentTextView" destination="ROZ-ir-SEm" id="pzs-Oo-l0k"/>
-                        <outlet property="titleTextField" destination="4Wp-D4-g6N" id="jwd-6j-I1I"/>
+                        <outlet property="editOrSaveButton" destination="jhF-O2-6HE" id="tOh-GI-HR2"/>
+                        <outlet property="titleTextView" destination="Wv0-bF-e9g" id="PqN-3Q-zeS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kiy-Of-a3e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -135,7 +141,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZDl-3h-DwE"/>
+        <segue reference="hbm-K5-PPP"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">

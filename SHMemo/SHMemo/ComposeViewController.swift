@@ -9,8 +9,21 @@ import UIKit
 
 class ComposeViewController: UIViewController {
 
-    @IBOutlet var titleTextField: UITextField!
-    @IBOutlet var contentTextView: UITextView!
+    var memo : Memo?
+    
+    @IBOutlet var editOrSaveButton: UIBarButtonItem!
+    
+    @IBOutlet var titleTextView: UITextView! {
+        didSet {
+            titleTextView.text = memo?.title
+        }
+    }
+    
+    @IBOutlet var contentTextView: UITextView! {
+        didSet {
+            contentTextView.text = memo?.content
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -18,8 +18,6 @@ class MainTableViewController: UITableViewController {
         return f
     }()
     
-    var memo = Memo(title: "", content: "")
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,6 +53,7 @@ class MainTableViewController: UITableViewController {
     }
     
 
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -95,13 +94,16 @@ class MainTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
             if let vc = segue.destination as? ComposeViewController {
-                vc.contentTextView!.text = Memo.dummyData[indexPath.row].content
-                vc.titleTextField!.text = Memo.dummyData[indexPath.row].title
+                vc.memo = Memo.dummyData[indexPath.row]
             }
         }
+        
+        if segue.identifier == "memoSegue" {
+            guard let vc = segue.destination as? ComposeViewController else { return }
+            vc.memo = Memo(title: "", content: "")
+        }
     }
-    
-
 }
