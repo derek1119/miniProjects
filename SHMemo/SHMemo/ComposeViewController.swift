@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UIViewController, UITextViewDelegate {
 
     var memo : Memo?
     
@@ -29,8 +29,34 @@ class ComposeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        placeholderSetting()
     }
     
+    func placeholderSetting() {
+        if titleTextView.text.isEmpty {
+            titleTextView.delegate = self
+            titleTextView.text = "Title"
+            titleTextView.textColor = UIColor.lightGray
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == titleTextView {
+            if textView.textColor == UIColor.lightGray {
+                textView.text = nil
+                textView.textColor = UIColor.black
+            }
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView == titleTextView {
+            if textView.text.isEmpty {
+                titleTextView.text = "Title"
+                titleTextView.textColor = UIColor.lightGray
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation
