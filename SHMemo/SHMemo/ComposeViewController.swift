@@ -7,21 +7,22 @@
 
 import UIKit
 
-class ComposeViewController: UIViewController, UITextViewDelegate {
+class ComposeViewController: UIViewController {
 
-    var memo : Memo?
+    var editedMemo : Memo?
+    var originalMemo : Memo?
     
     @IBOutlet var editOrSaveButton: UIBarButtonItem!
     
     @IBOutlet var titleTextView: UITextView! {
         didSet {
-            titleTextView.text = memo?.title
+            titleTextView.text = originalMemo?.title
         }
     }
     
     @IBOutlet var contentTextView: UITextView! {
         didSet {
-            contentTextView.text = memo?.content
+            contentTextView.text = originalMemo?.content
         }
     }
     
@@ -32,6 +33,23 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         placeholderSetting()
     }
     
+
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
+
+extension ComposeViewController: UITextViewDelegate {
+    
+    // title textView placeholder
     func placeholderSetting() {
         if titleTextView.text.isEmpty {
             titleTextView.delegate = self
@@ -57,15 +75,4 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

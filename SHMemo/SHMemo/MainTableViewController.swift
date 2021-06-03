@@ -97,13 +97,13 @@ class MainTableViewController: UITableViewController {
         
         if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
             if let vc = segue.destination as? ComposeViewController {
-                vc.memo = Memo.dummyData[indexPath.row]
+                vc.originalMemo = Memo.dummyData[indexPath.row]
             }
         }
         
         if segue.identifier == "memoSegue" {
             guard let vc = segue.destination as? ComposeViewController else { return }
-            vc.memo = Memo(title: "", content: "")
+            vc.originalMemo = Memo(title: "", content: "")
         }
     }
 }
