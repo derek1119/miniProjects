@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35666F91266A02C70076B019 /* UIViewController + Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35666F90266A02C70076B019 /* UIViewController + Alert.swift */; };
 		359A911126661B0E0080E733 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A911026661B0E0080E733 /* AppDelegate.swift */; };
 		359A911326661B0E0080E733 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A911226661B0E0080E733 /* SceneDelegate.swift */; };
 		359A911826661B0E0080E733 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 359A911626661B0E0080E733 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35666F90266A02C70076B019 /* UIViewController + Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Alert.swift"; sourceTree = "<group>"; };
 		359A910D26661B0E0080E733 /* SHMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SHMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		359A911026661B0E0080E733 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		359A911226661B0E0080E733 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				359A911226661B0E0080E733 /* SceneDelegate.swift */,
 				359A911626661B0E0080E733 /* Main.storyboard */,
 				359A912C266658400080E733 /* ComposeViewController.swift */,
+				35666F90266A02C70076B019 /* UIViewController + Alert.swift */,
 				359A912726661EE50080E733 /* MainTableViewController.swift */,
 				359A911C26661B0F0080E733 /* Assets.xcassets */,
 				359A911E26661B0F0080E733 /* LaunchScreen.storyboard */,
@@ -159,6 +162,7 @@
 				359A911B26661B0E0080E733 /* SHMemo.xcdatamodeld in Sources */,
 				359A912D266658400080E733 /* ComposeViewController.swift in Sources */,
 				359A911126661B0E0080E733 /* AppDelegate.swift in Sources */,
+				35666F91266A02C70076B019 /* UIViewController + Alert.swift in Sources */,
 				359A911326661B0E0080E733 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
