@@ -11,17 +11,28 @@ class ComposeViewController: UIViewController {
 
     var editedMemo : Memo?
     var originalMemo : Memo?
+    let editStyleButton = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editButtonPressed(_:)))
+    let saveStyleButton = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(saveButtonPressed(_:)))
+
     
     @IBOutlet var editOrSaveButton: UIBarButtonItem!
     
     @IBOutlet var titleTextView: UITextView! {
         didSet {
+            if self.navigationItem.rightBarButtonItem == editStyleButton {
+                titleTextView.isEditable = false
+            }
             titleTextView.text = originalMemo?.title
         }
     }
     
+    
+    
     @IBOutlet var contentTextView: UITextView! {
         didSet {
+            if self.navigationItem.rightBarButtonItem == editStyleButton {
+                contentTextView.isEditable = false
+            }
             contentTextView.text = originalMemo?.content
         }
     }
@@ -75,4 +86,18 @@ extension ComposeViewController: UITextViewDelegate {
             }
         }
     }
+    
+    @objc private func editButtonPressed(_ sender: Any) {
+        contentTextView.isEditable = true
+        titleTextView.isEditable = true
+        self.navigationItem.rightBarButtonItem = saveStyleButton
+    }
+    
+    @objc private func saveButtonPressed(_ sender: Any) {
+        if let memo = contentTextView.text, memo.count > 0 {
+            
+        }
+       
+    }
+
 }
