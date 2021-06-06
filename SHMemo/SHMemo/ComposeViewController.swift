@@ -91,16 +91,30 @@ extension ComposeViewController: UITextViewDelegate {
         contentTextView.isEditable = true
         titleTextView.isEditable = true
         self.navigationItem.rightBarButtonItem = saveStyleButton
+        originalMemo?.content = contentTextView.text
+        originalMemo?.title = titleTextView.text
     }
     
     @objc private func saveButtonPressed(_ sender: Any) {
-        guard let memo = contentTextView.text, memo.count > 0  else {
-            alert(message: "메모를 입력하세요.")
-            return
+        if originalMemo == nil {
+            guard let memo = contentTextView.text, memo.count > 0  else {
+                alert(message: "메모를 입력하세요.")
+                return
+            }
+            
+            let newMemo = Memo(title: titleTextView.text ?? " ", content: memo)
+            Memo.dummyData.append(newMemo)
+        } else {
+            editedMemo?.content = contentTextView.text
+            editedMemo?.title = titleTextView.text
+            
+            if originalMemo?.content != editedMemo?.content || originalMemo?.title != editedMemo?.title {
+                alert2(message: "편집한 내용을 저장하시겠습니까?")
+            }
         }
         
-        let newMemo = Memo(title: titleTextView.text ?? " ", content: memo)
-        Memo.dummyData.append(newMemo)
+        
+        
         
         contentTextView.isEditable = false
         titleTextView.isEditable = false
