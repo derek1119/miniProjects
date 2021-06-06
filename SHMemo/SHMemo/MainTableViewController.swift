@@ -104,13 +104,14 @@ class MainTableViewController: UITableViewController {
         if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
             if let vc = segue.destination as? ComposeViewController {
                 vc.originalMemo = Memo.dummyData[indexPath.row]
+                vc.dataIndex = indexPath.row
                 vc.navigationItem.rightBarButtonItem = vc.editStyleButton
             }
         }
         
         if segue.identifier == "memoSegue" {
             if let vc = segue.destination as? ComposeViewController {
-                vc.originalMemo = Memo(title: "", content: "")
+                vc.originalMemo = nil
                 vc.navigationItem.rightBarButtonItem = vc.saveStyleButton
                 
             }
