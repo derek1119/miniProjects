@@ -93,12 +93,10 @@ extension ComposeViewController: UITextViewDelegate {
         contentTextView.isEditable = true
         titleTextView.isEditable = true
         self.navigationItem.rightBarButtonItem = saveStyleButton
-        originalMemo?.content = contentTextView.text
-        originalMemo?.title = titleTextView.text
     }
     
     @objc private func saveButtonPressed(_ sender: Any) {
-        if originalMemo?.content == nil && originalMemo?.title == nil {
+        if originalMemo == nil {
             guard let memo = contentTextView.text, memo.count > 0  else {
                 alert(message: "메모를 입력하세요.")
                 return
@@ -106,14 +104,12 @@ extension ComposeViewController: UITextViewDelegate {
             
             let newMemo = Memo(title: titleTextView.text ?? "", content: memo)
             Memo.dummyData.append(newMemo)
-        } else {
-            if originalMemo?.content != contentTextView.text || originalMemo?.title != titleTextView.text {
-                editedMemo?.content = contentTextView.text
-                editedMemo?.title = titleTextView.text
-                alert2(message: "편집한 내용을 저장하시겠습니까?")
-            }
+            self.navigationController!.popViewController(animated: true)
+
+        } else if originalMemo?.content != contentTextView.text || originalMemo?.title != titleTextView.text {
+            editedMemo = Memo(title: titleTextView.text, content: contentTextView.text)
+            alert2(message: "편집한 내용을 저장하시겠습니까?")
         }
-        
         contentTextView.isEditable = false
         titleTextView.isEditable = false
         
@@ -124,11 +120,9 @@ extension ComposeViewController: UITextViewDelegate {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default) { _ in
             
-            if let index = self.dataIndex, let newMemo = self.editedMemo {
-                Memo.dummyData.remove(at: index)
-                Memo.dummyData.append(newMemo)
-                print(Memo.dummyData)
-            }
+            guard let index = self.dataIndex, let target = self.editedMemo else { return }
+            Memo.dummyData.remove(at: index)
+            Memo.dummyData.append(target)
             
             self.navigationController!.popViewController(animated: true)
             
@@ -137,6 +131,7 @@ extension ComposeViewController: UITextViewDelegate {
         alert.addAction(okAction)
         
         let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+            self.editedMemo = nil
             self.navigationController!.popViewController(animated: true)
         }
         alert.addAction(cancelAction)
