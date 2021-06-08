@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35495338266F92040077C816 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35495337266F92040077C816 /* DataManager.swift */; };
 		35666F91266A02C70076B019 /* UIViewController + Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35666F90266A02C70076B019 /* UIViewController + Alert.swift */; };
 		359A911126661B0E0080E733 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A911026661B0E0080E733 /* AppDelegate.swift */; };
 		359A911326661B0E0080E733 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A911226661B0E0080E733 /* SceneDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35495337266F92040077C816 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		35666F90266A02C70076B019 /* UIViewController + Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Alert.swift"; sourceTree = "<group>"; };
 		359A910D26661B0E0080E733 /* SHMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SHMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		359A911026661B0E0080E733 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35495336266F91D10077C816 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				35495337266F92040077C816 /* DataManager.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		359A910426661B0D0080E733 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +74,7 @@
 		359A910F26661B0E0080E733 /* SHMemo */ = {
 			isa = PBXGroup;
 			children = (
+				35495336266F91D10077C816 /* Data */,
 				359A912B2666219B0080E733 /* Model */,
 				359A911026661B0E0080E733 /* AppDelegate.swift */,
 				359A911226661B0E0080E733 /* SceneDelegate.swift */,
@@ -158,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				359A912A26661F020080E733 /* Model.swift in Sources */,
+				35495338266F92040077C816 /* DataManager.swift in Sources */,
 				359A912826661EE50080E733 /* MainTableViewController.swift in Sources */,
 				359A911B26661B0E0080E733 /* SHMemo.xcdatamodeld in Sources */,
 				359A912D266658400080E733 /* ComposeViewController.swift in Sources */,

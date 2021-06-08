@@ -32,7 +32,10 @@ class MainTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        DataManager.shared.fetchMemo()
         tableView.reloadData()
+        
+//        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -44,13 +47,13 @@ class MainTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return Memo.dummyData.count
+        return DataManager.shared.memoList.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let myMemo = Memo.dummyData[indexPath.row]
+        let myMemo = DataManager.shared.memoList[indexPath.row]
         
         cell.textLabel?.text = myMemo.title
         cell.detailTextLabel?.text = formatter.string(for: myMemo.date)
@@ -103,7 +106,7 @@ class MainTableViewController: UITableViewController {
         
         if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
             if let vc = segue.destination as? ComposeViewController {
-                vc.originalMemo = Memo.dummyData[indexPath.row]
+                vc.originalMemo = DataManager.shared.memoList[indexPath.row]
                 vc.dataIndex = indexPath.row
                 vc.navigationItem.rightBarButtonItem = vc.editStyleButton
             }
