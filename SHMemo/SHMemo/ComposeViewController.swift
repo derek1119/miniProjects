@@ -9,8 +9,8 @@ import UIKit
 
 class ComposeViewController: UIViewController {
     
-
-    var editedMemo : Memo?
+//    var editedMemo = Memo()
+    //https://developer.apple.com/documentation/coredata/modeling_data/generating_code
     var originalMemo : Memo?
     var dataIndex : Int?
     
@@ -94,6 +94,8 @@ extension ComposeViewController: UITextViewDelegate {
         contentTextView.isEditable = true
         titleTextView.isEditable = true
         self.navigationItem.rightBarButtonItem = saveStyleButton
+//        editedMemo.content = contentTextView.text
+//        editedMemo.title = titleTextView.text
     }
     
     @objc private func saveButtonPressed(_ sender: Any) {
@@ -113,9 +115,9 @@ extension ComposeViewController: UITextViewDelegate {
                 return
             }
             
-            editedMemo!.content = contentTextView.text
-            editedMemo!.title = titleTextView.text
             alert2(message: "편집한 내용을 저장하시겠습니까?")
+        } else {
+            self.navigationController!.popViewController(animated: true)
         }
         contentTextView.isEditable = false
         titleTextView.isEditable = false
@@ -127,9 +129,12 @@ extension ComposeViewController: UITextViewDelegate {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default) { _ in
             
-            guard let index = self.dataIndex else { return }
-            DataManager.shared.memoList.remove(at: index)
-            DataManager.shared.addNewMemo(self.editedMemo!.content, self.editedMemo!.title)
+//            guard let index = self.dataIndex else { return }
+//            DataManager.shared.memoList.remove(at: index)
+//            DataManager.shared.addNewMemo(self.editedMemo.content, self.editedMemo.title)
+            self.originalMemo?.content = self.contentTextView.text
+            self.originalMemo?.title = self.titleTextView.text ?? ""
+            self.originalMemo?.date = Date()
             DataManager.shared.saveContext()
             
             self.navigationController!.popViewController(animated: true)
@@ -138,6 +143,7 @@ extension ComposeViewController: UITextViewDelegate {
         
         let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
             
+//            self.editedMemo = Memo()
             self.navigationController!.popViewController(animated: true)
         }
         alert.addAction(cancelAction)
