@@ -11,8 +11,8 @@ class ComposeViewController: UIViewController {
     
 //    var editedMemo = Memo()
     //https://developer.apple.com/documentation/coredata/modeling_data/generating_code
-    var originalMemo : Memo?
-    var dataIndex : Int?
+    var memo : Memo?
+//    var dataIndex : Int?
     
     let editStyleButton = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editButtonPressed(_:)))
     let saveStyleButton = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(saveButtonPressed(_:)))
@@ -25,7 +25,7 @@ class ComposeViewController: UIViewController {
             if self.navigationItem.rightBarButtonItem == editStyleButton {
                 titleTextView.isEditable = false
             }
-            titleTextView.text = originalMemo?.title
+            titleTextView.text = memo?.title
         }
     }
     
@@ -36,7 +36,7 @@ class ComposeViewController: UIViewController {
             if self.navigationItem.rightBarButtonItem == editStyleButton {
                 contentTextView.isEditable = false
             }
-            contentTextView.text = originalMemo?.content
+            contentTextView.text = memo?.content
         }
     }
     
@@ -99,8 +99,8 @@ extension ComposeViewController: UITextViewDelegate {
     }
     
     @objc private func saveButtonPressed(_ sender: Any) {
-        if originalMemo == nil {
-            guard let memo = contentTextView.text, memo.count > 0  else {
+        if memo == nil {
+            guard let memo = contentTextView.text, memo.count > 0 else {
                 alert(message: "메모를 입력하세요.")
                 return
             }
@@ -109,12 +109,11 @@ extension ComposeViewController: UITextViewDelegate {
 //            Memo.dummyData.append(newMemo)
             self.navigationController!.popViewController(animated: true)
 
-        } else if originalMemo?.content != contentTextView.text || originalMemo?.title != titleTextView.text {
+        } else if memo?.content != contentTextView.text || memo?.title != titleTextView.text {
             guard let memo = contentTextView.text, memo.count > 0  else {
                 alert(message: "메모를 입력하세요.")
                 return
             }
-            
             alert2(message: "편집한 내용을 저장하시겠습니까?")
         } else {
             self.navigationController!.popViewController(animated: true)
@@ -132,9 +131,9 @@ extension ComposeViewController: UITextViewDelegate {
 //            guard let index = self.dataIndex else { return }
 //            DataManager.shared.memoList.remove(at: index)
 //            DataManager.shared.addNewMemo(self.editedMemo.content, self.editedMemo.title)
-            self.originalMemo?.content = self.contentTextView.text
-            self.originalMemo?.title = self.titleTextView.text ?? ""
-            self.originalMemo?.date = Date()
+            self.memo?.content = self.contentTextView.text
+            self.memo?.title = self.titleTextView.text ?? ""
+            self.memo?.date = Date()
             DataManager.shared.saveContext()
             
             self.navigationController!.popViewController(animated: true)
