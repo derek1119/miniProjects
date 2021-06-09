@@ -9,6 +9,7 @@ import UIKit
 
 class ComposeViewController: UIViewController {
     
+
     var editedMemo : Memo?
     var originalMemo : Memo?
     var dataIndex : Int?
@@ -107,8 +108,13 @@ extension ComposeViewController: UITextViewDelegate {
             self.navigationController!.popViewController(animated: true)
 
         } else if originalMemo?.content != contentTextView.text || originalMemo?.title != titleTextView.text {
-            editedMemo?.content = contentTextView.text
-            editedMemo?.title = titleTextView.text
+            guard let memo = contentTextView.text, memo.count > 0  else {
+                alert(message: "메모를 입력하세요.")
+                return
+            }
+            
+            editedMemo!.content = contentTextView.text
+            editedMemo!.title = titleTextView.text
             alert2(message: "편집한 내용을 저장하시겠습니까?")
         }
         contentTextView.isEditable = false
@@ -121,17 +127,12 @@ extension ComposeViewController: UITextViewDelegate {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default) { _ in
             
-//            guard let index = self.dataIndex, let target = self.editedMemo else { return }
-//            DataManager.shared.memoList.remove(at: index)
-//            DataManager.shared.addNewMemo(target.content, target.title)
-            if let target = self.editedMemo {
-                target.content = self.editedMemo?.content
-                target.title = self.editedMemo?.title
-                DataManager.shared.saveContext()
-            }
+            guard let index = self.dataIndex else { return }
+            DataManager.shared.memoList.remove(at: index)
+            DataManager.shared.addNewMemo(self.editedMemo!.content, self.editedMemo!.title)
+            DataManager.shared.saveContext()
+            
             self.navigationController!.popViewController(animated: true)
-            
-            
         }
         alert.addAction(okAction)
         

@@ -107,7 +107,7 @@ class MainTableViewController: UITableViewController {
         if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
             if let vc = segue.destination as? ComposeViewController {
                 vc.originalMemo = DataManager.shared.memoList[indexPath.row]
-                vc.dataIndex = indexPath.row
+//                vc.dataIndex = indexPath.row
                 vc.navigationItem.rightBarButtonItem = vc.editStyleButton
             }
         }
