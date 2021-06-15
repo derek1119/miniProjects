@@ -45,6 +45,8 @@ class ComposeViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         placeholderSetting()
+        titleTextView.isScrollEnabled = false
+        titleTextView.delegate = self
     }
     
     
@@ -90,6 +92,16 @@ extension ComposeViewController: UITextViewDelegate {
         }
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = titleTextView.text ?? ""
+        guard let strRange = Range(range, in: currentText) else { return false }
+        
+        let changedText = currentText.replacingCharacters(in: strRange, with: text)
+        
+        return changedText.count <= 20
+    }
+    
+    //edit & save button
     @objc private func editButtonPressed(_ sender: Any) {
         contentTextView.isEditable = true
         titleTextView.isEditable = true

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3523057F2678B1E800DAD5B0 /* TrashTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523057E2678B1E800DAD5B0 /* TrashTableViewController.swift */; };
 		35495338266F92040077C816 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35495337266F92040077C816 /* DataManager.swift */; };
 		35666F91266A02C70076B019 /* UIViewController + Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35666F90266A02C70076B019 /* UIViewController + Alert.swift */; };
 		359A911126661B0E0080E733 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A911026661B0E0080E733 /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3523057E2678B1E800DAD5B0 /* TrashTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		35495337266F92040077C816 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		35666F90266A02C70076B019 /* UIViewController + Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Alert.swift"; sourceTree = "<group>"; };
 		359A910D26661B0E0080E733 /* SHMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SHMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,7 @@
 				359A912C266658400080E733 /* ComposeViewController.swift */,
 				35666F90266A02C70076B019 /* UIViewController + Alert.swift */,
 				359A912726661EE50080E733 /* MainTableViewController.swift */,
+				3523057E2678B1E800DAD5B0 /* TrashTableViewController.swift */,
 				359A911C26661B0F0080E733 /* Assets.xcassets */,
 				359A911E26661B0F0080E733 /* LaunchScreen.storyboard */,
 				359A912126661B0F0080E733 /* Info.plist */,
@@ -172,6 +175,7 @@
 				35495338266F92040077C816 /* DataManager.swift in Sources */,
 				359A912826661EE50080E733 /* MainTableViewController.swift in Sources */,
 				359A911B26661B0E0080E733 /* SHMemo.xcdatamodeld in Sources */,
+				3523057F2678B1E800DAD5B0 /* TrashTableViewController.swift in Sources */,
 				359A912D266658400080E733 /* ComposeViewController.swift in Sources */,
 				359A911126661B0E0080E733 /* AppDelegate.swift in Sources */,
 				35666F91266A02C70076B019 /* UIViewController + Alert.swift in Sources */,

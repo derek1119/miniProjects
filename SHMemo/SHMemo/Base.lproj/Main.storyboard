@@ -50,6 +50,15 @@
                             <outlet property="delegate" destination="Per-ee-m8o" id="ftZ-qs-BxS"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="trash" id="ivc-DQ-DPN">
+                            <connections>
+                                <segue destination="9rb-Zz-FEn" kind="show" id="Uby-bs-9js"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="7eD-zk-jWt"/>
+                        <barButtonItem title="Item" id="7Py-1u-0rg"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="SHMemo" largeTitleDisplayMode="always" id="ASU-18-C3L">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="MRR-LV-6fh">
                             <connections>
@@ -57,10 +66,40 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7df-va-Lg3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="930.43478260869574" y="20.758928571428569"/>
+        </scene>
+        <!--휴지통-->
+        <scene sceneID="bTH-1Z-XkA">
+            <objects>
+                <tableViewController id="9rb-Zz-FEn" customClass="TrashTableViewController" customModule="SHMemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8jZ-2j-MC0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="mg2-rr-eoi">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mg2-rr-eoi" id="qdT-w1-dbO">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9rb-Zz-FEn" id="ven-cn-2mg"/>
+                            <outlet property="delegate" destination="9rb-Zz-FEn" id="PwC-Dd-9DS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="휴지통" id="Y7X-ph-K6H"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vSp-9W-MDy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="930" y="785"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="Ryt-iO-3Qe">
@@ -71,9 +110,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zYy-JB-jZB">
-                                <rect key="frame" x="0.0" y="88" width="414" height="777"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="728"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wv0-bF-e9g">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wv0-bF-e9g">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -84,7 +123,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ROZ-ir-SEm">
-                                        <rect key="frame" x="0.0" y="43" width="414" height="734"/>
+                                        <rect key="frame" x="0.0" y="43" width="414" height="685"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" systemColor="labelColor"/>
