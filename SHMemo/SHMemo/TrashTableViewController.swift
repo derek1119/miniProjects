@@ -10,16 +10,16 @@ import UIKit
 class TrashTableViewController: UITableViewController {
     
     var trashedMemo : [Memo]?
-    var arrStatusBool = [Bool]() 
-
+    var arrStatusBool = [Bool]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        guard let count = trashedMemo?.count else { return }
+        for i in count {
+        arrStatusBool.append(false)
+        }
+        
     }
 
     // MARK: - Table view data source
