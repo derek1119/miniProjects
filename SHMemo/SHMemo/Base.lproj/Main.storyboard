@@ -81,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="vA1-ip-fXT" style="IBUITableViewCellStyleDefault" id="mg2-rr-eoi">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="trashedMemoCell" textLabel="vA1-ip-fXT" style="IBUITableViewCellStyleDefault" id="mg2-rr-eoi">
                                 <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mg2-rr-eoi" id="qdT-w1-dbO">
@@ -104,7 +104,9 @@
                             <outlet property="delegate" destination="9rb-Zz-FEn" id="PwC-Dd-9DS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="휴지통" id="Y7X-ph-K6H"/>
+                    <navigationItem key="navigationItem" title="휴지통" id="Y7X-ph-K6H">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="tTO-Re-rNE"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vSp-9W-MDy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

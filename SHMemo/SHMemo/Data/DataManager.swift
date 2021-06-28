@@ -20,6 +20,8 @@ class DataManager {
     
     //메모 저장을 위한 배열 생성
     var memoList = [Memo]()
+    
+    //삭제된 메모 저장을 위한 배열 생성
     var trashedMemoList = [Memo]()
     
     //데이터 베이스에서 데이터 읽어오기

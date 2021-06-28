@@ -148,7 +148,7 @@ extension ComposeViewController: UITextViewDelegate {
             self.memo?.date = Date()
             DataManager.shared.saveContext()
             
-            self.navigationController!.popViewController(animated: true)
+//            self.navigationController!.popViewController(animated: true)
         }
         alert.addAction(okAction)
         

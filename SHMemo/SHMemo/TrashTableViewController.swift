@@ -2,12 +2,15 @@
 //  TrashTableViewController.swift
 //  SHMemo
 //
-//  Created by Sh Hong on 2021/06/15.
+//  Created by Sh Hong on 2021/06/28.
 //
 
 import UIKit
 
 class TrashTableViewController: UITableViewController {
+    
+    var trashedMemo : [Memo]?
+    var arrStatusBool = [Bool]() 
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,16 +20,6 @@ class TrashTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        self.navigationItem.title = "휴지통"
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        DataManager.shared.fetchMemo()
-        tableView.reloadData()
-        
-        //        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -38,16 +31,32 @@ class TrashTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return DataManager.shared.trashedMemoList.count ?? 0
+        return DataManager.shared.trashedMemoList.count
     }
 
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let myMemo = DataManager.shared.trashedMemoList[indexPath.row]
-        
-        cell.textLabel?.text = myMemo.title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "trashedMemoCell", for: indexPath)
+        if let target = trashedMemo {
+        cell.textLabel?.text = target[indexPath.row].title
+        }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if arrStatusBool[indexPath.row] {
+            arrStatusBool[indexPath.row] = false
+        } else {
+            arrStatusBool[indexPath.row] = true
+        }
+        
+        if arrStatusBool[indexPath.row] {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        }
     }
 
     /*
