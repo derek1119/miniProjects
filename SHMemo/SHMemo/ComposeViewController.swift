@@ -14,6 +14,8 @@ class ComposeViewController: UIViewController {
     var memo : Memo?
 //    var dataIndex : Int?
     
+    
+    
     let editStyleButton = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editButtonPressed(_:)))
     let saveStyleButton = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(saveButtonPressed(_:)))
     
