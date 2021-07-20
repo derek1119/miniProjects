@@ -1,0 +1,6 @@
+framework module Pods_API___Tutorial {
+  umbrella header "Pods-API _ Tutorial-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -15,10 +15,10 @@ class TrashTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let count = trashedMemo?.count else { return }
-        for i in count {
-        arrStatusBool.append(false)
-        }
+//        guard let count = trashedMemo?.count else { return }
+//        for i in count {
+//        arrStatusBool.append(false)
+//        }
         
     }
 
