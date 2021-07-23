@@ -7,9 +7,10 @@
 
 import UIKit
 import Toast
+import Alamofire
 
-class MainViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
-
+class MainViewController: BaseVC, UISearchBarDelegate, UIGestureRecognizerDelegate {
+    
     @IBOutlet var segControl: UISegmentedControl!
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var showResultBtn: UIButton!
@@ -56,7 +57,7 @@ class MainViewController: UIViewController, UISearchBarDelegate, UIGestureRecogn
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchBar.becomeFirstResponder()
-
+        
     }
     
     //MARK: - fileprivate methods
@@ -81,7 +82,7 @@ class MainViewController: UIViewController, UISearchBarDelegate, UIGestureRecogn
     
     //MARK : - IBAction methods
     @IBAction func selectSearchFocus(_ sender: UISegmentedControl) {
-                
+        
         switch sender.selectedSegmentIndex {
         case 0:
             searchBar.placeholder = "사진 키워드 입력"
@@ -100,8 +101,53 @@ class MainViewController: UIViewController, UISearchBarDelegate, UIGestureRecogn
     @IBAction func resultBtnTapped(_ sender: UIButton) {
         print("MainViewController - resultBtnTapped() called / selected index : \(segControl.selectedSegmentIndex)")
         //화면으로 이동
-        pushVC()
+        //        pushVC()
+        //        let url = API.BASE_URL + "search/photos"
+        
+        //키, 밸류 형식의 딕셔너리
+        guard let userInput = self.searchBar.text else { return }
+        
+        //        let queryParam = ["query" : userInput, "client_id" : API.CLIENT_ID]
+        
+        //        AF.request(url, method: .get, parameters: queryParam).responseJSON(completionHandler: { response in
+        //            debugPrint(response)
+        //        })
+        
+        var urlTocall : URLRequestConvertible?
+        
+        switch segControl.selectedSegmentIndex {
+        case 0:
+            urlTocall = MySearchRouter.searchPhotos(term: userInput)
+            
+            MyAlamofireManager.shared.getPhotos(searchTerm: userInput, completion: { result in
+                switch result {
+                case .success(let fetchedPhotos) :
+                    print("MainVC = getPhotos.success - fetchedPhotos.count : \(fetchedPhotos.count)")
+                case .failure(let error):
+                    print("MainVC = getPhotos.failure - error : \(error.rawValue)")
+
+                }
+            })
+        case 1:
+            urlTocall = MySearchRouter.searchUsers(term: userInput)
+        default:
+            print("default")
+        }
+        
+//        if let urlConvertible = urlTocall {
+//
+//            MyAlamofireManager
+//                .shared
+//                .session
+//                .request(urlConvertible)
+//                .validate(statusCode: 200...400)
+//                .responseJSON(completionHandler: { response in
+//                    debugPrint(response)
+//                })
+//        }
+        
     }
+    
     
     @IBAction func searchFilterValueChanged(_ sender: Any) {
         print("MainViewController - searchFilterValueChanged called")
@@ -147,7 +193,7 @@ extension MainViewController {
         if searchText.isEmpty {
             self.showResultBtn.isHidden = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
-                 //포커싱 해제
+                //포커싱 해제
                 searchBar.resignFirstResponder()
             })
             
@@ -155,7 +201,7 @@ extension MainViewController {
             self.showResultBtn.isHidden = false
         }
         
-            }
+    }
     
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
