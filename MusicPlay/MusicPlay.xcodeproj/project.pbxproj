@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3522AE3726B15AF30010334A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3522AE3626B15AF30010334A /* HomeViewController.swift */; };
 		352BE4B026AFDF9300AC1B98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352BE4AF26AFDF9300AC1B98 /* AppDelegate.swift */; };
 		352BE4B226AFDF9300AC1B98 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352BE4B126AFDF9300AC1B98 /* SceneDelegate.swift */; };
 		352BE4B726AFDF9300AC1B98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 352BE4B526AFDF9300AC1B98 /* Main.storyboard */; };
@@ -14,7 +15,6 @@
 		352BE4BC26AFDF9500AC1B98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 352BE4BB26AFDF9500AC1B98 /* Assets.xcassets */; };
 		352BE4BF26AFDF9500AC1B98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 352BE4BD26AFDF9500AC1B98 /* LaunchScreen.storyboard */; };
 		352BE4CC26AFE3EA00AC1B98 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 352BE4CB26AFE3EA00AC1B98 /* Player.storyboard */; };
-		352BE4CE26AFE42900AC1B98 /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352BE4CD26AFE42900AC1B98 /* TrackCollectionViewCell.swift */; };
 		352BE4D026AFE4C700AC1B98 /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352BE4CF26AFE4C700AC1B98 /* TrackCollectionViewCell.swift */; };
 		352BE4D226AFE4E900AC1B98 /* TrackCollectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352BE4D126AFE4E900AC1B98 /* TrackCollectionHeaderReusableView.swift */; };
 		352BE4D426AFE52C00AC1B98 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352BE4D326AFE52C00AC1B98 /* PlayerViewController.swift */; };
@@ -25,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3522AE3626B15AF30010334A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		352BE4AC26AFDF9300AC1B98 /* MusicPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		352BE4AF26AFDF9300AC1B98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		352BE4B126AFDF9300AC1B98 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,7 +35,6 @@
 		352BE4BE26AFDF9500AC1B98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		352BE4C026AFDF9500AC1B98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		352BE4CB26AFE3EA00AC1B98 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
-		352BE4CD26AFE42900AC1B98 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
 		352BE4CF26AFE4C700AC1B98 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
 		352BE4D126AFE4E900AC1B98 /* TrackCollectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionHeaderReusableView.swift; sourceTree = "<group>"; };
 		352BE4D326AFE52C00AC1B98 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				352BE4B526AFDF9300AC1B98 /* Main.storyboard */,
-				352BE4CD26AFE42900AC1B98 /* TrackCollectionViewCell.swift */,
+				3522AE3626B15AF30010334A /* HomeViewController.swift */,
 				352BE4CF26AFE4C700AC1B98 /* TrackCollectionViewCell.swift */,
 				352BE4D126AFE4E900AC1B98 /* TrackCollectionHeaderReusableView.swift */,
 			);
@@ -212,10 +212,10 @@
 				352BE4D426AFE52C00AC1B98 /* PlayerViewController.swift in Sources */,
 				352BE4D626AFE55300AC1B98 /* Player.swift in Sources */,
 				352BE4D826AFE56A00AC1B98 /* Track.swift in Sources */,
+				3522AE3726B15AF30010334A /* HomeViewController.swift in Sources */,
 				352BE4D026AFE4C700AC1B98 /* TrackCollectionViewCell.swift in Sources */,
 				352BE4DA26AFE57300AC1B98 /* TrackManager.swift in Sources */,
 				352BE4D226AFE4E900AC1B98 /* TrackCollectionHeaderReusableView.swift in Sources */,
-				352BE4CE26AFE42900AC1B98 /* TrackCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

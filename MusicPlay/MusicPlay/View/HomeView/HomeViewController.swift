@@ -44,6 +44,16 @@ extension HomeViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
+            guard let item = trackManager.todaysTrack else {
+                return UICollectionReusableView()
+            }
+            
+            guard let header = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackCollectionHeaderReusableView", for: indexPath) as? TrackCollectionHeaderReusableView else {
+                return UICollectionReusableView()
+            }
+            
+            header.update(with: item)
+            
             return TrackCollectionHeaderReusableView()
         default:
             return TrackCollectionHeaderReusableView()
