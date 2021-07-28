@@ -8,6 +8,9 @@
 import UIKit
 
 class HomeViewController : UIViewController {
+    
+    let trackManager = TrackManager()
+    
     @IBOutlet var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -24,13 +27,16 @@ class HomeViewController : UIViewController {
 
 extension HomeViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return trackManager.tracks.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackCollectionViewCell", for: indexPath) as? TrackCollectionViewCell else {
             return UICollectionViewCell()
         }
+        let item = trackManager.track(at: indexPath.item)
+        
+        cell.updateUI(item: item)
         
         return cell
     }
@@ -48,7 +54,7 @@ extension HomeViewController : UICollectionViewDataSource {
 
 extension HomeViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
+        
     }
 }
 

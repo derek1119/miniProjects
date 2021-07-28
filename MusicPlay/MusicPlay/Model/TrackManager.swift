@@ -45,10 +45,20 @@ class TrackManager {
     }
     
     func loadAlbums(tracks: [AVPlayerItem]) -> [Album] {
-        return []
+        let trackList: [Track] = tracks.compactMap{ $0.convertToTrack()}
+        let albumDics = Dictionary(grouping: trackList, by: {(track) in track.albumName})
+        var albums: [Album] = []
+        for (key, value) in albumDics {
+            let title = key
+            let tracks = value
+            let album = Album(title: title, tracks: tracks)
+            albums.append(album)
+        }
+        
+        return albums
     }
     
     func loadTodaysTrack() {
-        
+        self.todaysTrack = self.tracks.randomElement()
     }
 }

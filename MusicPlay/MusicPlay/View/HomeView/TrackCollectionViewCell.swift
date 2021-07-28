@@ -18,11 +18,16 @@ class TrackCollectionViewCell: UICollectionViewCell {
     }
     
     func updateUI(item : Track?) {
-        
+        if let track = item {
+            self.trackThumbnail.image = track.artwork
+            self.trackTitle.text = track.title
+            self.trackArtist.text = track.artist
+        }
     }
     
     func setUpConstraints() {
-        self.trackThumbnail.layer.cornerRadius = 8.0
+        self.trackThumbnail.layer.cornerRadius = 8
         self.trackArtist.textColor = .systemGray2
     }
+
 }

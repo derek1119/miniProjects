@@ -14,7 +14,7 @@
 		352BE4BC26AFDF9500AC1B98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 352BE4BB26AFDF9500AC1B98 /* Assets.xcassets */; };
 		352BE4BF26AFDF9500AC1B98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 352BE4BD26AFDF9500AC1B98 /* LaunchScreen.storyboard */; };
 		352BE4CC26AFE3EA00AC1B98 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 352BE4CB26AFE3EA00AC1B98 /* Player.storyboard */; };
-		352BE4CE26AFE42900AC1B98 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352BE4CD26AFE42900AC1B98 /* HomeViewController.swift */; };
+		352BE4CE26AFE42900AC1B98 /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352BE4CD26AFE42900AC1B98 /* TrackCollectionViewCell.swift */; };
 		352BE4D026AFE4C700AC1B98 /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352BE4CF26AFE4C700AC1B98 /* TrackCollectionViewCell.swift */; };
 		352BE4D226AFE4E900AC1B98 /* TrackCollectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352BE4D126AFE4E900AC1B98 /* TrackCollectionHeaderReusableView.swift */; };
 		352BE4D426AFE52C00AC1B98 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352BE4D326AFE52C00AC1B98 /* PlayerViewController.swift */; };
@@ -34,7 +34,7 @@
 		352BE4BE26AFDF9500AC1B98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		352BE4C026AFDF9500AC1B98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		352BE4CB26AFE3EA00AC1B98 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
-		352BE4CD26AFE42900AC1B98 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		352BE4CD26AFE42900AC1B98 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
 		352BE4CF26AFE4C700AC1B98 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
 		352BE4D126AFE4E900AC1B98 /* TrackCollectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionHeaderReusableView.swift; sourceTree = "<group>"; };
 		352BE4D326AFE52C00AC1B98 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +74,6 @@
 		352BE4AE26AFDF9300AC1B98 /* MusicPlay */ = {
 			isa = PBXGroup;
 			children = (
-				352BE4C826AFE24C00AC1B98 /* Resources */,
 				352BE4C726AFE13800AC1B98 /* View */,
 				352BE4C626AFE13000AC1B98 /* Model */,
 				352BE4AF26AFDF9300AC1B98 /* AppDelegate.swift */,
@@ -83,6 +82,7 @@
 				352BE4BD26AFDF9500AC1B98 /* LaunchScreen.storyboard */,
 				352BE4C026AFDF9500AC1B98 /* Info.plist */,
 				352BE4B826AFDF9300AC1B98 /* MusicPlay.xcdatamodeld */,
+				352BE4C826AFE24C00AC1B98 /* Resources */,
 			);
 			path = MusicPlay;
 			sourceTree = "<group>";
@@ -117,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				352BE4B526AFDF9300AC1B98 /* Main.storyboard */,
-				352BE4CD26AFE42900AC1B98 /* HomeViewController.swift */,
+				352BE4CD26AFE42900AC1B98 /* TrackCollectionViewCell.swift */,
 				352BE4CF26AFE4C700AC1B98 /* TrackCollectionViewCell.swift */,
 				352BE4D126AFE4E900AC1B98 /* TrackCollectionHeaderReusableView.swift */,
 			);
@@ -215,7 +215,7 @@
 				352BE4D026AFE4C700AC1B98 /* TrackCollectionViewCell.swift in Sources */,
 				352BE4DA26AFE57300AC1B98 /* TrackManager.swift in Sources */,
 				352BE4D226AFE4E900AC1B98 /* TrackCollectionHeaderReusableView.swift in Sources */,
-				352BE4CE26AFE42900AC1B98 /* HomeViewController.swift in Sources */,
+				352BE4CE26AFE42900AC1B98 /* TrackCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
