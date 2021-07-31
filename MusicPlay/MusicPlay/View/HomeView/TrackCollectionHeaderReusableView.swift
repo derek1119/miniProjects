@@ -15,14 +15,15 @@ class TrackCollectionHeaderReusableView: UICollectionReusableView {
     var item : AVPlayerItem?
     var tapHandler: ((AVPlayerItem) -> Void)?
     
-    override class func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
+        thumbnailImageView.layer.cornerRadius = 8
     }
     
     func update(with item: AVPlayerItem) {
         self.item = item
         guard let track = item.convertToTrack() else { return }
-        
+
         self.thumbnailImageView.image = track.artwork
         self.descriptionLabel.text = "Today's pick is \(track.artist)'s album, Let listen"
     }

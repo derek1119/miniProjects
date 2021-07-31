@@ -13,8 +13,10 @@ class TrackCollectionViewCell: UICollectionViewCell {
     @IBOutlet var trackTitle: UILabel!
     @IBOutlet var trackArtist: UILabel!
     
-    override class func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setUpConstraints()
     }
     
     func updateUI(item : Track?) {
