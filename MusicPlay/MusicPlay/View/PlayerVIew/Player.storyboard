@@ -45,8 +45,8 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="BHj-g6-NFD">
                                 <rect key="frame" x="18" y="600" width="378" height="31"/>
                                 <connections>
-                                    <action selector="beginDrag:" destination="Y6W-OH-hqX" eventType="valueChanged" id="S1D-Z1-0Dy"/>
-                                    <action selector="endDrag:" destination="Y6W-OH-hqX" eventType="valueChanged" id="O6b-al-CNN"/>
+                                    <action selector="beginDrag:" destination="Y6W-OH-hqX" eventType="editingDidBegin" id="ZaV-WG-h4W"/>
+                                    <action selector="endDrag:" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="NQ1-V4-Gpw"/>
                                     <action selector="seek:" destination="Y6W-OH-hqX" eventType="valueChanged" id="ffV-hW-mbQ"/>
                                 </connections>
                             </slider>
