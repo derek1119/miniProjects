@@ -13,6 +13,7 @@
 		353EAF5B26D68BF20069015C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 353EAF5926D68BF20069015C /* Main.storyboard */; };
 		353EAF5D26D68BF40069015C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 353EAF5C26D68BF40069015C /* Assets.xcassets */; };
 		353EAF6026D68BF40069015C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 353EAF5E26D68BF40069015C /* LaunchScreen.storyboard */; };
+		353EAF6826D6FDDB0069015C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353EAF6726D6FDDB0069015C /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		353EAF5C26D68BF40069015C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		353EAF5F26D68BF40069015C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		353EAF6126D68BF40069015C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		353EAF6726D6FDDB0069015C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				353EAF5326D68BF20069015C /* AppDelegate.swift */,
 				353EAF5526D68BF20069015C /* SceneDelegate.swift */,
+				353EAF6726D6FDDB0069015C /* Model.swift */,
 				353EAF5726D68BF20069015C /* ViewController.swift */,
 				353EAF5926D68BF20069015C /* Main.storyboard */,
 				353EAF5C26D68BF40069015C /* Assets.xcassets */,
@@ -140,6 +143,7 @@
 				353EAF5826D68BF20069015C /* ViewController.swift in Sources */,
 				353EAF5426D68BF20069015C /* AppDelegate.swift in Sources */,
 				353EAF5626D68BF20069015C /* SceneDelegate.swift in Sources */,
+				353EAF6826D6FDDB0069015C /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,12 +8,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    let gameModel = GameModel()
+    
+    @IBOutlet weak var leftDice: UIImageView!
+    @IBOutlet weak var rightDice: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
 
-
+    @IBAction func rollBtnTapped(_ sender: UIButton) {
+        gameModel.randomImage(image: leftDice)
+        gameModel.randomImage2(image: rightDice)
+    }
+    
 }
 
