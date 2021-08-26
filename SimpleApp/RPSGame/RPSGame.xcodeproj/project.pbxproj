@@ -13,6 +13,8 @@
 		353EAF7D26D7242B0069015C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 353EAF7B26D7242B0069015C /* Main.storyboard */; };
 		353EAF7F26D7242D0069015C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 353EAF7E26D7242D0069015C /* Assets.xcassets */; };
 		353EAF8226D7242D0069015C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 353EAF8026D7242D0069015C /* LaunchScreen.storyboard */; };
+		353EAF8A26D72BCC0069015C /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353EAF8926D72BCC0069015C /* GameModel.swift */; };
+		353EAF8C26D733D30069015C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353EAF8B26D733D30069015C /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		353EAF7E26D7242D0069015C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		353EAF8126D7242D0069015C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		353EAF8326D7242D0069015C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		353EAF8926D72BCC0069015C /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		353EAF8B26D733D30069015C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 			children = (
 				353EAF7526D7242B0069015C /* AppDelegate.swift */,
 				353EAF7726D7242B0069015C /* SceneDelegate.swift */,
+				353EAF8B26D733D30069015C /* Model.swift */,
+				353EAF8926D72BCC0069015C /* GameModel.swift */,
 				353EAF7926D7242B0069015C /* ViewController.swift */,
 				353EAF7B26D7242B0069015C /* Main.storyboard */,
 				353EAF7E26D7242D0069015C /* Assets.xcassets */,
@@ -137,7 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				353EAF8C26D733D30069015C /* Model.swift in Sources */,
 				353EAF7A26D7242B0069015C /* ViewController.swift in Sources */,
+				353EAF8A26D72BCC0069015C /* GameModel.swift in Sources */,
 				353EAF7626D7242B0069015C /* AppDelegate.swift in Sources */,
 				353EAF7826D7242B0069015C /* SceneDelegate.swift in Sources */,
 			);
