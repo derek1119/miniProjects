@@ -12,9 +12,12 @@
 		3591AA1726DE34EC005D56EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3591AA1526DE34EC005D56EB /* Main.storyboard */; };
 		3591AA1926DE34EE005D56EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3591AA1826DE34EE005D56EB /* Assets.xcassets */; };
 		3591AA1C26DE34EE005D56EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3591AA1A26DE34EE005D56EB /* LaunchScreen.storyboard */; };
-		3591AA2726DE3C68005D56EB /* TimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591AA2626DE3C68005D56EB /* TimeModel.swift */; };
+		3591AA2726DE3C68005D56EB /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591AA2626DE3C68005D56EB /* Entity.swift */; };
 		3591AA2B26DE3DCE005D56EB /* WorldTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591AA2A26DE3DCE005D56EB /* WorldTimeViewModel.swift */; };
 		3591AA2D26DE3DE7005D56EB /* WorldTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591AA2C26DE3DE7005D56EB /* WorldTimeViewController.swift */; };
+		3591AA4B26DF7EBA005D56EB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591AA4A26DF7EBA005D56EB /* Repository.swift */; };
+		3591AA4D26DF7F60005D56EB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591AA4C26DF7F60005D56EB /* Model.swift */; };
+		3591AA4F26DF7FAE005D56EB /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591AA4E26DF7FAE005D56EB /* Service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,9 +28,12 @@
 		3591AA1826DE34EE005D56EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3591AA1B26DE34EE005D56EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3591AA1D26DE34EE005D56EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3591AA2626DE3C68005D56EB /* TimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModel.swift; sourceTree = "<group>"; };
+		3591AA2626DE3C68005D56EB /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		3591AA2A26DE3DCE005D56EB /* WorldTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTimeViewModel.swift; sourceTree = "<group>"; };
 		3591AA2C26DE3DE7005D56EB /* WorldTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTimeViewController.swift; sourceTree = "<group>"; };
+		3591AA4A26DF7EBA005D56EB /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		3591AA4C26DF7F60005D56EB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		3591AA4E26DF7FAE005D56EB /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				3591AA2326DE3C2F005D56EB /* Model */,
-				3591AA2426DE3C35005D56EB /* ViewModel */,
 				3591AA2526DE3C3C005D56EB /* View */,
 				3591AA0F26DE34EC005D56EB /* AppDelegate.swift */,
 				3591AA1126DE34EC005D56EB /* SceneDelegate.swift */,
@@ -75,23 +80,19 @@
 		3591AA2326DE3C2F005D56EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3591AA2626DE3C68005D56EB /* TimeModel.swift */,
+				3591AA2626DE3C68005D56EB /* Entity.swift */,
+				3591AA4A26DF7EBA005D56EB /* Repository.swift */,
+				3591AA4C26DF7F60005D56EB /* Model.swift */,
+				3591AA4E26DF7FAE005D56EB /* Service.swift */,
+				3591AA2A26DE3DCE005D56EB /* WorldTimeViewModel.swift */,
+				3591AA2C26DE3DE7005D56EB /* WorldTimeViewController.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		3591AA2426DE3C35005D56EB /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				3591AA2A26DE3DCE005D56EB /* WorldTimeViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		3591AA2526DE3C3C005D56EB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3591AA2C26DE3DE7005D56EB /* WorldTimeViewController.swift */,
 				3591AA1526DE34EC005D56EB /* Main.storyboard */,
 			);
 			path = View;
@@ -167,11 +168,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3591AA4D26DF7F60005D56EB /* Model.swift in Sources */,
 				3591AA1026DE34EC005D56EB /* AppDelegate.swift in Sources */,
-				3591AA2726DE3C68005D56EB /* TimeModel.swift in Sources */,
+				3591AA2726DE3C68005D56EB /* Entity.swift in Sources */,
 				3591AA2B26DE3DCE005D56EB /* WorldTimeViewModel.swift in Sources */,
+				3591AA4F26DF7FAE005D56EB /* Service.swift in Sources */,
 				3591AA1226DE34EC005D56EB /* SceneDelegate.swift in Sources */,
 				3591AA2D26DE3DE7005D56EB /* WorldTimeViewController.swift in Sources */,
+				3591AA4B26DF7EBA005D56EB /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

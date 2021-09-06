@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimeModel : Codable {
+struct Entity : Codable {
     let id: String
     let currentDateTime: String
     let utcOffset: String

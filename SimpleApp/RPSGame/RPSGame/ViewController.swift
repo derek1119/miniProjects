@@ -27,8 +27,9 @@ class ViewController: UIViewController {
     
     @IBAction func rpsBtnTapped(_ sender: UIButton) {
         
-        guard let my = RPS(rawValue: sender.currentTitle ?? "바위") else { return }
-        updateUI(label: myChoiceLabel, imageView: myImageView, rps: my)
+        guard let myChoice = RPS(rawValue: sender.currentTitle ?? "바위") else { return }
+        updateUI(label: myChoiceLabel, imageView: myImageView, rps: myChoice)
+        self.myChoice = myChoice
         
     }
     
