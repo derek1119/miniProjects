@@ -31,13 +31,13 @@ class LoginViewController: UIViewController {
         //background color
         view.backgroundColor = .white
         
-        setUpView()
+        setUpConstraints()
     }
 
 }
 
 extension LoginViewController {
-    func setUpView() {
+    func setUpConstraints() {
         view.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(emailTextField)
