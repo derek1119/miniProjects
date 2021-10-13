@@ -45,9 +45,11 @@ class LoginViewController: UIViewController {
     }
     
     let dontHaveAccountButton = UIButton(type: .system).then {
-        let attributedTitle = NSMutableAttributedString(string: "Don't habe an account?   ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)]))
+        
+        $0.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         
         $0.setAttributedTitle(attributedTitle, for: .normal)
     }
@@ -58,13 +60,20 @@ class LoginViewController: UIViewController {
         //background color
         view.backgroundColor = .white
         
+        //hide nav bar
+        navigationController?.navigationBar.isHidden = true
+        
         setUpConstraints()
     }
 
+    @objc func handleShowSignUp() {
+        let signUpVC = SignUpViewController()
+        navigationController?.pushViewController(signUpVC, animated:   true)
+    }
 }
 
 extension LoginViewController {
-    func setUpConstraints() {
+    private func setUpConstraints() {
         
         view.addSubview(logoContainerView)
         
