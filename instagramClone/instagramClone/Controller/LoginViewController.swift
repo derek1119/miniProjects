@@ -11,6 +11,18 @@ import SnapKit
 
 class LoginViewController: UIViewController {
     
+    let logoContainerView = UIView().then { container in
+        container.backgroundColor = UIColor(red: 0/255, green: 120/255, blue: 175/255, alpha: 1)
+        let logoImageView = UIImageView(image: UIImage(named: "Instagram_logo_white")!)
+        logoImageView.contentMode = .scaleAspectFill
+        container.addSubview(logoImageView)
+        logoImageView.snp.makeConstraints { make in
+            make.width.equalTo(200)
+            make.height.equalTo(50)
+            make.centerX.centerY.equalToSuperview()
+        }
+    }
+    
     let emailTextField = UITextField().then {
         $0.placeholder = "Email"
         $0.backgroundColor = UIColor(white: 0, alpha: 0.03)
@@ -32,7 +44,13 @@ class LoginViewController: UIViewController {
         $0.layer.cornerRadius = 5
     }
     
-    
+    let dontHaveAccountButton = UIButton(type: .system).then {
+        let attributedTitle = NSMutableAttributedString(string: "Don't habe an account?   ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)]))
+        
+        $0.setAttributedTitle(attributedTitle, for: .normal)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +65,16 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     func setUpConstraints() {
+        
+        view.addSubview(logoContainerView)
+        
+        logoContainerView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalTo(view.safeArea.leading)
+            make.trailing.equalTo(view.safeArea.trailing)
+            make.height.equalTo(150)
+        }
+        
         let stackView = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton]).then {
             $0.axis = .vertical
             $0.spacing = 10
@@ -58,8 +86,17 @@ extension LoginViewController {
         stackView.snp.makeConstraints { make in
             make.leading.equalTo(view.safeArea.leading).offset(40)
             make.trailing.equalTo(view.safeArea.trailing).offset(-40)
-            make.top.equalTo(view.safeArea.top).offset(40)
+            make.top.equalTo(logoContainerView.snp.bottom).offset(40)
             make.height.equalTo(140)
         }
+        
+        view.addSubview(dontHaveAccountButton)
+        
+        dontHaveAccountButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeArea.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(50)
+        }
+       
     }
 }
