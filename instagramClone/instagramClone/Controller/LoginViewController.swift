@@ -24,6 +24,15 @@ class LoginViewController: UIViewController {
         $0.borderStyle = .roundedRect
         $0.font = .systemFont(ofSize: 14)
     }
+    
+    let loginButton = UIButton(type: .system).then {
+        $0.setTitle("Login", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+        $0.layer.cornerRadius = 5
+    }
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,23 +47,19 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     func setUpConstraints() {
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(emailTextField)
-        view.addSubview(passwordTextField)
-        
-        emailTextField.snp.makeConstraints { make in
-            make.leading.equalTo(20)
-            make.trailing.equalTo(-20)
-            make.top.equalTo(view.safeArea.top).offset(40)
-            make.height.equalTo(40)
+        let stackView = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton]).then {
+            $0.axis = .vertical
+            $0.spacing = 10
+            $0.distribution = .fillEqually
         }
         
-        passwordTextField.snp.makeConstraints { make in
-            make.leading.equalTo(20)
-            make.trailing.equalTo(-20)
-            make.top.equalTo(emailTextField.snp.bottom).offset(40)
-            make.height.equalTo(40)
+        view.addSubview(stackView)
+        
+        stackView.snp.makeConstraints { make in
+            make.leading.equalTo(view.safeArea.leading).offset(40)
+            make.trailing.equalTo(view.safeArea.trailing).offset(-40)
+            make.top.equalTo(view.safeArea.top).offset(40)
+            make.height.equalTo(140)
         }
     }
 }
