@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpViewController: UIViewController {
 
@@ -18,6 +19,7 @@ class SignUpViewController: UIViewController {
         $0.backgroundColor = UIColor(white: 0, alpha: 0.03)
         $0.borderStyle = .roundedRect
         $0.font = .systemFont(ofSize: 14)
+        $0.addTarget(self, action: #selector(formValidation), for: .editingChanged)
     }
     
     let passwordTextField = UITextField().then {
@@ -25,6 +27,8 @@ class SignUpViewController: UIViewController {
         $0.backgroundColor = UIColor(white: 0, alpha: 0.03)
         $0.borderStyle = .roundedRect
         $0.font = .systemFont(ofSize: 14)
+        $0.isSecureTextEntry = true
+        $0.addTarget(self, action: #selector(formValidation), for: .editingChanged)
     }
     
     let fullNameTextField = UITextField().then {
@@ -32,6 +36,7 @@ class SignUpViewController: UIViewController {
         $0.backgroundColor = UIColor(white: 0, alpha: 0.03)
         $0.borderStyle = .roundedRect
         $0.font = .systemFont(ofSize: 14)
+        $0.addTarget(self, action: #selector(formValidation), for: .editingChanged)
     }
     
     let userNameTextField = UITextField().then {
@@ -39,6 +44,7 @@ class SignUpViewController: UIViewController {
         $0.backgroundColor = UIColor(white: 0, alpha: 0.03)
         $0.borderStyle = .roundedRect
         $0.font = .systemFont(ofSize: 14)
+        $0.addTarget(self, action: #selector(formValidation), for: .editingChanged)
     }
     
     let signUpButton = UIButton(type: .system).then {
@@ -46,6 +52,8 @@ class SignUpViewController: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
         $0.layer.cornerRadius = 5
+        $0.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        $0.isEnabled = false
     }
     
     let alreadyHaveAccountButton = UIButton(type: .system).then {
@@ -71,6 +79,38 @@ class SignUpViewController: UIViewController {
         _ = navigationController?.popViewController(animated: true)
     }
     
+    @objc func handleSignUp() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { user, error in
+
+            // handle error
+            if let error = error {
+                print("Failed to create user with error: ", error.localizedDescription)
+                return
+            }
+            
+            // success
+            print("Successfully create User")
+        }
+    }
+    
+    @objc func formValidation() {
+        guard
+            emailTextField.hasText,
+            passwordTextField.hasText,
+            fullNameTextField.hasText,
+            userNameTextField.hasText
+        else {
+            signUpButton.isEnabled = false
+            signUpButton.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+            return
+        }
+        
+        signUpButton.isEnabled = true
+        signUpButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+    }
 }
 
 extension SignUpViewController {

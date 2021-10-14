@@ -35,6 +35,7 @@ class LoginViewController: UIViewController {
         $0.backgroundColor = UIColor(white: 0, alpha: 0.03)
         $0.borderStyle = .roundedRect
         $0.font = .systemFont(ofSize: 14)
+        $0.isSecureTextEntry = true
     }
     
     let loginButton = UIButton(type: .system).then {
