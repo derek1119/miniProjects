@@ -69,7 +69,7 @@ class LoginViewController: UIViewController {
 
     @objc func handleShowSignUp() {
         let signUpVC = SignUpViewController()
-        navigationController?.pushViewController(signUpVC, animated:   true)
+        navigationController?.pushViewController(signUpVC, animated: true)
     }
 }
 
