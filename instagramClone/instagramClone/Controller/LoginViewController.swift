@@ -28,6 +28,7 @@ class LoginViewController: UIViewController {
         $0.backgroundColor = UIColor(white: 0, alpha: 0.03)
         $0.borderStyle = .roundedRect
         $0.font = .systemFont(ofSize: 14)
+        $0.addTarget(self, action: #selector(formValidation), for: .editingChanged)
     }
     
     let passwordTextField = UITextField().then {
@@ -36,6 +37,7 @@ class LoginViewController: UIViewController {
         $0.borderStyle = .roundedRect
         $0.font = .systemFont(ofSize: 14)
         $0.isSecureTextEntry = true
+        $0.addTarget(self, action: #selector(formValidation), for: .editingChanged)
     }
     
     let loginButton = UIButton(type: .system).then {
@@ -43,6 +45,7 @@ class LoginViewController: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
         $0.layer.cornerRadius = 5
+        $0.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
     }
     
     let dontHaveAccountButton = UIButton(type: .system).then {
@@ -70,6 +73,21 @@ class LoginViewController: UIViewController {
     @objc func handleShowSignUp() {
         let signUpVC = SignUpViewController()
         navigationController?.pushViewController(signUpVC, animated: true)
+    }
+    
+    @objc func handleLogin() {
+        print(#function)
+    }
+    
+    @objc func formValidation() {
+        guard emailTextField.hasText,
+              passwordTextField.hasText else {
+                  loginButton.isEnabled = false
+                  loginButton.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+                  return }
+        // handle case for conditions were met
+        loginButton.isEnabled = true
+        loginButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
     }
 }
 
