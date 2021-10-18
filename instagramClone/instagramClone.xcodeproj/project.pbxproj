@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35427D59271D7222007FE420 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D58271D7222007FE420 /* MainTabViewController.swift */; };
+		35427D5B271D78BC007FE420 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D5A271D78BC007FE420 /* FeedViewController.swift */; };
+		35427D5D271D78E1007FE420 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D5C271D78E1007FE420 /* SearchViewController.swift */; };
+		35427D5F271D78FA007FE420 /* UploadPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D5E271D78FA007FE420 /* UploadPostViewController.swift */; };
+		35427D61271D795E007FE420 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D60271D795E007FE420 /* NotificationViewController.swift */; };
+		35427D63271D7981007FE420 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D62271D7981007FE420 /* UserProfileViewController.swift */; };
 		355825DE27158E380063D9FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355825DD27158E380063D9FD /* AppDelegate.swift */; };
 		355825E027158E380063D9FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355825DF27158E380063D9FD /* SceneDelegate.swift */; };
 		355825E527158E380063D9FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 355825E327158E380063D9FD /* Main.storyboard */; };
@@ -22,6 +28,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35427D58271D7222007FE420 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		35427D5A271D78BC007FE420 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		35427D5C271D78E1007FE420 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		35427D5E271D78FA007FE420 /* UploadPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostViewController.swift; sourceTree = "<group>"; };
+		35427D60271D795E007FE420 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		35427D62271D7981007FE420 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		355825DA27158E380063D9FD /* instagramClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instagramClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		355825DD27158E380063D9FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		355825DF27158E380063D9FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +105,12 @@
 			children = (
 				355825F427158EC00063D9FD /* LoginViewController.swift */,
 				356CDF182716A4AD002FED76 /* SignUpViewController.swift */,
+				35427D58271D7222007FE420 /* MainTabViewController.swift */,
+				35427D5A271D78BC007FE420 /* FeedViewController.swift */,
+				35427D5C271D78E1007FE420 /* SearchViewController.swift */,
+				35427D5E271D78FA007FE420 /* UploadPostViewController.swift */,
+				35427D60271D795E007FE420 /* NotificationViewController.swift */,
+				35427D62271D7981007FE420 /* UserProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -133,7 +151,6 @@
 				B58A6096D10266263340D9C3 /* Pods-instagramClone.debug.xcconfig */,
 				D94105D7938219C089065AD6 /* Pods-instagramClone.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -188,7 +205,7 @@
 			);
 			mainGroup = 355825D127158E380063D9FD;
 			packageReferences = (
-				355825F9271592270063D9FD /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				355825F9271592270063D9FD /* XCRemoteSwiftPackageReference "SnapKit" */,
 				355825FC271593040063D9FD /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			productRefGroup = 355825DB27158E380063D9FD /* Products */;
@@ -261,11 +278,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35427D61271D795E007FE420 /* NotificationViewController.swift in Sources */,
 				355825F527158EC00063D9FD /* LoginViewController.swift in Sources */,
 				355825DE27158E380063D9FD /* AppDelegate.swift in Sources */,
+				35427D5D271D78E1007FE420 /* SearchViewController.swift in Sources */,
 				355825E027158E380063D9FD /* SceneDelegate.swift in Sources */,
 				355825F8271591030063D9FD /* Extensions.swift in Sources */,
 				356CDF192716A4AD002FED76 /* SignUpViewController.swift in Sources */,
+				35427D5F271D78FA007FE420 /* UploadPostViewController.swift in Sources */,
+				35427D59271D7222007FE420 /* MainTabViewController.swift in Sources */,
+				35427D63271D7981007FE420 /* UserProfileViewController.swift in Sources */,
+				35427D5B271D78BC007FE420 /* FeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,7 +512,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		355825F9271592270063D9FD /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		355825F9271592270063D9FD /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -510,7 +533,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		355825FA271592280063D9FD /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 355825F9271592270063D9FD /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = 355825F9271592270063D9FD /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 		355825FD271593040063D9FD /* Then */ = {

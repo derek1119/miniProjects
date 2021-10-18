@@ -8,6 +8,7 @@
 import UIKit
 import Then
 import SnapKit
+import Firebase
 
 class LoginViewController: UIViewController {
     
@@ -75,10 +76,6 @@ class LoginViewController: UIViewController {
         navigationController?.pushViewController(signUpVC, animated: true)
     }
     
-    @objc func handleLogin() {
-        print(#function)
-    }
-    
     @objc func formValidation() {
         guard emailTextField.hasText,
               passwordTextField.hasText else {
@@ -88,6 +85,27 @@ class LoginViewController: UIViewController {
         // handle case for conditions were met
         loginButton.isEnabled = true
         loginButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+    }
+    
+    @objc func handleLogin() {
+        print(#function)
+        
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text else { return }
+        Auth.auth().signIn(withEmail: email, password: password) { user, error in
+            
+            // handle sign in error
+            if let error = error {
+                print("로그인에 에러와 함께 실패: ", error.localizedDescription)
+                return
+            }
+            
+            // handle success
+            print("성공적으로 로그인")
+            
+        }
+        
     }
 }
 
