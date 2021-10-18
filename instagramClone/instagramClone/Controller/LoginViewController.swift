@@ -104,6 +104,8 @@ class LoginViewController: UIViewController {
             // handle success
             print("성공적으로 로그인")
             
+            let mainTabBarVC = MainTabViewController()
+            self.present(mainTabBarVC, animated: true, completion: nil)
         }
         
     }
