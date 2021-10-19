@@ -103,7 +103,8 @@ class LoginViewController: UIViewController {
             
             // handle success
             print("성공적으로 로그인")
-            guard let mainTabVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabViewController else {
+            guard let mainTabVC = UIApplication.shared.windows.first(where: {$0.isKeyWindow})?.rootViewController as? MainTabViewController
+            else {
                 print("뷰 불러오기 실패")
                 return }
             

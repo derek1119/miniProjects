@@ -72,7 +72,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
                 // present login controller
                 let loginVC = LoginViewController()
                 let navController = UINavigationController(rootViewController: loginVC)
-                navController.modalPresentationStyle = .fullScreen
+                navController.modalTransitionStyle = .crossDissolve
                 self.present(navController, animated: true, completion: nil)
             }
             return

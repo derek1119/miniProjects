@@ -13,6 +13,7 @@
 		35427D5F271D78FA007FE420 /* UploadPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D5E271D78FA007FE420 /* UploadPostViewController.swift */; };
 		35427D61271D795E007FE420 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D60271D795E007FE420 /* NotificationViewController.swift */; };
 		35427D63271D7981007FE420 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D62271D7981007FE420 /* UserProfileViewController.swift */; };
+		35427D6B271EB1D3007FE420 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D6A271EB1D3007FE420 /* UserProfileHeader.swift */; };
 		355825DE27158E380063D9FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355825DD27158E380063D9FD /* AppDelegate.swift */; };
 		355825E027158E380063D9FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355825DF27158E380063D9FD /* SceneDelegate.swift */; };
 		355825E527158E380063D9FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 355825E327158E380063D9FD /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 		35427D5E271D78FA007FE420 /* UploadPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostViewController.swift; sourceTree = "<group>"; };
 		35427D60271D795E007FE420 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		35427D62271D7981007FE420 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		35427D6A271EB1D3007FE420 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		355825DA27158E380063D9FD /* instagramClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instagramClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		355825DD27158E380063D9FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		355825DF27158E380063D9FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35427D64271EAE3E007FE420 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				355825F427158EC00063D9FD /* LoginViewController.swift */,
+				356CDF182716A4AD002FED76 /* SignUpViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		35427D65271EAE4E007FE420 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				35427D5A271D78BC007FE420 /* FeedViewController.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		35427D66271EAE58007FE420 /* UploadPost */ = {
+			isa = PBXGroup;
+			children = (
+				35427D5E271D78FA007FE420 /* UploadPostViewController.swift */,
+			);
+			path = UploadPost;
+			sourceTree = "<group>";
+		};
+		35427D67271EAE69007FE420 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				35427D5C271D78E1007FE420 /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		35427D68271EAE7F007FE420 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				35427D60271D795E007FE420 /* NotificationViewController.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		35427D69271EAE87007FE420 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				35427D62271D7981007FE420 /* UserProfileViewController.swift */,
+				35427D6A271EB1D3007FE420 /* UserProfileHeader.swift */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
 		355825D127158E380063D9FD = {
 			isa = PBXGroup;
 			children = (
@@ -103,14 +155,13 @@
 		355825F127158E6B0063D9FD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				355825F427158EC00063D9FD /* LoginViewController.swift */,
-				356CDF182716A4AD002FED76 /* SignUpViewController.swift */,
+				35427D64271EAE3E007FE420 /* Login */,
+				35427D65271EAE4E007FE420 /* Feed */,
+				35427D67271EAE69007FE420 /* Search */,
+				35427D66271EAE58007FE420 /* UploadPost */,
+				35427D68271EAE7F007FE420 /* Notification */,
+				35427D69271EAE87007FE420 /* UserProfile */,
 				35427D58271D7222007FE420 /* MainTabViewController.swift */,
-				35427D5A271D78BC007FE420 /* FeedViewController.swift */,
-				35427D5C271D78E1007FE420 /* SearchViewController.swift */,
-				35427D5E271D78FA007FE420 /* UploadPostViewController.swift */,
-				35427D60271D795E007FE420 /* NotificationViewController.swift */,
-				35427D62271D7981007FE420 /* UserProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -281,6 +332,7 @@
 				35427D61271D795E007FE420 /* NotificationViewController.swift in Sources */,
 				355825F527158EC00063D9FD /* LoginViewController.swift in Sources */,
 				355825DE27158E380063D9FD /* AppDelegate.swift in Sources */,
+				35427D6B271EB1D3007FE420 /* UserProfileHeader.swift in Sources */,
 				35427D5D271D78E1007FE420 /* SearchViewController.swift in Sources */,
 				355825E027158E380063D9FD /* SceneDelegate.swift in Sources */,
 				355825F8271591030063D9FD /* Extensions.swift in Sources */,
@@ -351,6 +403,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -365,7 +418,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -412,6 +465,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -420,7 +474,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -446,6 +500,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,7 +510,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -475,6 +530,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -484,7 +540,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
