@@ -103,9 +103,15 @@ class LoginViewController: UIViewController {
             
             // handle success
             print("성공적으로 로그인")
+            guard let mainTabVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabViewController else {
+                print("뷰 불러오기 실패")
+                return }
             
-            let mainTabBarVC = MainTabViewController()
-            self.present(mainTabBarVC, animated: true, completion: nil)
+            // configure view controllers in maintabVC
+            mainTabVC.configureViewControllers()
+            
+            // dismiss login controller
+            self.dismiss(animated: true, completion: nil)
         }
         
     }

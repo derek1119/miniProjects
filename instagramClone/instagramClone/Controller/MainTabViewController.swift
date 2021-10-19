@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
 
@@ -16,6 +17,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
         delegate = self
         
         configureViewControllers()
+        
+        // user validation
+        checkIfUserIsLogIn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,5 +64,18 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
         
         //return nav Controller
         return navController
+    }
+    
+    func checkIfUserIsLogIn() {
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                // present login controller
+                let loginVC = LoginViewController()
+                let navController = UINavigationController(rootViewController: loginVC)
+                navController.modalPresentationStyle = .fullScreen
+                self.present(navController, animated: true, completion: nil)
+            }
+            return
+        }
     }
 }
