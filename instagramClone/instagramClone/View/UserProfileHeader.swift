@@ -11,6 +11,13 @@ import SnapKit
 
 class UserProfileHeader: UICollectionViewCell {
     
+    var  user: User? {
+        didSet {
+            let fullName = user?.name
+            nameLabel.text = fullName
+        }
+    }
+    
     let profileImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
@@ -18,7 +25,6 @@ class UserProfileHeader: UICollectionViewCell {
     }
     
     let nameLabel = UILabel().then {
-        $0.text = "이름"
         $0.font = .systemFont(ofSize: 12, weight: .bold)
     }
     

@@ -15,6 +15,9 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
 
     // MARK: - Properties
     
+    var user: User?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,6 +54,19 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         // declare header
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! UserProfileHeader
         
+        // set the user in header
+        guard let currentUid = Auth.auth().currentUser?.uid else { print("User is not exist ")
+            return UICollectionReusableView() }
+        
+        Database.database().reference().child("users").child(currentUid).observeSingleEvent(of: .value) { snapshot in
+            guard let dic = snapshot.value as? Dictionary<String, AnyObject> else { return }
+            let uid = snapshot.key
+            let user = User(uid: uid, dictionary: dic)
+            
+            self.navigationItem.title = user.username
+            
+            header.user = user
+        }
         // return header
         return header
     }
@@ -66,11 +82,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     // MARK: - API
     func fetchCurrentUserData() {
         
-        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+       
         
-        Database.database().reference().child("users").child(currentUid).child("username").observeSingleEvent(of: .value) { snapshot in
-            guard let username = snapshot.value as? String else { return }
-            self.navigationItem.title = username
-        }
     }
 }

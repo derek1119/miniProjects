@@ -14,6 +14,7 @@
 		35427D61271D795E007FE420 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D60271D795E007FE420 /* NotificationViewController.swift */; };
 		35427D63271D7981007FE420 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D62271D7981007FE420 /* UserProfileViewController.swift */; };
 		35427D6B271EB1D3007FE420 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D6A271EB1D3007FE420 /* UserProfileHeader.swift */; };
+		35427D6D271EEA5B007FE420 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D6C271EEA5B007FE420 /* User.swift */; };
 		355825DE27158E380063D9FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355825DD27158E380063D9FD /* AppDelegate.swift */; };
 		355825E027158E380063D9FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355825DF27158E380063D9FD /* SceneDelegate.swift */; };
 		355825E527158E380063D9FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 355825E327158E380063D9FD /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		35427D60271D795E007FE420 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		35427D62271D7981007FE420 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		35427D6A271EB1D3007FE420 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
+		35427D6C271EEA5B007FE420 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		355825DA27158E380063D9FD /* instagramClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instagramClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		355825DD27158E380063D9FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		355825DF27158E380063D9FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,7 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				35427D62271D7981007FE420 /* UserProfileViewController.swift */,
-				35427D6A271EB1D3007FE420 /* UserProfileHeader.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -169,6 +170,7 @@
 		355825F227158E7A0063D9FD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				35427D6C271EEA5B007FE420 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -176,6 +178,7 @@
 		355825F327158E840063D9FD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				35427D6A271EB1D3007FE420 /* UserProfileHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35427D6D271EEA5B007FE420 /* User.swift in Sources */,
 				35427D61271D795E007FE420 /* NotificationViewController.swift in Sources */,
 				355825F527158EC00063D9FD /* LoginViewController.swift in Sources */,
 				355825DE27158E380063D9FD /* AppDelegate.swift in Sources */,
