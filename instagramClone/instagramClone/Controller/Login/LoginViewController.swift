@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Then
-import SnapKit
 import Firebase
 
 class LoginViewController: UIViewController {
@@ -103,14 +101,33 @@ class LoginViewController: UIViewController {
             
             // handle success
             print("성공적으로 로그인")
-            guard let mainTabVC = UIApplication.shared.windows.first(where: {$0.isKeyWindow})?.rootViewController as? MainTabViewController
-            else {
-                print("뷰 불러오기 실패")
-                return }
-            
-            // configure view controllers in maintabVC
-            mainTabVC.configureViewControllers()
-            
+            if #available(iOS 15, *) {
+                guard let mainTabVC = UIApplication.KeyWindow?.rootViewController as? MainTabViewController
+                else {
+                    print("iOS 15 뷰 불러오기 실패")
+                    return }
+                // configure view controllers in maintabVC
+                print("iOS 15 뷰 불러오기 성공")
+                mainTabVC.configureViewControllers()
+            } else if #available(iOS 13, *) {
+                guard let mainTabVC = UIApplication.shared.windows.first(where: {$0.isKeyWindow})?.rootViewController as? MainTabViewController
+                else {
+                    print("뷰 불러오기 실패")
+                    return }
+                // configure view controllers in maintabVC
+                print("iOS 13 뷰 불러오기 성공")
+
+                mainTabVC.configureViewControllers()
+            } else {
+                guard let mainTabVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabViewController
+                else {
+                    print("뷰 불러오기 실패")
+                    return }
+                // configure view controllers in maintabVC
+                print("iOS 13 이하 뷰 불러오기 성공")
+
+                mainTabVC.configureViewControllers()
+            }
             // dismiss login controller
             self.dismiss(animated: true, completion: nil)
         }

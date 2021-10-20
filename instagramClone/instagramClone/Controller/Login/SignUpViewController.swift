@@ -85,8 +85,8 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
     @objc func handleSignUp() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        guard let fullName = fullNameTextField.text else { return }
-        guard let userName = userNameTextField.text else { return }
+        guard let fullName = fullNameTextField.text?.lowercased() else { return }
+        guard let userName = userNameTextField.text?.lowercased() else { return }
         
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
 
