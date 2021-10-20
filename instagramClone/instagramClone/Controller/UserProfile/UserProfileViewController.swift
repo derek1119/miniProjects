@@ -11,12 +11,12 @@ import Firebase
 private let reuseIdentifier = "Cell"
 private let headerIdentifier = "UserProfileHeader"
 
-class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate {
+    
 
     // MARK: - Properties
     
-    var user: User?
-    
+    var currentUser: User?
     var userToLoadFromSearchVC: User?
     
     override func viewDidLoad() {
@@ -58,9 +58,11 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         // declare header
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! UserProfileHeader
         
+        header.delegate = self
+        
         // set the user in header
-        if let user = user {
-            header.user = user
+        if let currentUser = currentUser {
+            header.user = currentUser
         } else if let userToLoadFromSearchVC = userToLoadFromSearchVC {
             header.user = userToLoadFromSearchVC
             navigationItem.title = userToLoadFromSearchVC.username
@@ -86,9 +88,26 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             guard let dic = snapshot.value as? Dictionary<String, AnyObject> else { return }
             let uid = snapshot.key
             let user = User(uid: uid, dictionary: dic)
-            self.user = user
+            self.currentUser = user
             self.navigationItem.title = user.username
             self.collectionView.reloadData()
+        }
+    }
+    
+    // MARK: - UserProfileHeader
+    func handleEditFollowTapped(for header: UserProfileHeader) {
+        guard let user = header.user else { return }
+        
+        if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {
+            
+        } else {
+            if header.editProfileFollowButton.titleLabel?.text == "Follow" {
+                header.editProfileFollowButton.setTitle("Following", for: .normal)
+                user.follow()
+            } else {
+                header.editProfileFollowButton.setTitle("Follow", for: .normal)
+                user.unfollow()
+            }
         }
     }
 }

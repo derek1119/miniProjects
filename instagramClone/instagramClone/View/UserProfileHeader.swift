@@ -12,9 +12,10 @@ import Firebase
 
 class UserProfileHeader: UICollectionViewCell {
     
+    var delegate : UserProfileHeaderDelegate?
+    
     var  user: User? {
         didSet {
-            
             // configure edit profile follow button
             configureEditProfileFollowButton()
             
@@ -75,6 +76,7 @@ class UserProfileHeader: UICollectionViewCell {
         $0.layer.borderWidth = 0.5
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         $0.setTitleColor(.black, for: .normal)
+        $0.addTarget(self, action: #selector(handleEditProfileFollow), for: .touchUpInside)
     }
     
     let gridButton = UIButton(type: .system).then {
@@ -92,14 +94,10 @@ class UserProfileHeader: UICollectionViewCell {
         $0.tintColor = UIColor(white: 0, alpha: 0.2)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setUpUI()
-    }
+    // MARK: - Handler
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @objc func handleEditProfileFollow() {
+        delegate?.handleEditFollowTapped(for: self)
     }
     
     private func setUpUI() {
@@ -189,12 +187,29 @@ class UserProfileHeader: UICollectionViewCell {
         } else {
             
             // configure button as follow button
-            editProfileFollowButton.setTitle("Follow", for: .normal)
             editProfileFollowButton.setTitleColor(.white, for: .normal)
             editProfileFollowButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
             
+            user.checkIfUserIsFollowed(completion: { followed in
+                if followed {
+                    self.editProfileFollowButton.setTitle("Following", for: .normal)
+                } else {
+                    self.editProfileFollowButton.setTitle("Follow", for: .normal)
+                }
+            })
         }
 
         
+    }
+    
+    // MARK: - init
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setUpUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

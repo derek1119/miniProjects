@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SeachUserTableViewCell: UITableViewCell {
+class SearchUserTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
@@ -40,6 +40,13 @@ class SeachUserTableViewCell: UITableViewCell {
         
         // add profile image view
         addSubview(profileImageView)
+        profileImageView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(8)
+            make.width.height.equalTo(48)
+            make.centerY.equalToSuperview()
+            profileImageView.layer.cornerRadius = 48 / 2
+            profileImageView.clipsToBounds = true
+        }
         
         fetchUI()
     }
@@ -64,13 +71,6 @@ class SeachUserTableViewCell: UITableViewCell {
     func fetchUI() {
         if #available(iOS 14.0, *) {
             var content = self.defaultContentConfiguration()
-            profileImageView.snp.makeConstraints { make in
-                make.leading.equalToSuperview().offset(8)
-                make.width.height.equalTo(48)
-                make.centerY.equalToSuperview()
-                profileImageView.layer.cornerRadius = 48 / 2
-                profileImageView.clipsToBounds = true
-            }
             content.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 64, bottom: 0, trailing: 0)
             content.attributedText = NSAttributedString(string: "\(self.user?.username ?? "User Name")" , attributes: [ .font: UIFont.systemFont(ofSize: 16, weight: .bold), .foregroundColor: UIColor.black ])
             content.secondaryAttributedText = NSAttributedString(string: "\(self.user?.name ?? "Full Name")", attributes: [ .font: UIFont.systemFont(ofSize: 10, weight: .regular), .foregroundColor: UIColor.lightGray ])
@@ -78,14 +78,10 @@ class SeachUserTableViewCell: UITableViewCell {
         } else {
             // Fallback on earlier versions
             self.textLabel?.text = "\(self.user?.username ?? "User Name")"
+            self.textLabel?.font = .boldSystemFont(ofSize: 16)
             self.detailTextLabel?.text = "\(self.user?.name ?? "Full Name")"
-            profileImageView.snp.makeConstraints { make in
-                make.leading.equalToSuperview().offset(8)
-                make.width.height.equalTo(48)
-                make.centerY.equalToSuperview()
-                profileImageView.layer.cornerRadius = 48 / 2
-                profileImageView.clipsToBounds = true
-            }
+            self.detailTextLabel?.font = .systemFont(ofSize: 10, weight: .regular)
+            self.detailTextLabel?.backgroundColor = .lightGray
         }
     }
 }

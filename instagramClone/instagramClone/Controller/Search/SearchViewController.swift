@@ -20,7 +20,7 @@ class SearchViewController: UITableViewController {
         super.viewDidLoad()
 
         // register cell classes
-        tableView.register(SeachUserTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(SearchUserTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         
         // separator insets
                 // 이미지의 너비(48) 만큼의 inset을 넣어줌 -> 64
@@ -47,7 +47,7 @@ class SearchViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SeachUserTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SearchUserTableViewCell
         cell.user = users[indexPath.row]
         return cell
     }
