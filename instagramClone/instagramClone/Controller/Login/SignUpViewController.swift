@@ -130,11 +130,37 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
                     
                     // save User info to database
                     Database.database().reference().child("users").updateChildValues(values) { error, ref in
-                        guard let mainTabVC = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? MainTabViewController else { return }
-                        
-                        mainTabVC.configureViewControllers()
-                        mainTabVC.isInitialLoad = true
-                        
+                        if #available(iOS 15, *) {
+                            guard let mainTabVC = UIApplication.KeyWindow?.rootViewController as? MainTabViewController
+                            else {
+                                print("iOS 15 뷰 불러오기 실패")
+                                return }
+                            // configure view controllers in maintabVC
+                            print("iOS 15 뷰 불러오기 성공")
+                            mainTabVC.configureViewControllers()
+                            mainTabVC.isInitialLoad = true
+                        } else if #available(iOS 13, *) {
+                            guard let mainTabVC = UIApplication.shared.windows.first(where: {$0.isKeyWindow})?.rootViewController as? MainTabViewController
+                            else {
+                                print("뷰 불러오기 실패")
+                                return }
+                            // configure view controllers in maintabVC
+                            print("iOS 13 뷰 불러오기 성공")
+
+                            mainTabVC.configureViewControllers()
+                            mainTabVC.isInitialLoad = true
+                        } else {
+                            guard let mainTabVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabViewController
+                            else {
+                                print("뷰 불러오기 실패")
+                                return }
+                            // configure view controllers in maintabVC
+                            print("iOS 13 이하 뷰 불러오기 성공")
+
+                            mainTabVC.configureViewControllers()
+                            mainTabVC.isInitialLoad = true
+                        }
+                        // dismiss login controller
                         self.dismiss(animated: true, completion: nil)
                     }
 
