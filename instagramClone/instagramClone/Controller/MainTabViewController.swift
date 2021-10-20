@@ -10,6 +10,8 @@ import Firebase
 
 class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
 
+    var isInitialLoad: Bool?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -88,7 +88,7 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
         guard let fullName = fullNameTextField.text else { return }
         guard let userName = userNameTextField.text else { return }
         
-        Auth.auth().createUser(withEmail: email, password: password) { user, error in
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
 
             // handle error
             if let error = error {
@@ -105,29 +105,41 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
             // 파이어베이스 저장소에 이미지 두기
                         // 나중에 이미지를 불러오기 위한 고유의(unique) identifier를 제공
             let fileName = NSUUID().uuidString
-            Storage.storage().reference().child("profile_images").child(fileName).putData(uploadData, metadata: nil) { metaData, error in
+            let storageRef = Storage.storage().reference().child("profile_images").child(fileName)
+                
+            storageRef.putData(uploadData, metadata: nil) { metaData, error in
                 
                 // 에러 처리
                 if let error = error {
                     print("파이어 베이스 저장소에 이비지를 업로드 하는데 에러로 실패하였다. ", error.localizedDescription)
                 }
                 
-                guard let profileImageURL = metaData?.path else { return }
-                
-                let dictionaryValues = ["name": fullName,
-                                        "username": userName,
-                                        "profileImageURL": profileImageURL]
-                
-                guard let uid = Auth.auth().currentUser?.uid else { return }
-                
-                let values = [uid : dictionaryValues]
-                
-                // save User info to database
-                Database.database().reference().child("users").updateChildValues(values) { error, ref in
-                    print(" 유저가 성공적으로 만들어짐 ")
+                storageRef.downloadURL { downloadURL, error in
+                    guard let profileImageURL = downloadURL?.absoluteString else {
+                        print("프로필 이미지 url is nil")
+                        return
+                    }
+                    
+                    // user id
+                    guard let uid = authResult?.user.uid else { return }
+                    
+                    let dictionaryValues = ["name": fullName,
+                                            "username": userName,
+                                            "profileImageURL": profileImageURL]
+                    let values = [uid : dictionaryValues]
+                    
+                    // save User info to database
+                    Database.database().reference().child("users").updateChildValues(values) { error, ref in
+                        guard let mainTabVC = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? MainTabViewController else { return }
+                        
+                        mainTabVC.configureViewControllers()
+                        mainTabVC.isInitialLoad = true
+                        
+                        self.dismiss(animated: true, completion: nil)
+                    }
+
                 }
             }
-            
             // success
             print("Successfully create User")
         }

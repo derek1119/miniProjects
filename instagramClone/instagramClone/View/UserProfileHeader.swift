@@ -15,6 +15,10 @@ class UserProfileHeader: UICollectionViewCell {
         didSet {
             let fullName = user?.name
             nameLabel.text = fullName
+            
+            guard let profileImageURL = user?.profileImageURL else { return }
+            
+            profileImageView.loadImage(with: profileImageURL)
         }
     }
     
@@ -70,17 +74,17 @@ class UserProfileHeader: UICollectionViewCell {
     }
     
     let gridButton = UIButton(type: .system).then {
-        $0.setImage(Image("grid"), for: .normal)
+        $0.setImage(UIImage().Image("grid"), for: .normal)
         $0.tintColor = UIColor(white: 0, alpha: 0.2)
     }
     
     let listButton = UIButton(type: .system).then {
-        $0.setImage(Image("list"), for: .normal)
+        $0.setImage(UIImage().Image("list"), for: .normal)
         $0.tintColor = UIColor(white: 0, alpha: 0.2)
     }
     
     let bookmarkButton = UIButton(type: .system).then {
-        $0.setImage(Image("ribbon"), for: .normal)
+        $0.setImage(UIImage().Image("ribbon"), for: .normal)
         $0.tintColor = UIColor(white: 0, alpha: 0.2)
     }
     
