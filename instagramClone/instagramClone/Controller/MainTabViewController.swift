@@ -38,8 +38,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
         // 검색 피드 컨트롤러
         let searchVC = constructNavigationCotroller(unselectedImage: #imageLiteral(resourceName: "search_unselected") , selectedImage: #imageLiteral(resourceName: "search_selected"), rootViewController: SearchViewController())
         
-        // 포스트 컨트롤러
-        let uploadPostVC = constructNavigationCotroller(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"), rootViewController: UploadPostViewController())
+        // 이미지 선택 컨트롤러
+        let selectVC = constructNavigationCotroller(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"))
         
         // 노티피케이션 컨트롤러
         let notificationVC = constructNavigationCotroller(unselectedImage: #imageLiteral(resourceName: "like_unselected"), selectedImage: #imageLiteral(resourceName: "like_selected"), rootViewController: NotificationViewController())
@@ -48,10 +48,28 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
         let userProfileVC = constructNavigationCotroller(unselectedImage: #imageLiteral(resourceName: "profile_unselected"), selectedImage: #imageLiteral(resourceName: "profile_selected"), rootViewController: UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout()))
         
         // tab controller에 view controller 추가하기
-        viewControllers = [feedVC, searchVC, uploadPostVC, notificationVC, userProfileVC]
+        viewControllers = [feedVC, searchVC, selectVC, notificationVC, userProfileVC]
         
         // tab bar tint color
         tabBar.tintColor = .black
+        tabBar.backgroundColor = .systemGray6
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let index = viewControllers?.firstIndex(of: viewController)
+        
+        if index == 2 {
+            
+            let selectImageVC = SelectImageViewController(collectionViewLayout: UICollectionViewFlowLayout())
+            let navController = UINavigationController(rootViewController: selectImageVC)
+            navController.navigationBar.tintColor = .black
+            navController.modalPresentationStyle = .fullScreen
+            present(navController, animated: true, completion: nil)
+            
+            return false
+        }
+        
+        return true
     }
     
     // 네비게이션 컨트롤러 생성

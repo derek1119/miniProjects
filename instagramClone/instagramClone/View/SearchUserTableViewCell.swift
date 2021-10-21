@@ -47,6 +47,8 @@ class SearchUserTableViewCell: UITableViewCell {
             profileImageView.layer.cornerRadius = 48 / 2
         }
         
+        self.selectionStyle = .none
+
         fetchUI()
     }
     
