@@ -13,7 +13,7 @@ class SelectPhotoHeader: UICollectionViewCell {
     let photoImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
-        $0.backgroundColor = .blue
+        $0.backgroundColor = .white
     }
     
     override init(frame: CGRect) {

@@ -53,7 +53,7 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
     let signUpButton = UIButton(type: .system).then {
         $0.setTitle("Sign Up", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+        $0.backgroundColor = .isUnableStateColor
         $0.layer.cornerRadius = 5
         $0.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         $0.isEnabled = false
@@ -62,7 +62,7 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
     let alreadyHaveAccountButton = UIButton(type: .system).then {
         let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)]))
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.isEnableStateColor]))
         
         $0.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
         
@@ -180,12 +180,12 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
             imageSelected == true
         else {
             signUpButton.isEnabled = false
-            signUpButton.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+            signUpButton.backgroundColor = .isUnableStateColor
             return
         }
         
         signUpButton.isEnabled = true
-        signUpButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+        signUpButton.backgroundColor = .isEnableStateColor
     }
 }
 

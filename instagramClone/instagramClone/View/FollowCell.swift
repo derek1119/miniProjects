@@ -43,7 +43,7 @@ class FollowCell: UITableViewCell {
                     self.followButton.setTitle("Follow", for: .normal)
                     self.followButton.setTitleColor(.white, for: .normal)
                     self.followButton.layer.borderWidth = 0
-                    self.followButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+                    self.followButton.backgroundColor = .isEnableStateColor
 
                 }
             })
@@ -61,7 +61,7 @@ class FollowCell: UITableViewCell {
         $0.setTitle("Loading", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 3
-        $0.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+        $0.backgroundColor = .isEnableStateColor
         $0.addTarget(self, action: #selector(handleFollowTapped), for: .touchUpInside)
     }
     

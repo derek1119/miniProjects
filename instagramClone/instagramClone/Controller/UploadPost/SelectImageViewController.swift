@@ -18,6 +18,7 @@ class SelectImageViewController: UICollectionViewController, UICollectionViewDel
     var images = [UIImage]()
     var assets = [PHAsset]()
     var selectedImage: UIImage?
+    var header: SelectPhotoHeader?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +87,8 @@ class SelectImageViewController: UICollectionViewController, UICollectionViewDel
         
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as? SelectPhotoHeader else { return UICollectionReusableView()}
         
+        self.header = header
+        
         // 높은 품질의 이미지 얻어오는 방법
         if let selectedImage = selectedImage {
            
@@ -117,7 +120,9 @@ class SelectImageViewController: UICollectionViewController, UICollectionViewDel
     }
     
     @objc func handleNext() {
-        print(#function)
+        let uploadPostVC = UploadPostViewController()
+        uploadPostVC.selectedImage = header?.photoImageView.image
+        navigationController?.pushViewController(uploadPostVC, animated: true)
     }
     
     func configureNavigationButton() {
@@ -151,9 +156,7 @@ class SelectImageViewController: UICollectionViewController, UICollectionViewDel
             
             // enumerate objects -> 객체와 인덱스를 함께,
             allPhotos.enumerateObjects { asset, count, stop in
-                
-                print("몇 번째 사진일까요? \(count)")
-                
+              
                 let imageManager = PHImageManager.default()
                 let targetSize = CGSize(width: 200, height: 200)
                 let options = PHImageRequestOptions()

@@ -42,7 +42,7 @@ class LoginViewController: UIViewController {
     let loginButton = UIButton(type: .system).then {
         $0.setTitle("Login", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+        $0.backgroundColor = .isUnableStateColor
         $0.layer.cornerRadius = 5
         $0.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
     }
@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
     let dontHaveAccountButton = UIButton(type: .system).then {
         let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)]))
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.isEnableStateColor]))
         
         $0.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         
@@ -78,11 +78,11 @@ class LoginViewController: UIViewController {
         guard emailTextField.hasText,
               passwordTextField.hasText else {
                   loginButton.isEnabled = false
-                  loginButton.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+                  loginButton.backgroundColor = .isUnableStateColor
                   return }
         // handle case for conditions were met
         loginButton.isEnabled = true
-        loginButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+        loginButton.backgroundColor = .isEnableStateColor
     }
     
     @objc func handleLogin() {
