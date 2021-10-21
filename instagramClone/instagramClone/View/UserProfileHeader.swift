@@ -197,9 +197,7 @@ class UserProfileHeader: UICollectionViewCell {
     }
     
     func setUserStats() {
-        
         delegate?.setUserStats(for: self)
-
     }
     
     func configureEditProfileFollowButton() {

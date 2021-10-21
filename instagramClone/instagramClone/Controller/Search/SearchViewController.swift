@@ -59,13 +59,13 @@ class SearchViewController: UITableViewController {
         let userProfileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
         
         // 선택된 user 데이터를 넘김
-        userProfileVC.userToLoadFromSearchVC = user
+        userProfileVC.user = user
         
         // push view controller
         navigationController?.pushViewController(userProfileVC, animated: true)
     }
-
-// MARK: - Handlers
+    
+    // MARK: - Handlers
     
     func configureNavController() {
         navigationItem.title = "Explore"
@@ -74,22 +74,18 @@ class SearchViewController: UITableViewController {
     // MARK: - API
     
     func fetchUser() {
+        // childAdd를 사용하는 이유는 새로 들어오는 값만 가져와서 따로 딕셔너리를 만들어서 가져오는 반면에 value를 사용하면 차일드 아래에 있는 모든 데이터를 하나의 딕셔너리에 넣어서 가져온다. 결국 value는 한번 업데이트 할 때마다 모든 값을 다 가져오고, childadd, modified 등등 은 바뀌거나 수정되거나 추가된 이벤트인 그 정보만 컴팩트하게 가져온다.
         Database.database().reference().child("users").observe(.childAdded) { snapshot in
             
             // uid
             let uid = snapshot.key
             
-            // snapshot value case as dictionary
-            guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
-            
-            let user = User(uid: uid, dictionary: dictionary)
-            
-            // append user to data source
-            self.users.append(user)
-            
-            // reload our table view
-            DispatchQueue.main.async {
+            Database.fetchUser(with: uid) { user in
+                
+                self.users.append(user)
+                
                 self.tableView.reloadData()
+                
             }
         }
     }

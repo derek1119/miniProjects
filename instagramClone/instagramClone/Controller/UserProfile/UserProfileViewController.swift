@@ -15,8 +15,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
 
     // MARK: - Properties
     
-    var currentUser: User?
-    var userToLoadFromSearchVC: User?
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +28,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         self.collectionView.backgroundColor = .white
         
         // fetch user data
-        if userToLoadFromSearchVC == nil {
+        if user == nil {
             fetchCurrentUserData()
         }
         
@@ -60,12 +59,8 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         header.delegate = self
         
         // set the user in header
-        if let currentUser = currentUser {
-            header.user = currentUser
-        } else if let userToLoadFromSearchVC = userToLoadFromSearchVC {
-            header.user = userToLoadFromSearchVC
-            navigationItem.title = userToLoadFromSearchVC.username
-        }
+        header.user = user
+        navigationItem.title = user?.username
         
         // return header
         return header
@@ -99,12 +94,14 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     func handleFollowersTapped(for header: UserProfileHeader) {
         let FollowVC = FollowViewController()
         FollowVC.viewFollowers = true
+        FollowVC.uid = user?.uid
         navigationController?.pushViewController(FollowVC, animated: true)
     }
     
     func handleFollowingTapped(for header: UserProfileHeader) {
         let FollowVC = FollowViewController()
         FollowVC.viewFollowing = true
+        FollowVC.uid = user?.uid
         navigationController?.pushViewController(FollowVC, animated: true)
     }
     
@@ -152,7 +149,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             guard let dic = snapshot.value as? Dictionary<String, AnyObject> else { return }
             let uid = snapshot.key
             let user = User(uid: uid, dictionary: dic)
-            self.currentUser = user
+            self.user = user
             self.navigationItem.title = user.username
             self.collectionView.reloadData()
         }

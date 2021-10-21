@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Firebase
 
 class FollowCell: UITableViewCell {
+    
+    var delegate: FollowCellDelegate?
     
     var user: User? {
         didSet {
@@ -22,6 +25,28 @@ class FollowCell: UITableViewCell {
             
             self.detailTextLabel?.text = fullName
             
+            // hide follow button for current user
+            if user?.uid == Auth.auth().currentUser?.uid {
+                self.followButton.isHidden = true
+            }
+            
+            user?.checkIfUserIsFollowed(completion: { followed in
+                if followed {
+                    // configure follow button for followed user
+                    self.followButton.setTitle("Following", for: .normal)
+                    self.followButton.setTitleColor(.black, for: .normal)
+                    self.followButton.layer.borderWidth = 0.5
+                    self.followButton.layer.borderColor = UIColor.lightGray.cgColor
+                    self.followButton.backgroundColor = .white
+                } else {
+                    // configure follow button for none followed user
+                    self.followButton.setTitle("Follow", for: .normal)
+                    self.followButton.setTitleColor(.white, for: .normal)
+                    self.followButton.layer.borderWidth = 0
+                    self.followButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+
+                }
+            })
         }
     }
 
@@ -42,7 +67,7 @@ class FollowCell: UITableViewCell {
     
     // MARK: - Handlers
     @objc func handleFollowTapped() {
-        print(#function)
+        delegate?.handleFollowTapped(for: self)
     }
     
     // MARK: - Init
@@ -86,38 +111,7 @@ class FollowCell: UITableViewCell {
         detailTextLabel?.frame = CGRect(x: 68, y: (detailTextLabel?.frame.origin.y)!, width: self.frame.width - 108, height: (detailTextLabel?.frame.height)!)
         detailTextLabel?.font = .boldSystemFont(ofSize: 12)
         detailTextLabel?.textColor = .lightGray
-        
-        
-//        if #available(iOS 15.0, *) {
-//            return
-//        } else {
-//            textLabel?.frame = CGRect(x: 60, y: (textLabel?.frame.origin.y)! - 2, width: (textLabel?.frame.width)!, height: (textLabel?.frame.height)!)
-//            textLabel?.font = .boldSystemFont(ofSize: 12)
-//
-//            detailTextLabel?.frame = CGRect(x: 60, y: (detailTextLabel?.frame.origin.y)! - 2, width: (detailTextLabel?.frame.width)!, height: (detailTextLabel?.frame.height)!)
-//            detailTextLabel?.font = .boldSystemFont(ofSize: 12)
-//        }
+ 
     }
-    /*
-    func fetchUI() {
-        
-        self.textLabel?.text = "\(self.user?.username ?? "User Name")"
-        self.textLabel?.font = .boldSystemFont(ofSize: 16)
-        self.textLabel?.tintColor = .black
-        self.detailTextLabel?.text = "\(self.user?.name ?? "Full Name")"
-        self.detailTextLabel?.font = .systemFont(ofSize: 10, weight: .regular)
-        self.detailTextLabel?.backgroundColor = .lightGray
-        
-        if #available(iOS 14.0, *) {
-            var content = self.defaultContentConfiguration()
-            content.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 64, bottom: 0, trailing: 0)
-            content.attributedText = NSAttributedString(string: "\(self.user?.username ?? "User Name")" , attributes: [ .font: UIFont.systemFont(ofSize: 16, weight: .bold), .foregroundColor: UIColor.black ])
-            content.secondaryAttributedText = NSAttributedString(string: "\(self.user?.name ?? "Full Name")", attributes: [ .font: UIFont.systemFont(ofSize: 10, weight: .regular), .foregroundColor: UIColor.lightGray ])
-            self.contentConfiguration = content
-        } else {
-            // Fallback on earlier versions
 
-        }
-    }
-     */
 }

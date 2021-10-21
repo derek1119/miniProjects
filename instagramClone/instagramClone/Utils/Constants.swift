@@ -18,7 +18,7 @@ let STORAGE_PROFILE_IMAGES_REF = STORAGE_REF.child("profile_images")
 
 // MARK: - Database Reference
 
-let USER_REF = DB_REF.child("user")
+let USER_REF = DB_REF.child("users")
 
 let USER_FOLLOWER_REF = DB_REF.child("user-followers")
 let USER_FOLLOWING_REF = DB_REF.child("user-following")
