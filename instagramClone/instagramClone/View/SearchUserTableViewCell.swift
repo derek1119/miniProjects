@@ -45,7 +45,6 @@ class SearchUserTableViewCell: UITableViewCell {
             make.width.height.equalTo(48)
             make.centerY.equalToSuperview()
             profileImageView.layer.cornerRadius = 48 / 2
-            profileImageView.clipsToBounds = true
         }
         
         fetchUI()

@@ -1,5 +1,5 @@
 //
-//  Costants.swift
+//  Constants.swift
 //  instagramClone
 //
 //  Created by Sh Hong on 2021/10/20.

@@ -12,12 +12,17 @@ import Firebase
 
 class UserProfileHeader: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     var delegate : UserProfileHeaderDelegate?
     
     var  user: User? {
         didSet {
             // configure edit profile follow button
             configureEditProfileFollowButton()
+            
+            // set user stats
+            setUserStats()
             
             let fullName = user?.name
             nameLabel.text = fullName
@@ -46,25 +51,34 @@ class UserProfileHeader: UICollectionViewCell {
         $0.attributedText = attributedText
     }
     
-    let followersLabel = UILabel().then {
+    lazy var followersLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.textAlignment = .center
-        
-        let attributedText = NSMutableAttributedString(string: "5\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSAttributedString(string: "팔로워", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
         $0.attributedText = attributedText
+        
+        let followTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowersTapped))
+        followTap.numberOfTapsRequired = 1
+        $0.isUserInteractionEnabled = true
+        $0.addGestureRecognizer(followTap)
     }
     
-    let followingLabel = UILabel().then {
+    lazy var followingLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.textAlignment = .center
-        
-        let attributedText = NSMutableAttributedString(string: "5\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSAttributedString(string: "팔로잉", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
         $0.attributedText = attributedText
+        
+        let followingTap = UITapGestureRecognizer(
+            target: self, action: #selector(handleFollowingTapped))
+        followingTap.numberOfTapsRequired = 1
+        $0.isUserInteractionEnabled = true
+        $0.addGestureRecognizer(followingTap)
     }
     
-    lazy var userStatestackView = UIStackView(arrangedSubviews: [postsLabel, followersLabel, followingLabel]).then {
+    lazy var userStatsStackView = UIStackView(arrangedSubviews: [postsLabel, followersLabel, followingLabel]).then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
     }
@@ -94,12 +108,6 @@ class UserProfileHeader: UICollectionViewCell {
         $0.tintColor = UIColor(white: 0, alpha: 0.2)
     }
     
-    // MARK: - Handler
-    
-    @objc func handleEditProfileFollow() {
-        delegate?.handleEditFollowTapped(for: self)
-    }
-    
     private func setUpUI() {
         addSubview(profileImageView)
         
@@ -117,9 +125,9 @@ class UserProfileHeader: UICollectionViewCell {
             make.centerX.equalTo(profileImageView)
         }
         
-        addSubview(userStatestackView)
+        addSubview(userStatsStackView)
         
-        userStatestackView.snp.makeConstraints { make in
+        userStatsStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
             make.leading.equalTo(profileImageView.snp.trailing).offset(12)
             make.trailing.equalToSuperview().offset(12)
@@ -174,6 +182,26 @@ class UserProfileHeader: UICollectionViewCell {
         }
     }
     
+    // MARK: - Handler
+
+    @objc func handleEditProfileFollow() {
+        delegate?.handleEditFollowTapped(for: self)
+    }
+    
+    @objc func handleFollowersTapped() {
+        delegate?.handleFollowersTapped(for: self)
+    }
+    
+    @objc func handleFollowingTapped() {
+        delegate?.handleFollowingTapped(for: self)
+    }
+    
+    func setUserStats() {
+        
+        delegate?.setUserStats(for: self)
+
+    }
+    
     func configureEditProfileFollowButton() {
         
         guard let currentUID = Auth.auth().currentUser?.uid else { return }
@@ -202,7 +230,7 @@ class UserProfileHeader: UICollectionViewCell {
         
     }
     
-    // MARK: - init
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         

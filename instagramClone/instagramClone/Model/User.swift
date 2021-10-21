@@ -34,6 +34,7 @@ class User {
         // UPDATE: - get uid like this to work with update
         guard let uid = uid else { return }
         
+        // set is followed to true
         self.isFollowed = true
         
         // add followed user to current user-following structure

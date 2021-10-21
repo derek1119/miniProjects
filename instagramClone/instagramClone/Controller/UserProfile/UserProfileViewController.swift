@@ -12,7 +12,6 @@ private let reuseIdentifier = "Cell"
 private let headerIdentifier = "UserProfileHeader"
 
 class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate {
-    
 
     // MARK: - Properties
     
@@ -80,20 +79,6 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         return cell
     }
     
-    // MARK: - API
-    func fetchCurrentUserData() {
-        guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        
-        Database.database().reference().child("users").child(currentUid).observeSingleEvent(of: .value) { snapshot in
-            guard let dic = snapshot.value as? Dictionary<String, AnyObject> else { return }
-            let uid = snapshot.key
-            let user = User(uid: uid, dictionary: dic)
-            self.currentUser = user
-            self.navigationItem.title = user.username
-            self.collectionView.reloadData()
-        }
-    }
-    
     // MARK: - UserProfileHeader
     func handleEditFollowTapped(for header: UserProfileHeader) {
         guard let user = header.user else { return }
@@ -108,6 +93,68 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
                 header.editProfileFollowButton.setTitle("Follow", for: .normal)
                 user.unfollow()
             }
+        }
+    }
+    
+    func handleFollowersTapped(for header: UserProfileHeader) {
+        let FollowVC = FollowViewController()
+        FollowVC.viewFollowers = true
+        navigationController?.pushViewController(FollowVC, animated: true)
+    }
+    
+    func handleFollowingTapped(for header: UserProfileHeader) {
+        let FollowVC = FollowViewController()
+        FollowVC.viewFollowing = true
+        navigationController?.pushViewController(FollowVC, animated: true)
+    }
+    
+    
+    func setUserStats(for header: UserProfileHeader) {
+        
+        guard let uid = header.user?.uid else { return }
+
+        var numberOfFollowers: Int!
+        var numberOfFollowing: Int!
+
+        // get number of followers
+        USER_FOLLOWER_REF.child(uid).observe(.value) { snapshot in
+            if let snapshot = snapshot.value as? Dictionary<String, AnyObject> {
+                numberOfFollowers = snapshot.count
+            } else {
+                numberOfFollowers = 0
+            }
+
+            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowers!)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string: "팔로워", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+            header.followersLabel.attributedText = attributedText
+        }
+
+        // get number of following
+        // observeSingleEvent는 한번의 이벤트만 받고 끝나지만 observe는 실시간(realtime) 추적을 한다.
+        USER_FOLLOWING_REF.child(uid).observe(.value) { snapshot in
+            if let snapshot = snapshot.value as? Dictionary<String, AnyObject> {
+                numberOfFollowing = snapshot.count
+            } else {
+                numberOfFollowing = 0
+            }
+            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowing!)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string: "팔로잉", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+            header.followingLabel.attributedText = attributedText
+        }
+        
+    }
+    
+    // MARK: - API
+    func fetchCurrentUserData() {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        Database.database().reference().child("users").child(currentUid).observeSingleEvent(of: .value) { snapshot in
+            guard let dic = snapshot.value as? Dictionary<String, AnyObject> else { return }
+            let uid = snapshot.key
+            let user = User(uid: uid, dictionary: dic)
+            self.currentUser = user
+            self.navigationItem.title = user.username
+            self.collectionView.reloadData()
         }
     }
 }
