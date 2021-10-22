@@ -29,7 +29,7 @@ class SearchUserTableViewCell: UITableViewCell {
         }
     }
     
-    let profileImageView = UIImageView().then {
+    let profileImageView = CustomImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         $0.backgroundColor = .lightGray

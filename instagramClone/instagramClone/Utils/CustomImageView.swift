@@ -7,11 +7,20 @@
 
 import UIKit
 
+var imageCach = [String: UIImage]()
+
 class CustomImageView: UIImageView {
     // 캐쉬를 이용하여 매번 api에서 불러오는 것이 아닌 한번만 불러와서 저장소에 저장하는 기능 구현
-    var imageCach = [String: UIImage]()
+    
+    var lastImgUrlUsedToLoadImage: String?
     
     func loadImage(with urlString: String) {
+        
+        // 이미지를 nil로 설정 -> 복사된 것 처럼 보이지 않기 위해
+        self.image = nil
+        
+        // set lastImgUrlUsedToLoadImage -> 체크하기 위한 설정
+        lastImgUrlUsedToLoadImage = urlString
         
         // 캐시 안에 이미지가 존재하는지 확인
         if let cachedImage = imageCach[urlString] {
@@ -28,6 +37,10 @@ class CustomImageView: UIImageView {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("이미지 호출 실패: ", error.localizedDescription)
+            }
+            
+            if self.lastImgUrlUsedToLoadImage != url.absoluteString {
+                return
             }
             
             // image data

@@ -8,39 +8,51 @@
 import UIKit
 import Firebase
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "FeedCell"
 
-class FeedViewController: UICollectionViewController {
+class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     
     // MARK: - Properties
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
-
-
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         //configure logout button
-        configureLogOutButton()
+        configureNavigationBar()
     }
 
+    // MARK: - UICollectionViewFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = view.frame.width
+        var height = width + 8 + 40 + 8
+        height += 50
+        height += 60
+        
+        return CGSize(width: width, height: height)
+    }
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return 5
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? FeedCell else { return UICollectionViewCell() }
     
         // Configure the cell
     
@@ -49,8 +61,16 @@ class FeedViewController: UICollectionViewController {
 
     // MARK: - Handlers
     
-    func configureLogOutButton() {
+    @objc func handleShowMessages() {
+        print(#function)
+    }
+    
+    func configureNavigationBar() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogOut))
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage().Image("send2"), style: .plain, target: self, action: #selector(handleShowMessages))
+        
+        self.navigationItem.title = "Feed"
     }
     
     @objc func handleLogOut() {
