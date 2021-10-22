@@ -11,6 +11,7 @@ class UserPostCell: UICollectionViewCell {
     
     var post: Post? {
         didSet {
+
             guard let imageURL = post?.imageURL else { return }
             postImageView.loadImage(with: imageURL)
         }
