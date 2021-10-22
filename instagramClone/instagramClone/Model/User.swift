@@ -42,11 +42,7 @@ class User {
         
         // add current user to followed user-follower structure
         USER_FOLLOWER_REF.child(uid).updateChildValues([currentUID: 1])
-        
-        //upload follow notification to server
-        uploadFollowNotificationToServer()
-        
-        
+
     }
     
     func unfollow() {
@@ -77,16 +73,16 @@ class User {
         }
     }
     
-    func uploadFollowNotificationToServer() {
-        guard let currentUID = Auth.auth().currentUser?.uid else { return }
-        let creationDate = Int(NSDate().timeIntervalSince1970)
-        
-        // notification values
-        let values = ["checked": 0,
-                      "creationDate": creationDate,
-                      "uid": currentUID,
-                      "type": FOLLOW_INT_VALUE] as [String : Any]
-        
-        NOTIFICATIONS_REF.child(self.uid).childByAutoId().updateChildValues(values)
-    }
+//    func uploadFollowNotificationToServer() {
+//        guard let currentUID = Auth.auth().currentUser?.uid else { return }
+//        let creationDate = Int(NSDate().timeIntervalSince1970)
+//
+//        // notification values
+//        let values = ["checked": 0,
+//                      "creationDate": creationDate,
+//                      "uid": currentUID,
+//                      "type": FOLLOW_INT_VALUE] as [String : Any]
+//
+//        NOTIFICATIONS_REF.child(self.uid).childByAutoId().updateChildValues(values)
+//    }
 }

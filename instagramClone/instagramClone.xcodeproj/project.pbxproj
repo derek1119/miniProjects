@@ -32,6 +32,8 @@
 		355825F8271591030063D9FD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355825F7271591030063D9FD /* Extensions.swift */; };
 		355825FB271592280063D9FD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 355825FA271592280063D9FD /* SnapKit */; };
 		355825FE271593040063D9FD /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 355825FD271593040063D9FD /* Then */; };
+		355B43F427224EBB009FBBB8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B43F327224EBB009FBBB8 /* Post.swift */; };
+		355B43F627227AD3009FBBB8 /* UserPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B43F527227AD3009FBBB8 /* UserPostCell.swift */; };
 		356CDF192716A4AD002FED76 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356CDF182716A4AD002FED76 /* SignUpViewController.swift */; };
 		356CDF1B2716C792002FED76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 356CDF1A2716C792002FED76 /* GoogleService-Info.plist */; };
 		BF2F4D0CBAD15422A6D15BAF /* Pods_instagramClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78F990628770FB03903E4911 /* Pods_instagramClone.framework */; };
@@ -63,6 +65,8 @@
 		355825EB27158E3B0063D9FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		355825F427158EC00063D9FD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		355825F7271591030063D9FD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		355B43F327224EBB009FBBB8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		355B43F527227AD3009FBBB8 /* UserPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostCell.swift; sourceTree = "<group>"; };
 		356CDF182716A4AD002FED76 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		356CDF1A2716C792002FED76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		78F990628770FB03903E4911 /* Pods_instagramClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_instagramClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				35427D6C271EEA5B007FE420 /* User.swift */,
+				355B43F327224EBB009FBBB8 /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -201,6 +206,7 @@
 				35427D762720F8E7007FE420 /* FollowCell.swift */,
 				35427D7C27215FAA007FE420 /* SelectPhotoHeader.swift */,
 				35427D7A27215F70007FE420 /* SelectPhotoCell.swift */,
+				355B43F527227AD3009FBBB8 /* UserPostCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -357,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35427D6D271EEA5B007FE420 /* User.swift in Sources */,
+				355B43F427224EBB009FBBB8 /* Post.swift in Sources */,
 				35427D61271D795E007FE420 /* NotificationViewController.swift in Sources */,
 				355825F527158EC00063D9FD /* LoginViewController.swift in Sources */,
 				355825DE27158E380063D9FD /* AppDelegate.swift in Sources */,
@@ -368,6 +375,7 @@
 				355825E027158E380063D9FD /* SceneDelegate.swift in Sources */,
 				355825F8271591030063D9FD /* Extensions.swift in Sources */,
 				356CDF192716A4AD002FED76 /* SignUpViewController.swift in Sources */,
+				355B43F627227AD3009FBBB8 /* UserPostCell.swift in Sources */,
 				35427D5F271D78FA007FE420 /* UploadPostViewController.swift in Sources */,
 				35427D59271D7222007FE420 /* MainTabViewController.swift in Sources */,
 				35427D7D27215FAA007FE420 /* SelectPhotoHeader.swift in Sources */,

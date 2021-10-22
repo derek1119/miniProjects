@@ -83,7 +83,6 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         let filename = NSUUID().uuidString
         let storatyRef = STORAGE_REF.child("post_images").child(filename)
         
-        
         storatyRef.putData(uploadData, metadata: nil) { metadata, error in
             
             // handle error
@@ -107,14 +106,18 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
                               "creationDate": creationDate,
                               "likes": 0,
                               "imageURL": postImageURL,
-                              "currentUID": currentUID] as [String: Any]
+                              "ownerUID": currentUID] as [String: Any]
                 
                 // post id
                 let postID = POSTS_REF.childByAutoId()
-                
+                guard let postKey = postID.key else { return }
                 // upload information to database
                 postID.updateChildValues(values) { err, ref in
-                    print("post 실패 ")
+                    
+                    // update user-post structure
+                    let userPostsRef = USER_POSTS_REF.child(currentUID)
+                    userPostsRef.updateChildValues([postKey: 1])
+                    
                     // return to home feed
                     self.dismiss(animated: true) {
                         self.tabBarController?.selectedIndex = 0
