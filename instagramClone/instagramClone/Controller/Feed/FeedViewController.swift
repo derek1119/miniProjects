@@ -78,12 +78,10 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     // MARK: - FeedCellDelegate protocol
     
     func handleUserNameTapped(for cell: FeedCell) {
+        guard let post = cell.post else { return }
         let userProfileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        guard let user = cell.post?.ownerUID else { return }
-        Database.fetchUser(with: user) { user in
-            userProfileVC.user = user
-            self.navigationController?.pushViewController(userProfileVC, animated: true)
-        }
+        userProfileVC.user = post.user
+        self.navigationController?.pushViewController(userProfileVC, animated: true)
     }
     
     func handleOptionsTapped(for cell: FeedCell) {
@@ -94,22 +92,21 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
        
         // 현재 유저가 좋아요 표시한 포스트 추가
         guard let post = cell.post else { return }
-
-        if post.didLike {
-
-            post.adjustLikes(addLike: false)
-            cell.likeButton.setImage(UIImage().Image("like_unselected"), for: .normal)
-            
-        } else {
-
-            post.adjustLikes(addLike: true)
-            // cell의 좋아요 마크 selected로 변경
-            cell.likeButton.setImage(UIImage().Image("like_selected"), for: .normal)
-        }
         
-        // ui update
-        guard let likes = post.likes else { return }
-        cell.likesLabel.text = "좋아요 \(likes)개"
+        if post.didLike {
+            
+            post.adjustLikes(addLike: false) { likes in
+                cell.likesLabel.text = "좋아요 \(likes)개"
+                cell.likeButton.setImage(UIImage().Image("like_unselected"), for: .normal)
+            }
+        } else {
+            
+            post.adjustLikes(addLike: true) { likes in
+                cell.likesLabel.text = "좋아요 \(likes)개"
+                // cell의 좋아요 마크 selected로 변경
+                cell.likeButton.setImage(UIImage().Image("like_selected"), for: .normal)
+            }
+        }
     }
     
     func handleCommentTapped(for cell: FeedCell) {

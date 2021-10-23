@@ -54,8 +54,12 @@ extension Database {
         POSTS_REF.child(postId).observeSingleEvent(of: .value) { snapshot in
 
             guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
-            let post = Post(postID: postId, dictionary: dictionary)
-            completion(post)
+            guard let ownerUid = dictionary["ownerUID"] as? String else { return }
+            
+            Database.fetchUser(with: ownerUid) { user in
+                let post = Post(postID: postId, user: user, dictionary: dictionary)
+                completion(post)
+            }
         }
     }
 }
