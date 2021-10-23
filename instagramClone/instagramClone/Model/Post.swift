@@ -34,17 +34,37 @@ class Post {
     }
     
     func adjustLikes(addLike: Bool) {
+        
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
         if addLike {
-            likes += 1
-            didLike = true
+            // update user-likes structure
+            USER_LIKES_REF.child(currentUid).updateChildValues([postID: 1]) { err, ref in
+                // update 포스트에 좋아요한 유저 업데이트
+                POST_LIKES_REF.child(self.postID).updateChildValues([currentUid: 1]) { err, ref in
+                    self.likes += 1
+                    self.didLike = true
+                    // 데이터베이스의 좋아요 개수 수정
+                    POSTS_REF.child(self.postID).child("likes").setValue(self.likes)
+                    print("좋아요 수는? \(self.likes)")
+                }
+            }
         } else {
-            guard likes > 0 else { return }
-            likes -= 1
-            didLike = false
+            // update user-likes structure
+            USER_LIKES_REF.child(currentUid).child(postID).removeValue { err, ref in
+                // update 포스트에 좋아요한 유저 업데이트
+                POST_LIKES_REF.child(self.postID).child(currentUid).removeValue { err, ref in
+                    guard self.likes > 0 else { return }
+                    self.likes -= 1
+                    self.didLike = false
+                    // 데이터베이스의 좋아요 개수 수정
+                    POSTS_REF.child(self.postID).child("likes").setValue(self.likes)
+                    print("좋아요 수는? \(self.likes)")
+                }
+            }
         }
         
-       print("포스트 모델에서 호출")
-        // 데이터베이스의 좋아요 개수 수정
-        POSTS_REF.child(postID).child("likes").setValue(likes)
+
+        
     }
 }

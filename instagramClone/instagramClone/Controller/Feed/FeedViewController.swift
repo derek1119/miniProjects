@@ -93,21 +93,18 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     func handleLikeTapped(for cell: FeedCell) {
        
         // 현재 유저가 좋아요 표시한 포스트 추가
-        guard let post = cell.post,
-        let postId = post.postID else { return }
+        guard let post = cell.post else { return }
 
         if post.didLike {
 
             post.adjustLikes(addLike: false)
             cell.likeButton.setImage(UIImage().Image("like_unselected"), for: .normal)
-            updateLikesStructure(with: postId, addLike: false)
-
+            
         } else {
 
             post.adjustLikes(addLike: true)
             // cell의 좋아요 마크 selected로 변경
             cell.likeButton.setImage(UIImage().Image("like_selected"), for: .normal)
-            updateLikesStructure(with: postId, addLike: true)
         }
         
         // ui update
@@ -138,29 +135,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     @objc func handleShowMessages() {
         print(#function)
     }
-    
-    func updateLikesStructure(with postId: String, addLike: Bool) {
 
-        guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        
-        if addLike {
-            // update user-likes structure
-            USER_LIKES_REF.child(currentUid).updateChildValues([postId: 1])
-            
-            // update 포스트에 좋아요한 유저 업데이트
-            POST_LIKES_REF.child(postId).updateChildValues([currentUid: 1])
-   
-        } else {
-            // update user-likes structure
-            USER_LIKES_REF.child(currentUid).child(postId).removeValue()
-            
-            // update 포스트에 좋아요한 유저 업데이트
-            POST_LIKES_REF.child(postId).child(currentUid).removeValue()
-        }
-        
-        
-    }
-    
     func configureNavigationBar() {
         if !viewSinglePost {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogOut))
