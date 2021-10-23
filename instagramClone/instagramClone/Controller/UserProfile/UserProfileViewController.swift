@@ -92,6 +92,15 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let feedVC = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        feedVC.viewSinglePost = true
+        feedVC.post = posts[indexPath.item]
+        feedVC.modalPresentationStyle = .fullScreen
+        
+        navigationController?.pushViewController(feedVC, animated: true)
+    }
+    
     // MARK: - UserProfileHeader
     func handleEditFollowTapped(for header: UserProfileHeader) {
         guard let user = header.user else { return }
@@ -174,19 +183,17 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         USER_POSTS_REF.child(uid).observe(.childAdded) { snapshot in
             let postId = snapshot.key
             
-            POSTS_REF.child(postId).observeSingleEvent(of: .value) { snapshot in
-                
-                guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
-                
-                let post = Post(postID: postId, dictionary: dictionary)
+            Database.fetchPosts(with: postId) { post in
                 self.posts.append(post)
                 self.posts.sort { $0.creationDate > $1.creationDate }
                 self.collectionView.reloadData()
             }
+            
         }
-        
     }
     
+
+
     func fetchCurrentUserData() {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         

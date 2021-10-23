@@ -168,6 +168,7 @@
 				355825F327158E840063D9FD /* View */,
 				355825F227158E7A0063D9FD /* Model */,
 				355825F127158E6B0063D9FD /* Controller */,
+				35427D58271D7222007FE420 /* MainTabViewController.swift */,
 				355825DD27158E380063D9FD /* AppDelegate.swift */,
 				355825DF27158E380063D9FD /* SceneDelegate.swift */,
 				355825E327158E380063D9FD /* Main.storyboard */,
@@ -188,7 +189,6 @@
 				35427D66271EAE58007FE420 /* UploadPost */,
 				35427D68271EAE7F007FE420 /* Notification */,
 				35427D69271EAE87007FE420 /* UserProfile */,
-				35427D58271D7222007FE420 /* MainTabViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

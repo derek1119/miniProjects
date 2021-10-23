@@ -10,20 +10,35 @@ import Firebase
 
 private let reuseIdentifier = "FeedCell"
 
-class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FeedCellDelegate {
     
     // MARK: - Properties
+    
+    var posts = [Post]()
+    var viewSinglePost = false
+    var post: Post?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-
         self.collectionView!.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        // configure refresh control
+        let refreshControl = UIRefreshControl().then {
+            $0.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        }
+        collectionView.refreshControl = refreshControl
+        
 
         //configure logout button
         configureNavigationBar()
+        
+        //fetch posts
+        if !viewSinglePost {
+            fetchPosts()
+        }
+        
+        updateUserFeeds()
     }
 
     // MARK: - UICollectionViewFlowLayout
@@ -41,33 +56,116 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+
         return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 5
+        
+        return viewSinglePost ? 1 : posts.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? FeedCell else { return UICollectionViewCell() }
     
-        // Configure the cell
+        cell.post = viewSinglePost ? post : posts[indexPath.row]
+        cell.delegate = self
     
         return cell
     }
 
+    // MARK: - FeedCellDelegate protocol
+    
+    func handleUserNameTapped(for cell: FeedCell) {
+        let userProfileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        guard let user = cell.post?.ownerUID else { return }
+        Database.fetchUser(with: user) { user in
+            userProfileVC.user = user
+            self.navigationController?.pushViewController(userProfileVC, animated: true)
+        }
+    }
+    
+    func handleOptionsTapped(for cell: FeedCell) {
+        print(#function)
+    }
+    
+    func handleLikeTapped(for cell: FeedCell) {
+       
+        // 현재 유저가 좋아요 표시한 포스트 추가
+        guard let post = cell.post,
+        let postId = post.postID else { return }
+
+        if post.didLike {
+
+            post.adjustLikes(addLike: false)
+            cell.likeButton.setImage(UIImage().Image("like_unselected"), for: .normal)
+            updateLikesStructure(with: postId, addLike: false)
+
+        } else {
+
+            post.adjustLikes(addLike: true)
+            // cell의 좋아요 마크 selected로 변경
+            cell.likeButton.setImage(UIImage().Image("like_selected"), for: .normal)
+            updateLikesStructure(with: postId, addLike: true)
+        }
+        
+        // ui update
+        guard let likes = post.likes else { return }
+        cell.likesLabel.text = "좋아요 \(likes)개"
+    }
+    
+    func handleCommentTapped(for cell: FeedCell) {
+        print(#function)
+    }
+    
+    func handleMessageTapped(for cell: FeedCell) {
+        print(#function)
+    }
+    
+    func handleSavePostTapped(for cell: FeedCell) {
+        print(#function)
+    }
+    
     // MARK: - Handlers
+    
+    @objc func handleRefresh() {
+        posts.removeAll(keepingCapacity: false)
+        fetchPosts()
+        collectionView.reloadData()
+    }
     
     @objc func handleShowMessages() {
         print(#function)
     }
     
-    func configureNavigationBar() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogOut))
+    func updateLikesStructure(with postId: String, addLike: Bool) {
+
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
         
+        if addLike {
+            // update user-likes structure
+            USER_LIKES_REF.child(currentUid).updateChildValues([postId: 1])
+            
+            // update 포스트에 좋아요한 유저 업데이트
+            POST_LIKES_REF.child(postId).updateChildValues([currentUid: 1])
+   
+        } else {
+            // update user-likes structure
+            USER_LIKES_REF.child(currentUid).child(postId).removeValue()
+            
+            // update 포스트에 좋아요한 유저 업데이트
+            POST_LIKES_REF.child(postId).child(currentUid).removeValue()
+        }
+        
+        
+    }
+    
+    func configureNavigationBar() {
+        if !viewSinglePost {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogOut))
+        }
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage().Image("send2"), style: .plain, target: self, action: #selector(handleShowMessages))
         
         self.navigationItem.title = "Feed"
@@ -101,5 +199,47 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         alerController.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         
         present(alerController, animated: true, completion: nil)
+    }
+    
+    // MARK: - API
+    
+    func updateUserFeeds() {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        USER_FOLLOWING_REF.child(currentUid).observe(.childAdded) { snapshot in
+            
+            let followingUserID = snapshot.key
+            
+            USER_POSTS_REF.child(followingUserID).observe(.childAdded) { snapshot in
+                
+                let postID = snapshot.key
+                USER_FEED_REF.child(currentUid).updateChildValues([postID: 1])
+            }
+        }
+        
+        USER_POSTS_REF.child(currentUid).observe(.childAdded) { snapshot in
+            
+            let postID = snapshot.key
+            USER_FEED_REF.child(currentUid).updateChildValues([postID: 1])
+        }
+    }
+    
+    func fetchPosts() {
+        
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        USER_FEED_REF.child(currentUid).observe(.childAdded) { snapshot in
+            
+            let postId = snapshot.key
+            
+            Database.fetchPosts(with: postId) { post in
+                self.posts.append(post)
+                self.posts.sort { $0.creationDate > $1.creationDate }
+
+                // stop refreshing
+                self.collectionView.refreshControl?.endRefreshing()
+                
+                self.collectionView.reloadData()
+            }
+        }
     }
 }

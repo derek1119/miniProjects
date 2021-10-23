@@ -6,10 +6,34 @@
 //
 
 import UIKit
+import Firebase
 
 class FeedCell: UICollectionViewCell {
     
     // MARK: - Properties
+    
+    var delegate: FeedCellDelegate?
+    
+    var post : Post? {
+        
+        didSet {
+            
+            guard let ownerUID = post?.ownerUID,
+                  let imageURL = post?.imageURL,
+                  let likes = post?.likes else { return }
+            
+            Database.fetchUser(with: ownerUID) { user in
+                self.profileImageView.loadImage(with: user.profileImageURL)
+                self.userNameButton.setTitle(user.username, for: .normal)
+                self.configurePostCaption(user: user)
+            }
+            
+            postImageView.loadImage(with: imageURL)
+            likesLabel.text = "좋아요 \(likes)개"
+            
+        }
+    }
+    
     let profileImageView = CustomImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
@@ -20,12 +44,14 @@ class FeedCell: UICollectionViewCell {
         $0.setTitle("Username", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         $0.setTitleColor(.black, for: .normal)
+        $0.addTarget(self, action: #selector(handleUserNameTapped), for: .touchUpInside)
     }
     
     let optionButton = UIButton(type: .system).then {
         $0.setTitle("•••", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        $0.addTarget(self, action: #selector(handleOptionsTapped), for: .touchUpInside)
     }
     
     let postImageView = CustomImageView().then {
@@ -36,23 +62,26 @@ class FeedCell: UICollectionViewCell {
     
     let likeButton = UIButton(type: .system).then {
         $0.setImage(UIImage().Image("like_unselected"), for: .normal)
-        $0.setImage(UIImage().Image("like_selected"), for: .selected)
         $0.tintColor = .black
+        $0.addTarget(self, action: #selector(handleLikeTapped), for: .touchUpInside)
     }
     
     let commentButton = UIButton(type: .system).then {
         $0.setImage(UIImage().Image("comment"), for: .normal)
         $0.tintColor = .black
+        $0.addTarget(self, action: #selector(handleCommentTapped), for: .touchUpInside)
     }
     
     let messageButton = UIButton(type: .system).then {
         $0.setImage(UIImage().Image("send2"), for: .normal)
         $0.tintColor = .black
+        $0.addTarget(self, action: #selector(handleMessageTapped), for: .touchUpInside)
     }
     
     let savePostButton = UIButton(type: .system).then {
         $0.setImage(UIImage().Image("ribbon"), for: .normal)
         $0.tintColor = .black
+        $0.addTarget(self, action: #selector(handleSavePostTapped), for: .touchUpInside)
     }
     
     let likesLabel = UILabel().then {
@@ -60,17 +89,15 @@ class FeedCell: UICollectionViewCell {
         $0.text = "좋아요 3개"
     }
     
-    let captionLabel = UILabel().then {
-        let attributedText = NSMutableAttributedString(string: "Username", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: .bold)])
-        attributedText.append(NSAttributedString(string: " Some test caption for now", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
-        $0.attributedText = attributedText
-    }
+    let captionLabel = UILabel()
     
     let postTimelabel = UILabel().then {
         $0.textColor = .lightGray
         $0.font = .systemFont(ofSize: 12, weight: .bold)
         $0.text = "2일 전"
     }
+    
+    // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -82,11 +109,41 @@ class FeedCell: UICollectionViewCell {
         configureActionButton()
         
         configureCaption()
+        
+
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Handlers
+    
+    @objc func handleUserNameTapped() {
+        delegate?.handleUserNameTapped(for: self)
+    }
+    
+    @objc func handleOptionsTapped() {
+        delegate?.handleOptionsTapped(for: self)
+    }
+    
+    @objc func handleLikeTapped() {
+        delegate?.handleLikeTapped(for: self)
+    }
+    
+    @objc func handleCommentTapped() {
+        delegate?.handleCommentTapped(for: self)
+    }
+    
+    @objc func handleMessageTapped() {
+        delegate?.handleMessageTapped(for: self)
+    }
+    
+    @objc func handleSavePostTapped() {
+        delegate?.handleSavePostTapped(for: self)
+    }
+    
+    // MARK: - Configurations
     
     func configurePostUI() {
         addSubview(profileImageView)
@@ -142,6 +199,17 @@ class FeedCell: UICollectionViewCell {
             make.width.equalTo(20)
             make.height.equalTo(24)
         }
+    }
+    
+    func configurePostCaption(user: User) {
+        
+        guard
+            let post = post,
+            let caption = post.caption,
+            let username = user.username else { return }
+        let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: .bold)])
+        attributedText.append(NSAttributedString(string: " \(caption)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
+        self.captionLabel.attributedText = attributedText
     }
     
     func configureCaption() {

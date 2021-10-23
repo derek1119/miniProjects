@@ -15,3 +15,12 @@ protocol UserProfileHeaderDelegate {
 protocol FollowCellDelegate {
     func handleFollowTapped(for cell: FollowCell)
 }
+
+protocol FeedCellDelegate {
+    func handleUserNameTapped(for cell: FeedCell)
+    func handleOptionsTapped(for cell: FeedCell)
+    func handleLikeTapped(for cell: FeedCell)
+    func handleCommentTapped(for cell: FeedCell)
+    func handleMessageTapped(for cell: FeedCell)
+    func handleSavePostTapped(for cell: FeedCell)
+}

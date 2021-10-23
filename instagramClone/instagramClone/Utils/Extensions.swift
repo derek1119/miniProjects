@@ -49,6 +49,15 @@ extension Database {
             completion(user)
         }
     }
+    
+    static func fetchPosts(with postId: String, completion: @escaping(Post) -> Void) {
+        POSTS_REF.child(postId).observeSingleEvent(of: .value) { snapshot in
+
+            guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
+            let post = Post(postID: postId, dictionary: dictionary)
+            completion(post)
+        }
+    }
 }
 
 extension UIColor {
