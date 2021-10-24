@@ -29,7 +29,9 @@ class FeedCell: UICollectionViewCell {
             }
             
             postImageView.loadImage(with: imageURL)
+            
             likesLabel.text = "좋아요 \(likes)개"
+            configureLikeButton()
             
         }
     }
@@ -84,9 +86,15 @@ class FeedCell: UICollectionViewCell {
         $0.addTarget(self, action: #selector(handleSavePostTapped), for: .touchUpInside)
     }
     
-    let likesLabel = UILabel().then {
+    lazy var likesLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        $0.text = "좋아요 3개"
+        $0.text = "좋아요 0개"
+        
+        // 제스처 추가
+        let likeTap = UITapGestureRecognizer(target: self, action: #selector(handleShowLikes))
+        likeTap.numberOfTapsRequired = 1
+        $0.isUserInteractionEnabled = true
+        $0.addGestureRecognizer(likeTap)
     }
     
     let captionLabel = UILabel()
@@ -141,6 +149,14 @@ class FeedCell: UICollectionViewCell {
     
     @objc func handleSavePostTapped() {
         delegate?.handleSavePostTapped(for: self)
+    }
+    
+    @objc func handleShowLikes() {
+        delegate?.handleShowLikes(for: self)
+    }
+    
+    func configureLikeButton() {
+        delegate?.handleConfigureLikeButton(for: self)
     }
     
     // MARK: - Configurations

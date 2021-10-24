@@ -109,6 +109,32 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
+    func handleConfigureLikeButton(for cell: FeedCell) {
+        guard
+            let currentUid = Auth.auth().currentUser?.uid,
+            let post = cell.post,
+            let postId = post.postID else { return }
+        USER_LIKES_REF.child(currentUid).observeSingleEvent(of: .value) { snapshot in
+            
+            if snapshot.hasChild(postId) {
+                post.didLike = true
+                cell.likeButton.setImage(UIImage().Image("like_selected"), for: .normal)
+            }
+        }
+    }
+    
+    func handleShowLikes(for cell: FeedCell) {
+        guard
+            let post = cell.post,
+            let postId = post.postID else { return }
+              
+        let followLikeVC = FollowLikeViewController()
+        followLikeVC.viewingMode = .Likes
+        followLikeVC.postId = postId
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(followLikeVC, animated: true)
+    }
+    
     func handleCommentTapped(for cell: FeedCell) {
         print(#function)
     }

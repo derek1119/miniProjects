@@ -10,30 +10,53 @@ import Firebase
 
 private let reuseIdentifier = "FollowCell"
 
-class FollowViewController: UITableViewController, FollowCellDelegate {
+class FollowLikeViewController: UITableViewController, FollowCellDelegate {
     
     // MARK: - Properties
     
-    var viewFollowers = false
-    var viewFollowing = false
+    enum ViewingMode: Int {
+        case Following
+        case Followers
+        case Likes
+        
+        init(index: Int) {
+            switch index {
+            case 0: self = .Following
+            case 1: self = .Followers
+            case 2: self = .Likes
+            default: self = .Following
+            }
+        }
+    }
+
+    
+    var viewingMode: ViewingMode!
     var uid: String?
     var users = [User]()
+    var postId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // register cell class
-        tableView.register(FollowCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(FollowLikeCell.self, forCellReuseIdentifier: reuseIdentifier)
         
         // configure nav controller
-        navigationItem.title = viewFollowers ? "팔로워" : "팔로잉"
+        guard let viewingMode = viewingMode else { return }
+        switch viewingMode {
+        case .Following:
+            navigationItem.title = "팔로잉"
+        case .Followers:
+            navigationItem.title = "팔로워"
+        case .Likes:
+            navigationItem.title = "좋아요"
+        }
         
         // clear seperator line
         tableView.separatorColor = .clear
         
-        
         // fetch Users
-        fetchUsers()
+        fetchUsers(by: viewingMode)
     }
     
     // MARK: - UITableView
@@ -51,7 +74,7 @@ class FollowViewController: UITableViewController, FollowCellDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? FollowCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? FollowLikeCell else { return UITableViewCell() }
         cell.user = users[indexPath.row]
         cell.delegate = self
         
@@ -70,7 +93,7 @@ class FollowViewController: UITableViewController, FollowCellDelegate {
     }
     
     // MARK: - Handler
-    func handleFollowTapped(for cell: FollowCell) {
+    func handleFollowTapped(for cell: FollowLikeCell) {
         
         guard let user = cell.user else { return }
         if user.isFollowed {
@@ -90,11 +113,21 @@ class FollowViewController: UITableViewController, FollowCellDelegate {
         
     }
     
-    func fetchUsers() {
+    func getDatabaseReference(_ viewingMode: ViewingMode) -> DatabaseReference? {
+        switch viewingMode {
+        case .Following:
+            return USER_FOLLOWING_REF
+        case .Followers:
+            return USER_FOLLOWER_REF
+        case .Likes:
+            return POST_LIKES_REF
+        }
+    }
+    
+    func fetchUsers(by viewingMode: ViewingMode) {
         
         guard let uid = uid else { return }
-        var ref: DatabaseReference!
-        ref = viewFollowers ? USER_FOLLOWER_REF : USER_FOLLOWING_REF
+        guard let ref = getDatabaseReference(viewingMode) else { return }
         
         // 만일 observe(.childadded)를 사용하면 노드에서부터 추가되는 데이터를 감지하기 때문에 추가되는 데이터와 추가된 데이터를 중복해서 나타낼 수 있다.
         ref.child(uid).observeSingleEvent(of: .value) { snapshot in
