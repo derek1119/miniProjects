@@ -43,13 +43,12 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
         // clear seperator line
         tableView.separatorColor = .clear
         
+        // configure nav controller
+        configureNavigationTitle()
         
-        if let viewingMode = viewingMode {
-            // configure nav controller
-            configureNavigationTitle(with: viewingMode)
-            // fetch Users
-            fetchUsers(by: viewingMode)
-        }
+        // fetch Users
+        fetchUsers()
+        
     }
     
     // MARK: - UITableView
@@ -107,7 +106,8 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
     }
     
     // MARK: - Handlers
-    func configureNavigationTitle(with viewingMode: ViewingMode) {
+    func configureNavigationTitle() {
+        guard let viewingMode = viewingMode else { return }
         switch viewingMode {
         case .Following:
             navigationItem.title = "팔로잉"
@@ -120,7 +120,8 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
     
     // MARK: - API
     
-    func getDatabaseReference(_ viewingMode: ViewingMode) -> DatabaseReference? {
+    func getDatabaseReference() -> DatabaseReference? {
+        guard let viewingMode = viewingMode else { return nil }
         switch viewingMode {
         case .Following:
             return USER_FOLLOWING_REF
@@ -131,9 +132,17 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
         }
     }
     
-    func fetchUsers(by viewingMode: ViewingMode) {
+    func fetchUser(with userId: String) {
+        Database.fetchUser(with: userId) { user in
+            self.users.append(user)
+            self.tableView.reloadData()
+        }
+    }
+    
+    func fetchUsers() {
         
-        guard let ref = getDatabaseReference(viewingMode) else { return }
+        guard let viewingMode = viewingMode else { return }
+        guard let ref = getDatabaseReference() else { return }
         
         switch viewingMode {
         case .Following, .Followers:
@@ -145,24 +154,15 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
                 // 각각 데이터를 확인하여 추가한다.
                 allObjects.forEach { snapshot in
                     let userId = snapshot.key
-                    Database.fetchUser(with: userId) { user in
-                        self.users.append(user)
-                        self.tableView.reloadData()
-                    }
+                    self.fetchUser(with: userId)
                 }
             }
         case .Likes:
-            guard let postId = postId else {
-                return
-            }
+            guard let postId = postId else { return }
+            
             ref.child(postId).observe(.childAdded) { snapshot in
-    
                 let uid = snapshot.key
-                
-                Database.fetchUser(with: uid) { user in
-                    self.users.append(user)
-                    self.tableView.reloadData()
-                }
+                self.fetchUser(with: uid)
             }
         }
     }

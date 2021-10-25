@@ -88,19 +88,22 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         print(#function)
     }
     
-    func handleLikeTapped(for cell: FeedCell) {
+    func handleLikeTapped(for cell: FeedCell, isDoubleTap: Bool) {
        
         // 현재 유저가 좋아요 표시한 포스트 추가
         guard let post = cell.post else { return }
         
         if post.didLike {
-            
-            post.adjustLikes(addLike: false) { likes in
-                cell.likesLabel.text = "좋아요 \(likes)개"
-                cell.likeButton.setImage(UIImage().Image("like_unselected"), for: .normal)
+            // 더블 탭으로는 좋아요만 표시할 수 있음 -> 한번 더 더블 탭을 한다고 좋아요 취소가 되는 것은 아님
+            if !isDoubleTap {
+                // handle unlike post
+                post.adjustLikes(addLike: false) { likes in
+                    cell.likesLabel.text = "좋아요 \(likes)개"
+                    cell.likeButton.setImage(UIImage().Image("like_unselected"), for: .normal)
+                }
             }
         } else {
-            
+            // handle like post
             post.adjustLikes(addLike: true) { likes in
                 cell.likesLabel.text = "좋아요 \(likes)개"
                 // cell의 좋아요 마크 selected로 변경
@@ -116,6 +119,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             let postId = post.postID else { return }
         USER_LIKES_REF.child(currentUid).observeSingleEvent(of: .value) { snapshot in
             
+            // user-like 데이터에 post id가 있는지 확인 
             if snapshot.hasChild(postId) {
                 post.didLike = true
                 cell.likeButton.setImage(UIImage().Image("like_selected"), for: .normal)

@@ -19,7 +19,8 @@ protocol FollowCellDelegate {
 protocol FeedCellDelegate {
     func handleUserNameTapped(for cell: FeedCell)
     func handleOptionsTapped(for cell: FeedCell)
-    func handleLikeTapped(for cell: FeedCell)
+    // 더블 탭으로 좋아요를 표시한 것인지 혹은 좋아요 버튼을 눌러서 표시한 액션인지 분기처리하기 위함
+    func handleLikeTapped(for cell: FeedCell, isDoubleTap: Bool)
     func handleCommentTapped(for cell: FeedCell)
     func handleMessageTapped(for cell: FeedCell)
     func handleSavePostTapped(for cell: FeedCell)
