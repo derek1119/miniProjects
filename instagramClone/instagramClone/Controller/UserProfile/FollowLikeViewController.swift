@@ -28,7 +28,6 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
             }
         }
     }
-
     
     var viewingMode: ViewingMode!
     var uid: String?
@@ -41,22 +40,16 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
         // register cell class
         tableView.register(FollowLikeCell.self, forCellReuseIdentifier: reuseIdentifier)
         
-        // configure nav controller
-        guard let viewingMode = viewingMode else { return }
-        switch viewingMode {
-        case .Following:
-            navigationItem.title = "팔로잉"
-        case .Followers:
-            navigationItem.title = "팔로워"
-        case .Likes:
-            navigationItem.title = "좋아요"
-        }
-        
         // clear seperator line
         tableView.separatorColor = .clear
         
-        // fetch Users
-        fetchUsers(by: viewingMode)
+        
+        if let viewingMode = viewingMode {
+            // configure nav controller
+            configureNavigationTitle(with: viewingMode)
+            // fetch Users
+            fetchUsers(by: viewingMode)
+        }
     }
     
     // MARK: - UITableView
@@ -113,6 +106,20 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
         
     }
     
+    // MARK: - Handlers
+    func configureNavigationTitle(with viewingMode: ViewingMode) {
+        switch viewingMode {
+        case .Following:
+            navigationItem.title = "팔로잉"
+        case .Followers:
+            navigationItem.title = "팔로워"
+        case .Likes:
+            navigationItem.title = "좋아요"
+        }
+    }
+    
+    // MARK: - API
+    
     func getDatabaseReference(_ viewingMode: ViewingMode) -> DatabaseReference? {
         switch viewingMode {
         case .Following:
@@ -126,17 +133,33 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
     
     func fetchUsers(by viewingMode: ViewingMode) {
         
-        guard let uid = uid else { return }
         guard let ref = getDatabaseReference(viewingMode) else { return }
         
-        // 만일 observe(.childadded)를 사용하면 노드에서부터 추가되는 데이터를 감지하기 때문에 추가되는 데이터와 추가된 데이터를 중복해서 나타낼 수 있다.
-        ref.child(uid).observeSingleEvent(of: .value) { snapshot in
-            // 전체 데이터를 한번에 불러온다
-            guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
-            // 각각 데이터를 확인하여 추가한다.
-            allObjects.forEach { snapshot in
-                let userId = snapshot.key
-                Database.fetchUser(with: userId) { user in
+        switch viewingMode {
+        case .Following, .Followers:
+            guard let uid = uid else { return }
+            // 만일 observe(.childadded)를 사용하면 노드에서부터 추가되는 데이터를 감지하기 때문에 추가되는 데이터와 추가된 데이터를 중복해서 나타낼 수 있다.
+            ref.child(uid).observeSingleEvent(of: .value) { snapshot in
+                // 전체 데이터를 한번에 불러온다
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                // 각각 데이터를 확인하여 추가한다.
+                allObjects.forEach { snapshot in
+                    let userId = snapshot.key
+                    Database.fetchUser(with: userId) { user in
+                        self.users.append(user)
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        case .Likes:
+            guard let postId = postId else {
+                return
+            }
+            ref.child(postId).observe(.childAdded) { snapshot in
+    
+                let uid = snapshot.key
+                
+                Database.fetchUser(with: uid) { user in
                     self.users.append(user)
                     self.tableView.reloadData()
                 }
