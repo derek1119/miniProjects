@@ -140,7 +140,11 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     func handleCommentTapped(for cell: FeedCell) {
-        print(#function)
+        guard let postId = cell.post?.postID else { return }
+        let commentVC = CommentViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        commentVC.postId = postId
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(commentVC, animated: true)
     }
     
     func handleMessageTapped(for cell: FeedCell) {
@@ -170,7 +174,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage().Image("send2"), style: .plain, target: self, action: #selector(handleShowMessages))
         
-        self.navigationItem.title = "Feed"
+        self.navigationItem.title = "피드"
     }
     
     @objc func handleLogOut() {
