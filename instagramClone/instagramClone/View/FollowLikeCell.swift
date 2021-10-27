@@ -33,17 +33,10 @@ class FollowLikeCell: UITableViewCell {
             user?.checkIfUserIsFollowed(completion: { followed in
                 if followed {
                     // configure follow button for followed user
-                    self.followButton.setTitle("Following", for: .normal)
-                    self.followButton.setTitleColor(.black, for: .normal)
-                    self.followButton.layer.borderWidth = 0.5
-                    self.followButton.layer.borderColor = UIColor.lightGray.cgColor
-                    self.followButton.backgroundColor = .white
+                    self.followButton.followingStyle()
                 } else {
                     // configure follow button for none followed user
-                    self.followButton.setTitle("Follow", for: .normal)
-                    self.followButton.setTitleColor(.white, for: .normal)
-                    self.followButton.layer.borderWidth = 0
-                    self.followButton.backgroundColor = .isEnableStateColor
+                    self.followButton.followStyle()
 
                 }
             })

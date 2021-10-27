@@ -38,6 +38,22 @@ extension UIImage {
     }
 }
 
+extension UIButton {
+    func followStyle() {
+        self.setTitle("Follow", for: .normal)
+        self.setTitleColor(.white, for: .normal)
+        self.layer.borderWidth = 0
+        self.backgroundColor = .isEnableStateColor
+    }
+    
+    func followingStyle() {
+        self.setTitle("Following", for: .normal)
+        self.setTitleColor(.black, for: .normal)
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.backgroundColor = .white
+    }
+}
 
 
 

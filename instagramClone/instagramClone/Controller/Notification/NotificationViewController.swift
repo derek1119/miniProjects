@@ -67,18 +67,11 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
         if user.isFollowed {
             user.unfollow()
             
-            cell.followButton.setTitle("Follow", for: .normal)
-            cell.followButton.setTitleColor(.white, for: .normal)
-            cell.followButton.layer.borderWidth = 0
-            cell.followButton.backgroundColor = .isEnableStateColor
+            cell.followButton.followStyle()
         } else {
             user.follow()
             
-            cell.followButton.setTitle("Following", for: .normal)
-            cell.followButton.setTitleColor(.black, for: .normal)
-            cell.followButton.layer.borderWidth = 0.5
-            cell.followButton.layer.borderColor = UIColor.lightGray.cgColor
-            cell.followButton.backgroundColor = .white
+            cell.followButton.followingStyle()
         }
     }
     
