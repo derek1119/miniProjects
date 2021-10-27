@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import Firebase
 
 private let reuseIdentifier = "NotificationCell"
 
-class NotificationViewController: UITableViewController {
-
+class NotificationViewController: UITableViewController, NotificationCellDelegate {
+ 
+    // MARK: - Properties
+    
+    var notifications = [Notification]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +27,9 @@ class NotificationViewController: UITableViewController {
         
         // navigation title
         navigationItem.title = "알림"
+        
+        // fetch notification
+        fetchNotification()
     }
 
     // MARK: - Table view data source
@@ -32,11 +40,91 @@ class NotificationViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 5
+        return notifications.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? NotificationCell else { return UITableViewCell()}
+        cell.notification = notifications[indexPath.row]
+        cell.delegate = self
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let notification = notifications[indexPath.row]
+        
+        let userProfileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        userProfileVC.user = notification.user
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(userProfileVC, animated: true)
+    }
+    
+    // MARK: - Notification Delegate Protocols
+    
+    func handleFollowTapped(for cell: NotificationCell) {
+        guard let user = cell.notification?.user else { return }
+        
+        if user.isFollowed {
+            user.unfollow()
+            
+            cell.followButton.setTitle("Follow", for: .normal)
+            cell.followButton.setTitleColor(.white, for: .normal)
+            cell.followButton.layer.borderWidth = 0
+            cell.followButton.backgroundColor = .isEnableStateColor
+        } else {
+            user.follow()
+            
+            cell.followButton.setTitle("Following", for: .normal)
+            cell.followButton.setTitleColor(.black, for: .normal)
+            cell.followButton.layer.borderWidth = 0.5
+            cell.followButton.layer.borderColor = UIColor.lightGray.cgColor
+            cell.followButton.backgroundColor = .white
+        }
+    }
+    
+    func handlePostTapped(for cell: NotificationCell) {
+        guard let post = cell.notification?.post else { return }
+        
+        let feedVC = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        feedVC.post = post
+        feedVC.viewSinglePost = true
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(feedVC, animated: true)
+    }
+    
+
+    
+    // MARK: - API
+    
+    func fetchNotification() {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        NOTIFICATIONS_REF.child(currentUid).observe(.childAdded) { snapshot in
+            guard
+                let dictionary = snapshot.value as? [String: AnyObject],
+                let uid = dictionary["uid"] as? String else { return }
+            
+            Database.fetchUser(with: uid) { user in
+                
+                // if notification for post
+                if let postID = dictionary["postID"] as? String {
+                    
+                    Database.fetchPosts(with: postID) { post in
+                        let notification = Notification(user: user, post: post, dictionary: dictionary)
+                        self.notifications.append(notification)
+                        self.tableView.reloadData()
+                    }
+                // if notification for like
+                } else {
+                    Database.fetchUser(with: uid) { user in
+                        let notification = Notification(user: user, post: nil, dictionary: dictionary)
+                        self.notifications.append(notification)
+                        self.tableView.reloadData()
+                    }
+                }
+                
+            }
+        }
+    }
+    
 }

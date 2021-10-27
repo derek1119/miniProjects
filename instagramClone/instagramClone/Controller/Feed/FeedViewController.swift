@@ -140,9 +140,9 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     func handleCommentTapped(for cell: FeedCell) {
-        guard let postId = cell.post?.postID else { return }
+        guard let post = cell.post else { return }
         let commentVC = CommentViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        commentVC.postId = postId
+        commentVC.post = post
         navigationController?.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(commentVC, animated: true)
     }

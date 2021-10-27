@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		351E1E3D27291BFF00DFEA9E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351E1E3C27291BFF00DFEA9E /* Notification.swift */; };
 		35427D59271D7222007FE420 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D58271D7222007FE420 /* MainTabViewController.swift */; };
 		35427D5B271D78BC007FE420 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D5A271D78BC007FE420 /* FeedViewController.swift */; };
 		35427D5D271D78E1007FE420 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D5C271D78E1007FE420 /* SearchViewController.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		351E1E3C27291BFF00DFEA9E /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		35427D58271D7222007FE420 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		35427D5A271D78BC007FE420 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		35427D5C271D78E1007FE420 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				35427D6C271EEA5B007FE420 /* User.swift */,
 				355B43F327224EBB009FBBB8 /* Post.swift */,
 				35D5C1BA2727FA2C00D8F3FB /* Comment.swift */,
+				351E1E3C27291BFF00DFEA9E /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				35427D63271D7981007FE420 /* UserProfileViewController.swift in Sources */,
 				35427D5B271D78BC007FE420 /* FeedViewController.swift in Sources */,
 				355B43FA27228B73009FBBB8 /* FeedCell.swift in Sources */,
+				351E1E3D27291BFF00DFEA9E /* Notification.swift in Sources */,
 				35427D772720F8E7007FE420 /* FollowLikeCell.swift in Sources */,
 				35427D7B27215F70007FE420 /* SelectPhotoCell.swift in Sources */,
 				35427D732720496F007FE420 /* Protocols.swift in Sources */,

@@ -8,7 +8,29 @@
 import UIKit
 
 class NotificationCell: UITableViewCell {
-
+    
+    var delegate: NotificationCellDelegate?
+    
+    var notification: Notification? {
+        
+        didSet {
+            
+            guard
+                let user = notification?.user,
+                let profileImageURL = user.profileImageURL else { return }
+            
+            // configure notification label
+            configureNotificationLabel()
+            
+            // configure notification type
+            configureNotificationType()
+            
+            self.profileImageView.loadImage(with: profileImageURL)
+            
+        }
+        
+    }
+    
     // MARK: - Properties
     let profileImageView = CustomImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -20,11 +42,6 @@ class NotificationCell: UITableViewCell {
         $0.font = .systemFont(ofSize: 12)
         $0.textColor = .black
         $0.numberOfLines = 2
-        
-        let attributedText = NSMutableAttributedString(string: "유저 이름", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)])
-        attributedText.append(NSAttributedString(string: " 알림 내용 댓글 달았어요 좋아요 눌렀어요.\n", attributes: [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
-        attributedText.append(NSAttributedString(string: "2일 전", attributes: [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
-        $0.attributedText = attributedText
     }
     
     let followButton = UIButton(type: .system).then {
@@ -35,20 +52,108 @@ class NotificationCell: UITableViewCell {
         $0.addTarget(self, action: #selector(handleFollowTapped), for: .touchUpInside)
     }
     
-    let postImageView = CustomImageView().then {
+    lazy var postImageView = CustomImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         $0.backgroundColor = .lightGray
+        
+        let tabGesture = UITapGestureRecognizer(target: self, action: #selector(handlePostTapped))
+        tabGesture.numberOfTapsRequired = 1
+        $0.isUserInteractionEnabled = true
+        $0.addGestureRecognizer(tabGesture)
     }
     
     // MARK: - Handlers
     
     @objc func handleFollowTapped() {
-        print("noti cell에서 보내는 메세지: ", #function)
+        delegate?.handleFollowTapped(for: self)
+    }
+    
+    @objc func handlePostTapped() {
+        delegate?.handlePostTapped(for: self)
+    }
+    
+    func configureNotificationLabel() {
+        guard
+            let notification = notification,
+            let user = notification.user,
+            let username = user.username else { return }
+        
+        let notificationMessage = notification.notificationType.description
+        
+        let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)])
+        attributedText.append(NSAttributedString(string: "님이 \(notificationMessage)\n", attributes: [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
+        attributedText.append(NSAttributedString(string: "2일 전", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+        notificationLabel.attributedText = attributedText
+    }
+    
+    func configureNotificationType() {
+        
+        guard let notification = notification else { return }
+        guard let user = notification.user else { return }
+
+        switch notification.notificationType {
+        case .Comment, .Like:
+            guard let post = notification.post else { return }
+            postImageView.loadImage(with: post.imageURL)
+            
+            contentView.addSubview(postImageView)
+            postImageView.snp.makeConstraints { make in
+                make.right.equalToSuperview().offset(-12)
+                make.width.height.equalTo(40)
+                make.centerY.equalToSuperview()
+            }
+            
+            addSubview(notificationLabel)
+            notificationLabel.snp.makeConstraints { make in
+                make.left.equalTo(profileImageView.snp.right).offset(8)
+                make.top.bottom.equalToSuperview()
+                make.right.equalTo(postImageView.snp.left).offset(8)
+            }
+            
+        case .Follow:
+            contentView.addSubview(followButton)
+            followButton.snp.makeConstraints { make in
+                make.right.equalToSuperview().offset(-12)
+                make.centerY.equalToSuperview()
+                make.width.equalTo(90)
+                make.height.equalTo(30)
+            }
+            
+            addSubview(notificationLabel)
+            notificationLabel.snp.makeConstraints { make in
+                make.left.equalTo(profileImageView.snp.right).offset(8)
+                make.top.bottom.equalToSuperview()
+                make.right.equalTo(followButton.snp.left).offset(8)
+            }
+            
+            user.checkIfUserIsFollowed { followed in
+                
+                if followed {
+                    // configure follow button for followed user
+                    self.followButton.setTitle("Following", for: .normal)
+                    self.followButton.setTitleColor(.black, for: .normal)
+                    self.followButton.layer.borderWidth = 0.5
+                    self.followButton.layer.borderColor = UIColor.lightGray.cgColor
+                    self.followButton.backgroundColor = .white
+                } else {
+                    // configure follow button for none followed user
+                    self.followButton.setTitle("Follow", for: .normal)
+                    self.followButton.setTitleColor(.white, for: .normal)
+                    self.followButton.layer.borderWidth = 0
+                    self.followButton.backgroundColor = .isEnableStateColor
+                }
+            }
+        case .none:
+            return
+        }
+        
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        selectionStyle = .none
         
         addSubview(profileImageView)
         profileImageView.snp.makeConstraints { make in
@@ -56,34 +161,6 @@ class NotificationCell: UITableViewCell {
             make.width.height.equalTo(40)
             make.centerY.equalToSuperview()
             profileImageView.layer.cornerRadius = 40 / 2
-        }
-        
-        contentView.addSubview(followButton)
-        followButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-12)
-            make.centerY.equalToSuperview()
-            make.width.equalTo(90)
-            make.height.equalTo(30)
-        }
-        followButton.isHidden = true
-        
-        contentView.addSubview(postImageView)
-        postImageView.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-8)
-            make.width.right.equalTo(30)
-            make.centerY.equalToSuperview()
-        }
-        
-        addSubview(notificationLabel)
-        notificationLabel.snp.makeConstraints { make in
-            make.left.equalTo(profileImageView.snp.right).offset(8)
-            make.top.bottom.equalToSuperview()
-            if !followButton.isHidden {
-                make.right.equalTo(followButton.snp.left).offset(8)
-            } else {
-                make.right.equalTo(postImageView.snp.left).offset(8)
-            }
-            
         }
     }
     

@@ -68,7 +68,7 @@ class SearchViewController: UITableViewController {
     // MARK: - Handlers
     
     func configureNavController() {
-        navigationItem.title = "Explore"
+        navigationItem.title = "탐색"
     }
     
     // MARK: - API
