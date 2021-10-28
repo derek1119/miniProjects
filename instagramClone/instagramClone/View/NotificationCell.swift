@@ -77,13 +77,14 @@ class NotificationCell: UITableViewCell {
         guard
             let notification = notification,
             let user = notification.user,
-            let username = user.username else { return }
+            let username = user.username,
+            let notificationTime = getNotificationTimeStamp() else { return }
         
         let notificationMessage = notification.notificationType.description
         
         let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)])
         attributedText.append(NSAttributedString(string: "님이 \(notificationMessage)\n", attributes: [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
-        attributedText.append(NSAttributedString(string: "2일 전", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+        attributedText.append(NSAttributedString(string: "\(notificationTime) 전", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
         notificationLabel.attributedText = attributedText
     }
     
@@ -140,6 +141,26 @@ class NotificationCell: UITableViewCell {
         case .none:
             return
         }
+        
+    }
+    
+    func getNotificationTimeStamp() -> String? {
+        
+        guard let notification = notification else {
+            return nil
+        }
+        let dateFormatter = DateComponentsFormatter().then {
+            var calendar = Calendar.current
+            calendar.locale = Locale(identifier: "ko_kr")
+            $0.calendar = calendar
+            $0.allowedUnits = [.second, .minute, .hour, .day, .weekOfMonth]
+            $0.maximumUnitCount = 1
+            $0.unitsStyle = .abbreviated
+        }
+        let now = Date()
+        let dateToString = dateFormatter.string(from: notification.creationDate, to: now)
+        
+        return dateToString
         
     }
     

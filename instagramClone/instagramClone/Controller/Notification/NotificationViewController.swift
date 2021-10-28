@@ -14,6 +14,8 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
  
     // MARK: - Properties
     
+    var timer: Timer?
+    
     var notifications = [Notification]()
     
     override func viewDidLoad() {
@@ -85,7 +87,22 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
         navigationController?.pushViewController(feedVC, animated: true)
     }
     
-
+// MARK: - Handlers
+    
+    func handleReloadTable() {
+        self.timer?.invalidate()
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleSortNotifications), userInfo: nil, repeats: false)
+    }
+    
+    @objc func handleSortNotifications() {
+        self.notifications.sort { noti1, noti2 in
+            return noti1.creationDate > noti2.creationDate
+        }
+        self.tableView.reloadData()
+    }
+    
+    
     
     // MARK: - API
     
@@ -105,19 +122,17 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
                     Database.fetchPosts(with: postID) { post in
                         let notification = Notification(user: user, post: post, dictionary: dictionary)
                         self.notifications.append(notification)
-                        self.tableView.reloadData()
+                        self.handleReloadTable()
                     }
                 // if notification for like
                 } else {
                     Database.fetchUser(with: uid) { user in
                         let notification = Notification(user: user, post: nil, dictionary: dictionary)
                         self.notifications.append(notification)
-                        self.tableView.reloadData()
+                        self.handleReloadTable()
                     }
                 }
-                
             }
         }
     }
-    
 }
