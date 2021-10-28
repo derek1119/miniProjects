@@ -92,7 +92,7 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
     func handleReloadTable() {
         self.timer?.invalidate()
         
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleSortNotifications), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(handleSortNotifications), userInfo: nil, repeats: false)
     }
     
     @objc func handleSortNotifications() {
@@ -110,6 +110,8 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         
         NOTIFICATIONS_REF.child(currentUid).observe(.childAdded) { snapshot in
+            
+            let notificationId = snapshot.key
             guard
                 let dictionary = snapshot.value as? [String: AnyObject],
                 let uid = dictionary["uid"] as? String else { return }
@@ -132,6 +134,7 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
                         self.handleReloadTable()
                     }
                 }
+                NOTIFICATIONS_REF.child(currentUid).child(notificationId).child("checked").setValue(1)
             }
         }
     }
