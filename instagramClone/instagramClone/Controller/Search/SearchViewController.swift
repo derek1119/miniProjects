@@ -8,30 +8,40 @@
 import UIKit
 import Firebase
 
+private let searchPostReuseIdentifier = "SearchPostCell"
 private let reuseIdentifier = "SeachUserTableViewCell"
 
-class SearchViewController: UITableViewController {
-
+class SearchViewController: UITableViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     // MARK: - Properties
     
     var users = [User]()
+    var filteredUsers = [User]()
+    var searchBar = UISearchBar()
+    var inSearchMode = false
+    var collectionView: UICollectionView!
+    var collectionViewEnabled = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // register cell classes
         tableView.register(SearchUserTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         
-        // separator insets
-                // 이미지의 너비(48) 만큼의 inset을 넣어줌 -> 64
-//        tableView.separatorInset = UIEdgeInsets(top: 0, left: 64, bottom: 0, right: 0)
+        tableView.separatorStyle = .none
         
-        configureNavController()
+        // configure search bar
+        configureSearchBar()
         
         // fetch Users
         fetchUser()
+        
+        // configure collectionView
+        configureCollectionView()
+        
+        
     }
-
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -43,18 +53,30 @@ class SearchViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return inSearchMode ? filteredUsers.count : users.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SearchUserTableViewCell
-        cell.user = users[indexPath.row]
+        
+        if inSearchMode {
+            cell.user = filteredUsers[indexPath.row]
+        } else {
+            cell.user = users[indexPath.row]
+        }
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let user = users[indexPath.row]
         
+        var user: User!
+        
+        if inSearchMode {
+            user = filteredUsers[indexPath.row]
+        } else {
+            user = users[indexPath.row]
+        }
         // create instance of user profile vc
         let userProfileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
         
@@ -65,10 +87,88 @@ class SearchViewController: UITableViewController {
         navigationController?.pushViewController(userProfileVC, animated: true)
     }
     
+    // MARK: - UICollectionView
+    func configureCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let frame = CGRect(x: 0, y: 0, width: CGFloat().windowWidth, height: CGFloat().windowHeight - (tabBarController?.tabBar.frame.height)!)
+        
+        collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.alwaysBounceVertical = true
+        collectionView.backgroundColor = .white
+        // register cell
+        collectionView.register(SearchPostCell.self, forCellWithReuseIdentifier: "SearchPostCell")
+        
+        tableView.addSubview(collectionView)
+        tableView.separatorColor = .clear
+        
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (view.frame.width - 2) / 3
+        return CGSize(width: width, height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 15
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchPostCell", for: indexPath) as? SearchPostCell else { return UICollectionViewCell() }
+        
+        return cell
+    }
+    
     // MARK: - Handlers
     
-    func configureNavController() {
-        navigationItem.title = "탐색"
+    func configureSearchBar() {
+        searchBar.sizeToFit()
+        searchBar.delegate = self
+        navigationItem.titleView = searchBar
+        searchBar.barTintColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        searchBar.tintColor = .black
+    }
+    
+    // MARK: - UISearchBar
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // handle search text change
+        let searchText = searchText.lowercased()
+        
+        if searchText.isEmpty || searchText == " " {
+            inSearchMode = false
+            tableView.reloadData()
+        } else {
+            inSearchMode = true
+            filteredUsers = users.filter {
+                $0.username.contains(searchText)
+            }
+            tableView.reloadData()
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        searchBar.showsCancelButton = false
+        inSearchMode = false
+        searchBar.text = nil
     }
     
     // MARK: - API

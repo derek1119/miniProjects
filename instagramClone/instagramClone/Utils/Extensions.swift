@@ -55,6 +55,15 @@ extension UIButton {
     }
 }
 
+extension CGFloat {
+    var windowWidth: Self {
+        return UIScreen.main.bounds.width
+    }
+    
+    var windowHeight: Self {
+        return UIScreen.main.bounds.height
+    }
+}
 
 
 extension Database {

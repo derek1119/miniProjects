@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		351E1E3D27291BFF00DFEA9E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351E1E3C27291BFF00DFEA9E /* Notification.swift */; };
+		35373BCC272A845700127532 /* SearchPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35373BCB272A845700127532 /* SearchPostCell.swift */; };
 		35427D59271D7222007FE420 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D58271D7222007FE420 /* MainTabViewController.swift */; };
 		35427D5B271D78BC007FE420 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D5A271D78BC007FE420 /* FeedViewController.swift */; };
 		35427D5D271D78E1007FE420 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D5C271D78E1007FE420 /* SearchViewController.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		351E1E3C27291BFF00DFEA9E /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		35373BCB272A845700127532 /* SearchPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostCell.swift; sourceTree = "<group>"; };
 		35427D58271D7222007FE420 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		35427D5A271D78BC007FE420 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		35427D5C271D78E1007FE420 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				355B43F927228B73009FBBB8 /* FeedCell.swift */,
 				3564AD3A2727CB8C00493D07 /* CommentCell.swift */,
 				35D5C1BC2728104400D8F3FB /* NotificationCell.swift */,
+				35373BCB272A845700127532 /* SearchPostCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				35427D5F271D78FA007FE420 /* UploadPostViewController.swift in Sources */,
 				35427D59271D7222007FE420 /* MainTabViewController.swift in Sources */,
 				35427D7D27215FAA007FE420 /* SelectPhotoHeader.swift in Sources */,
+				35373BCC272A845700127532 /* SearchPostCell.swift in Sources */,
 				35D5C1BD2728104400D8F3FB /* NotificationCell.swift in Sources */,
 				35427D6F271F9D35007FE420 /* SearchUserTableViewCell.swift in Sources */,
 				35427D63271D7981007FE420 /* UserProfileViewController.swift in Sources */,
