@@ -15,7 +15,6 @@ class ChatCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .blue
     }
     
     required init?(coder: NSCoder) {

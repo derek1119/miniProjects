@@ -138,6 +138,23 @@
 			path = Messages;
 			sourceTree = "<group>";
 		};
+		35373BDD272BD01000127532 /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				35427D6A271EB1D3007FE420 /* UserProfileHeader.swift */,
+				35427D6E271F9D35007FE420 /* SearchUserTableViewCell.swift */,
+				35427D762720F8E7007FE420 /* FollowLikeCell.swift */,
+				35427D7C27215FAA007FE420 /* SelectPhotoHeader.swift */,
+				35427D7A27215F70007FE420 /* SelectPhotoCell.swift */,
+				355B43F527227AD3009FBBB8 /* UserPostCell.swift */,
+				355B43F927228B73009FBBB8 /* FeedCell.swift */,
+				3564AD3A2727CB8C00493D07 /* CommentCell.swift */,
+				35D5C1BC2728104400D8F3FB /* NotificationCell.swift */,
+				35373BCB272A845700127532 /* SearchPostCell.swift */,
+			);
+			path = Social;
+			sourceTree = "<group>";
+		};
 		35427D64271EAE3E007FE420 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,17 +273,8 @@
 		355825F327158E840063D9FD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				35373BDD272BD01000127532 /* Social */,
 				35373BD0272AE35700127532 /* Messages */,
-				35427D6A271EB1D3007FE420 /* UserProfileHeader.swift */,
-				35427D6E271F9D35007FE420 /* SearchUserTableViewCell.swift */,
-				35427D762720F8E7007FE420 /* FollowLikeCell.swift */,
-				35427D7C27215FAA007FE420 /* SelectPhotoHeader.swift */,
-				35427D7A27215F70007FE420 /* SelectPhotoCell.swift */,
-				355B43F527227AD3009FBBB8 /* UserPostCell.swift */,
-				355B43F927228B73009FBBB8 /* FeedCell.swift */,
-				3564AD3A2727CB8C00493D07 /* CommentCell.swift */,
-				35D5C1BC2728104400D8F3FB /* NotificationCell.swift */,
-				35373BCB272A845700127532 /* SearchPostCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
