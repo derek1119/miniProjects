@@ -164,7 +164,9 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     @objc func handleShowMessages() {
-        print(#function)
+        let messageVC = MessagesViewController()
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(messageVC, animated: true)
     }
 
     func configureNavigationBar() {

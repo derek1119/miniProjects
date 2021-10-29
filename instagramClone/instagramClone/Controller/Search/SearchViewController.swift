@@ -21,6 +21,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     var inSearchMode = false
     var collectionView: UICollectionView!
     var collectionViewEnabled = true
+    var posts = [Post]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,9 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         
         // configure search bar
         configureSearchBar()
+        
+        // fetch post
+        fetchPosts()
         
         // fetch Users
         fetchUser()
@@ -100,8 +104,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         collectionView.dataSource = self
         collectionView.alwaysBounceVertical = true
         collectionView.backgroundColor = .white
-        // register cell
-        collectionView.register(SearchPostCell.self, forCellWithReuseIdentifier: "SearchPostCell")
+        collectionView.register(SearchPostCell.self, forCellWithReuseIdentifier: searchPostReuseIdentifier)
         
         tableView.addSubview(collectionView)
         tableView.separatorColor = .clear
@@ -123,13 +126,24 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        return posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchPostCell", for: indexPath) as? SearchPostCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: searchPostReuseIdentifier, for: indexPath) as? SearchPostCell else { return UICollectionViewCell() }
+        
+        cell.post = posts[indexPath.item]
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let feedVC = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        feedVC.viewSinglePost = true
+        feedVC.post = posts[indexPath.item]
+        feedVC.modalPresentationStyle = .fullScreen
+        
+        navigationController?.pushViewController(feedVC, animated: true)
     }
     
     // MARK: - Handlers
@@ -146,6 +160,11 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
+        
+        collectionView.isHidden = true
+        collectionViewEnabled = false
+        
+        tableView.separatorColor = .lightGray
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -169,6 +188,13 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         searchBar.showsCancelButton = false
         inSearchMode = false
         searchBar.text = nil
+        
+        collectionView.isHidden = false
+        collectionViewEnabled = true
+        
+        tableView.separatorColor = .clear
+        
+        tableView.reloadData()
     }
     
     // MARK: - API
@@ -186,6 +212,19 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
                 
                 self.tableView.reloadData()
                 
+            }
+        }
+    }
+    
+    func fetchPosts() {
+        posts.removeAll()
+        
+        POSTS_REF.observe(.childAdded) { snapshot in
+            let postID = snapshot.key
+            
+            Database.fetchPosts(with: postID) { post in
+                self.posts.append(post)
+                self.collectionView.reloadData()
             }
         }
     }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		351E1E3D27291BFF00DFEA9E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351E1E3C27291BFF00DFEA9E /* Notification.swift */; };
 		35373BCC272A845700127532 /* SearchPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35373BCB272A845700127532 /* SearchPostCell.swift */; };
+		35373BCF272AE16500127532 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35373BCE272AE16400127532 /* MessagesViewController.swift */; };
+		35373BD2272AE37700127532 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35373BD1272AE37600127532 /* MessageCell.swift */; };
 		35427D59271D7222007FE420 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D58271D7222007FE420 /* MainTabViewController.swift */; };
 		35427D5B271D78BC007FE420 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D5A271D78BC007FE420 /* FeedViewController.swift */; };
 		35427D5D271D78E1007FE420 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35427D5C271D78E1007FE420 /* SearchViewController.swift */; };
@@ -50,6 +52,8 @@
 /* Begin PBXFileReference section */
 		351E1E3C27291BFF00DFEA9E /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		35373BCB272A845700127532 /* SearchPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostCell.swift; sourceTree = "<group>"; };
+		35373BCE272AE16400127532 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		35373BD1272AE37600127532 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		35427D58271D7222007FE420 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		35427D5A271D78BC007FE420 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		35427D5C271D78E1007FE420 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +108,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35373BCD272AE13700127532 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				35373BCE272AE16400127532 /* MessagesViewController.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		35373BD0272AE35700127532 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				35373BD1272AE37600127532 /* MessageCell.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
 		35427D64271EAE3E007FE420 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +222,7 @@
 				35427D66271EAE58007FE420 /* UploadPost */,
 				35427D68271EAE7F007FE420 /* Notification */,
 				35427D69271EAE87007FE420 /* UserProfile */,
+				35373BCD272AE13700127532 /* Messages */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -220,6 +241,7 @@
 		355825F327158E840063D9FD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				35373BD0272AE35700127532 /* Messages */,
 				35427D6A271EB1D3007FE420 /* UserProfileHeader.swift */,
 				35427D6E271F9D35007FE420 /* SearchUserTableViewCell.swift */,
 				35427D762720F8E7007FE420 /* FollowLikeCell.swift */,
@@ -397,6 +419,7 @@
 				35427D712720486D007FE420 /* Constants.swift in Sources */,
 				35427D7927215EE2007FE420 /* SelectImageViewController.swift in Sources */,
 				35427D752720F885007FE420 /* FollowLikeViewController.swift in Sources */,
+				35373BD2272AE37700127532 /* MessageCell.swift in Sources */,
 				35427D6B271EB1D3007FE420 /* UserProfileHeader.swift in Sources */,
 				35427D5D271D78E1007FE420 /* SearchViewController.swift in Sources */,
 				355825E027158E380063D9FD /* SceneDelegate.swift in Sources */,
@@ -412,6 +435,7 @@
 				35427D6F271F9D35007FE420 /* SearchUserTableViewCell.swift in Sources */,
 				35427D63271D7981007FE420 /* UserProfileViewController.swift in Sources */,
 				35427D5B271D78BC007FE420 /* FeedViewController.swift in Sources */,
+				35373BCF272AE16500127532 /* MessagesViewController.swift in Sources */,
 				355B43FA27228B73009FBBB8 /* FeedCell.swift in Sources */,
 				351E1E3D27291BFF00DFEA9E /* Notification.swift in Sources */,
 				35427D772720F8E7007FE420 /* FollowLikeCell.swift in Sources */,

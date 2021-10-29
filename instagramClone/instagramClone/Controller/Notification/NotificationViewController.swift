@@ -92,7 +92,7 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
     func handleReloadTable() {
         self.timer?.invalidate()
         
-        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(handleSortNotifications), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleSortNotifications), userInfo: nil, repeats: false)
     }
     
     @objc func handleSortNotifications() {
