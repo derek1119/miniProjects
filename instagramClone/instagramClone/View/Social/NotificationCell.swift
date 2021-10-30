@@ -26,7 +26,7 @@ class NotificationCell: UITableViewCell {
             configureNotificationType()
             
             self.profileImageView.loadImage(with: profileImageURL)
-            
+          
         }
         
     }
@@ -41,7 +41,7 @@ class NotificationCell: UITableViewCell {
     let notificationLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 12)
         $0.textColor = .black
-        $0.numberOfLines = 2
+        $0.numberOfLines = 3
     }
     
     let followButton = UIButton(type: .system).then {
@@ -114,7 +114,15 @@ class NotificationCell: UITableViewCell {
         case .none:
             return
         }
-        
+        notificationLabel.snp.makeConstraints { make in
+            make.left.equalTo(profileImageView.snp.right).offset(8)
+            make.top.bottom.equalToSuperview()
+            if notification.notificationType == .Follow {
+                make.right.equalTo(self.followButton.snp.left).offset(-8)
+            } else {
+                make.right.equalTo(self.postImageView.snp.left).offset(-8)
+            }
+        }
     }
     
     func getNotificationTimeStamp() -> String? {
@@ -165,16 +173,8 @@ class NotificationCell: UITableViewCell {
             make.height.equalTo(30)
         }
         
-        addSubview(notificationLabel)
-        notificationLabel.snp.makeConstraints { make in
-            make.left.equalTo(profileImageView.snp.right).offset(8)
-            make.top.bottom.equalToSuperview()
-            if notification?.notificationType == .Follow {
-                make.right.equalTo(contentView.snp.right).offset(100)
-            } else {
-                make.right.equalTo(postImageView.snp.left).offset(8)
-            }
-        }
+        contentView.addSubview(notificationLabel)
+        
     }
     
     required init?(coder: NSCoder) {

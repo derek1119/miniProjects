@@ -25,6 +25,9 @@ class MessagesViewController: UITableViewController {
         
         // register cell
         tableView.register(MessageCell.self, forCellReuseIdentifier: reuseIdentifier)
+        
+        // fetch messages
+        fetchMessages()
     }
     
     // MARK: - UITableView
@@ -69,6 +72,32 @@ class MessagesViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleNewMessage))
     }
     
+    // MARK: - API
     
+    func fetchMessages() {
+        
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        USER_MESSAGES_REF.child(currentUid).observe(.childAdded) { snapshot in
+            
+            let uid = snapshot.key
+            
+            USER_MESSAGES_REF.child(currentUid).child(uid).observe(.childAdded) { snapshot in
+                let messageId = snapshot.key
+                
+                self.fetchMessage(withMessageId: messageId)
+            }
+        }
+        
+    }
+    
+    func fetchMessage(withMessageId messageId: String) {
+        MESSAGES_REF.child(messageId).observeSingleEvent(of: .value) { snapshot in
+            guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
+            let message = Message(dictionary: dictionary)
+            self.messages.append(message)
+            self.tableView.reloadData()
+        }
+    }
     
 }

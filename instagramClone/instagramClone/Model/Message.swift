@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 class Message {
     
@@ -26,5 +27,15 @@ class Message {
         self.fromID = fromID
         self.toID = toID
         self.creationDate = Date(timeIntervalSince1970: creationDate)
+    }
+    
+    func getChatPartnerId() -> String {
+        guard let currentId = Auth.auth().currentUser?.uid else { return "" }
+        
+        if fromID == currentId {
+            return toID
+        } else {
+            return fromID
+        }
     }
 }
