@@ -31,7 +31,7 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
         $0.addSubview(commentTextField)
         commentTextField.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
-            make.right.equalTo(postButton.snp.left).offset(8)
+            make.right.equalTo(postButton.snp.left).offset(-8)
             make.left.equalToSuperview().offset(15)
         }
         
