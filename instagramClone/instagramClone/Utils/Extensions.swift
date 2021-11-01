@@ -92,4 +92,7 @@ extension Database {
 extension UIColor {
     static let isUnableStateColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
     static let isEnableStateColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
+        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
+    }
 }

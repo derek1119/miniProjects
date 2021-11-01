@@ -94,7 +94,14 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     // MARK: - UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width / 2 , height: 50)
+        var height: CGFloat = 80
+        
+        if let message = messages[indexPath.row].messageText {
+            height = extimateFrameForText(message).height + 20
+
+        }
+        
+        return CGSize(width: view.frame.width , height: height)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -103,8 +110,9 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ChatCell else { return UICollectionViewCell() }
-        
-        cell.backgroundColor = .red
+        let message = messages[indexPath.item]
+        cell.message = message
+        configureMessage(cell: cell, message: message)
         
         return cell
     }
@@ -119,6 +127,38 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     @objc func handleInfoTapped() {
         print(#function)
+    }
+    
+    // text의 Rect을 구하는 방법
+    func extimateFrameForText(_ text: String) -> CGRect {
+        let size = CGSize(width: 200, height: 1000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], context: nil)
+    }
+    
+    func configureMessage(cell: ChatCell, message: Message) {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        cell.bubbleView.snp.updateConstraints { make in
+            make.width.equalTo(extimateFrameForText(message.messageText).width + 32)
+        }
+        cell.frame.size.height = extimateFrameForText(message.messageText).height + 20
+        
+        if message.fromID == currentUid {
+            cell.bubbleViewRightContraint?.activate()
+            cell.bubbleViewLeftContraint?.deactivate()
+            cell.bubbleView.backgroundColor = UIColor.rgb(red: 0, green: 137, blue: 249)
+            cell.textView.textColor = .white
+            cell.profileImageView.isHidden = true
+            
+        } else {
+            cell.bubbleViewRightContraint?.deactivate()
+            cell.bubbleViewLeftContraint?.activate()
+            cell.bubbleView.backgroundColor = UIColor.rgb(red: 240, green: 240, blue: 240)
+            cell.textView.textColor = .black
+            cell.profileImageView.isHidden = false
+        }
+        
     }
     
     func configureNavigationBar() {
