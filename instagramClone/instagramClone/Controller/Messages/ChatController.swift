@@ -126,7 +126,10 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     @objc func handleInfoTapped() {
-        print(#function)
+        let userProfileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        userProfileVC.user = user
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(userProfileVC, animated: true)
     }
     
     // text의 Rect을 구하는 방법
