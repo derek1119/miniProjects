@@ -128,6 +128,7 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
                 
                 // post id
                 let postID = POSTS_REF.childByAutoId()
+                
                 guard let postKey = postID.key else { return }
                 // upload information to database
                 postID.updateChildValues(values) { err, ref in
@@ -138,6 +139,9 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
                     
                     // update user-feed structure
                     self.updateUserFeed(with: postKey)
+                    
+                    // upload hashtag to server
+                    self.uploadHashtagToServer(withPostId: postKey)
                     
                     // return to home feed
                     self.dismiss(animated: true) {
@@ -174,4 +178,23 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    // MARK: - API
+    
+    func uploadHashtagToServer(withPostId PostID: String) {
+        
+        guard let caption = captionTextView.text else { return }
+        
+        let words: [String] = caption.components(separatedBy: .whitespacesAndNewlines)
+        
+        for var word in words {
+            if word.hasPrefix("#") {
+                word = word.trimmingCharacters(in: .punctuationCharacters)
+                word = word.trimmingCharacters(in: .symbols)
+                
+                let hashtagValues = [PostID: 1]
+                
+                HASHTAG_POST_REF.child(word.lowercased()).updateChildValues(hashtagValues)
+            }
+        }
+    }
 }

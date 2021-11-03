@@ -29,7 +29,6 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
         collectionView.refreshControl = refreshControl
         
-
         //configure logout button
         configureNavigationBar()
         

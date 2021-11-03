@@ -208,11 +208,9 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         guard let chatPartnerID = self.user?.uid else { return }
         
         USER_MESSAGES_REF.child(currentUid).child(chatPartnerID).observe(.childAdded) { snapshot in
+            
             let messageId = snapshot.key
-            
             self.fetchMessage(withMessageId: messageId)
-            
-            
         }
     }
     
