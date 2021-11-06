@@ -129,19 +129,24 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
                 // post id
                 let postID = POSTS_REF.childByAutoId()
                 
-                guard let postKey = postID.key else { return }
+                guard let postId = postID.key else { return }
                 // upload information to database
                 postID.updateChildValues(values) { err, ref in
                     
                     // update user-post structure
                     let userPostsRef = USER_POSTS_REF.child(currentUID)
-                    userPostsRef.updateChildValues([postKey: 1])
+                    userPostsRef.updateChildValues([postId: 1])
                     
                     // update user-feed structure
-                    self.updateUserFeed(with: postKey)
+                    self.updateUserFeed(with: postId)
                     
                     // upload hashtag to server
-                    self.uploadHashtagToServer(withPostId: postKey)
+                    self.uploadHashtagToServer(withPostId: postId)
+                    
+                    // upload mention noti
+                    if caption.contains("@") {
+                        self.uploadMentionNotification(forPostId: postId, withText: caption, isForComment: false)
+                    }
                     
                     // return to home feed
                     self.dismiss(animated: true) {

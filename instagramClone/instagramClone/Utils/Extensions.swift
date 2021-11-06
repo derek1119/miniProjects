@@ -112,10 +112,12 @@ extension UIViewController {
         }
     }
     
-    func uploadMentionNotification(forPostId postId: String, withText text: String) {
+    func uploadMentionNotification(forPostId postId: String, withText text: String, isForComment: Bool) {
         guard let currentUID = Auth.auth().currentUser?.uid else { return }
         let creationDate = Int(NSDate().timeIntervalSince1970)
         let words = text.components(separatedBy: .whitespacesAndNewlines)
+        
+        let mentionIntegerValue = isForComment ? COMMENT_INT_VALUE : POST_MENTION_INT_VALUE
         
         for var word in words {
             if word.hasPrefix("@") {
@@ -129,7 +131,7 @@ extension UIViewController {
                         guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
                         if word == dictionary["username"] as? String {
                             let notificationValues = ["postID": postId,
-                                                      "uid": currentUID, "type": MENTION_INT_VALUE,
+                                                      "uid": currentUID, "type": mentionIntegerValue,
                                                             "creationDate": creationDate] as [String: Any]
                             if currentUID != uid {
                                 NOTIFICATIONS_REF.child(uid).childByAutoId().updateChildValues(notificationValues)

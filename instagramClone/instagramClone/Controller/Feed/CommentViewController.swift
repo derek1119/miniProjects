@@ -148,7 +148,7 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
         COMMENT_REF.child(postId).childByAutoId().updateChildValues(values) { err, ref in
             self.uploadCommentNotificationToServer()
             if commentText.contains("@") {
-                self.uploadMentionNotification(forPostId: postId, withText: commentText)
+                self.uploadMentionNotification(forPostId: postId, withText: commentText, isForComment: true)
             }
             self.commentTextField.text = nil
         }
