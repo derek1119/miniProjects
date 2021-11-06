@@ -14,15 +14,18 @@ class Notification {
         case Like = 0
         case Comment
         case Follow
+        case Mention
         
         var description: String {
             switch self {
             case .Like:
                 return "회원님의 게시물을 좋아합니다."
             case .Comment:
-                return "님이 댓글을 달았습니다."
+                return "댓글을 달았습니다."
             case .Follow:
                 return "회원님을 팔로우하기 시작했습니다."
+            case .Mention:
+                return "회원님을 언급하였습니다."
             }
         }
     }

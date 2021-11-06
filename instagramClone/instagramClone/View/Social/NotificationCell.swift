@@ -94,7 +94,7 @@ class NotificationCell: UITableViewCell {
         guard let user = notification.user else { return }
 
         switch notification.notificationType {
-        case .Comment, .Like:
+        case .Comment, .Like, .Mention:
             followButton.isHidden = true
             postImageView.isHidden = false
             guard let post = notification.post else { return }

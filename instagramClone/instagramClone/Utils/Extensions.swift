@@ -89,6 +89,59 @@ extension Database {
     }
 }
 
+extension UIViewController {
+    
+    func getMentionUser(withUsername username: String) {
+        
+        USER_REF.observe(.childAdded) { snapshot in
+            let uid = snapshot.key
+            
+            USER_REF.child(uid).observeSingleEvent(of: .value) { snapshot in
+                guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
+                if username == dictionary["username"] as? String {
+                    Database.fetchUser(with: uid) { user in
+                        let userProfileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+                        userProfileVC.user = user
+                        self.navigationController?.modalPresentationStyle = .fullScreen
+                        self.navigationController?.pushViewController(userProfileVC, animated: true)
+                        // 해쉬태그 된 user를 찾고 나서 불필요한 작업을 방지하는 방법 -> return
+                        return
+                    }
+                }
+            }
+        }
+    }
+    
+    func uploadMentionNotification(forPostId postId: String, withText text: String) {
+        guard let currentUID = Auth.auth().currentUser?.uid else { return }
+        let creationDate = Int(NSDate().timeIntervalSince1970)
+        let words = text.components(separatedBy: .whitespacesAndNewlines)
+        
+        for var word in words {
+            if word.hasPrefix("@") {
+                word = word.trimmingCharacters(in: .symbols)
+                word = word.trimmingCharacters(in: .punctuationCharacters)
+                
+                USER_REF.observe(.childAdded) { snapshot in
+                    let uid = snapshot.key
+                    
+                    USER_REF.child(uid).observeSingleEvent(of: .value) { snapshot in
+                        guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
+                        if word == dictionary["username"] as? String {
+                            let notificationValues = ["postID": postId,
+                                                      "uid": currentUID, "type": MENTION_INT_VALUE,
+                                                            "creationDate": creationDate] as [String: Any]
+                            if currentUID != uid {
+                                NOTIFICATIONS_REF.child(uid).childByAutoId().updateChildValues(notificationValues)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 extension UIColor {
     static let isUnableStateColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
     static let isEnableStateColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
@@ -96,3 +149,4 @@ extension UIColor {
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
 }
+
