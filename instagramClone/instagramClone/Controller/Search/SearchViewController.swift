@@ -23,6 +23,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     var collectionViewEnabled = true
     var posts = [Post]()
     var currentKey: String?
+    var userCurrentKey: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +38,6 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         
         // fetch post
         fetchPosts()
-        
-        // fetch Users
-        fetchUser()
         
         // configure collectionView
         configureCollectionView()
@@ -59,6 +57,16 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return inSearchMode ? filteredUsers.count : users.count
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if users.count > 3 {
+            if indexPath.row == users.count - 1 {
+                fetchUsers()
+            }
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -170,6 +178,9 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
         
+        // fetch users
+        fetchUsers()
+        
         collectionView.isHidden = true
         collectionViewEnabled = false
         
@@ -208,21 +219,44 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     
     // MARK: - API
     
-    func fetchUser() {
-        // childAdd를 사용하는 이유는 새로 들어오는 값만 가져와서 따로 딕셔너리를 만들어서 가져오는 반면에 value를 사용하면 차일드 아래에 있는 모든 데이터를 하나의 딕셔너리에 넣어서 가져온다. 결국 value는 한번 업데이트 할 때마다 모든 값을 다 가져오고, childadd, modified 등등 은 바뀌거나 수정되거나 추가된 이벤트인 그 정보만 컴팩트하게 가져온다.
-        Database.database().reference().child("users").observe(.childAdded) { snapshot in
-            
-            // uid
-            let uid = snapshot.key
-            
-            Database.fetchUser(with: uid) { user in
+    func fetchUsers() {
+        
+        if userCurrentKey == nil {
+            USER_REF.queryLimited(toLast: 4).observeSingleEvent(of: .value) { snapshot in
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
                 
-                self.users.append(user)
-                
-                self.tableView.reloadData()
-                
+                allObjects.forEach { snapshot in
+                    let uid = snapshot.key
+                    
+                    Database.fetchUser(with: uid) { user in
+                        self.users.append(user)
+                        self.tableView.reloadData()
+                    }
+                }
+                self.userCurrentKey = first.key
+            }
+        } else {
+            USER_REF.queryOrderedByKey().queryEnding(atValue: userCurrentKey).queryLimited(toLast: 5).observeSingleEvent(of: .value) { snapshot in
+                print(snapshot)
             }
         }
+        
+        
+        
+        
+        
+        /*
+        // childAdd를 사용하는 이유는 새로 들어오는 값만 가져와서 따로 딕셔너리를 만들어서 가져오는 반면에 value를 사용하면 차일드 아래에 있는 모든 데이터를 하나의 딕셔너리에 넣어서 가져온다. 결국 value는 한번 업데이트 할 때마다 모든 값을 다 가져오고, childadd, modified 등등 은 바뀌거나 수정되거나 추가된 이벤트인 그 정보만 컴팩트하게 가져온다.
+        Database.database().reference().child("users").observe(.childAdded) { snapshot in
+            // uid
+            let uid = snapshot.key
+            Database.fetchUser(with: uid) { user in
+                self.users.append(user)
+                self.tableView.reloadData()
+            }
+        }
+        */
     }
     
     func fetchPosts() {
