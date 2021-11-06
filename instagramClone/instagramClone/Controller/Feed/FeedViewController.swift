@@ -172,6 +172,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     @objc func handleRefresh() {
         posts.removeAll(keepingCapacity: false)
+        self.currentKey = nil
         fetchPosts()
         collectionView.reloadData()
     }
