@@ -78,8 +78,9 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? FeedCell else { return UICollectionViewCell() }
     
-        cell.post = viewSinglePost ? post : posts[indexPath.row]
         cell.delegate = self
+
+        cell.post = viewSinglePost ? post : posts[indexPath.row]
         
         handleHashtagTapped(forCell: cell)
         handleUsernameLabelTapped(forCell: cell)
