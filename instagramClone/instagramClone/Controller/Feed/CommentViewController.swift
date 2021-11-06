@@ -120,9 +120,12 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? CommentCell else { return UICollectionViewCell() }
-        let comment = comments[indexPath.item]
-        cell.comment = comment
         
+        handleHashtagTapped(forCell: cell)
+        
+        handleMentionTapped(forCell: cell)
+        
+        cell.comment = comments[indexPath.item]
         
         return cell
     }
@@ -148,7 +151,18 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
     }
     
     func handleHashtagTapped(forCell cell: CommentCell) {
-        
+        cell.commentLabel.handleHashtagTap { hashtag in
+            let hashtagVC = HashtagController(collectionViewLayout: UICollectionViewFlowLayout())
+            hashtagVC.hashtag = hashtag
+            self.navigationController?.modalPresentationStyle = .fullScreen
+            self.navigationController?.pushViewController(hashtagVC, animated: true)
+        }
+    }
+    
+    func handleMentionTapped(forCell cell: CommentCell) {
+        cell.commentLabel.handleMentionTap { username in
+            self.getMentionUser(withUsername: username)
+        }
     }
     
     // MARK: - API
@@ -166,6 +180,27 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
                 self.collectionView.reloadData()
             }
         }
+    }
+    
+    func getMentionUser(withUsername username: String) {
+        
+        USER_REF.observe(.childAdded) { snapshot in
+            let uid = snapshot.key
+            
+            USER_REF.child(uid).observeSingleEvent(of: .value) { snapshot in
+                guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
+                if username == dictionary["username"] as? String {
+                    Database.fetchUser(with: uid) { user in
+                        let userProfileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+                        userProfileVC.user = user
+                        self.navigationController?.modalPresentationStyle = .fullScreen
+                        self.navigationController?.pushViewController(userProfileVC, animated: true)
+                    }
+                }
+            }
+            
+        }
+        
     }
     
     func uploadCommentNotificationToServer() {
