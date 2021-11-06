@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import ActiveLabel
 
 private let reuseIdentifier = "FeedCell"
 
@@ -70,6 +71,9 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     
         cell.post = viewSinglePost ? post : posts[indexPath.row]
         cell.delegate = self
+        
+        handleHashtagTapped(forCell: cell)
+        handleUsernameLabelTapped(forCell: cell)
     
         return cell
     }
@@ -166,6 +170,28 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         let messageVC = MessagesViewController()
         navigationController?.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(messageVC, animated: true)
+    }
+    
+    func handleHashtagTapped(forCell cell: FeedCell) {
+        cell.captionLabel.handleHashtagTap { hashtag in
+            print("hashtag is \(hashtag)")
+        }
+    }
+    
+    func handleUsernameLabelTapped(forCell cell: FeedCell) {
+        
+        guard let user = cell.post?.user else { return }
+        guard let username = cell.post?.user?.username else { return }
+        
+        let customType = ActiveType.custom(pattern: "^\(username)\\b")
+        
+        cell.captionLabel.handleCustomTap(for: customType) { _ in
+            
+            let userProfileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+            userProfileVC.user = user
+            self.navigationController?.modalPresentationStyle = .fullScreen
+            self.navigationController?.pushViewController(userProfileVC, animated: true)
+        }
     }
 
     func configureNavigationBar() {

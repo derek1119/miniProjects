@@ -7,11 +7,11 @@
 
 import UIKit
 import Firebase
+import ActiveLabel
 
 class FeedCell: UICollectionViewCell {
     
     // MARK: - Properties
-    
     var delegate: FeedCellDelegate?
     
     var post : Post? {
@@ -103,7 +103,9 @@ class FeedCell: UICollectionViewCell {
         $0.addGestureRecognizer(likeTap)
     }
     
-    let captionLabel = UILabel()
+    let captionLabel = ActiveLabel().then {
+        $0.numberOfLines = 0
+    }
     
     let postTimelabel = UILabel().then {
         $0.textColor = .lightGray
@@ -233,9 +235,34 @@ class FeedCell: UICollectionViewCell {
             let post = post,
             let caption = post.caption,
             let username = user.username else { return }
-        let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: .bold)])
-        attributedText.append(NSAttributedString(string: " \(caption)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
-        self.captionLabel.attributedText = attributedText
+        
+        // look for username as pattern
+        let customType = ActiveType.custom(pattern: "^\(username)\\b")
+        
+        // enable username as custom type
+        captionLabel.enabledTypes = [.mention, .hashtag, .url, customType]
+        
+        //configure username link attributes
+        captionLabel.configureLinkAttribute = { type, attributes, isSelected in
+            var atts = attributes
+            
+            switch type {
+            case .custom:
+                atts[NSAttributedString.Key.font] = UIFont.boldSystemFont(ofSize:12)
+            default: ()
+            }
+            return atts
+        }
+        
+        captionLabel.customize { label in
+            label.text = "\(username) \(caption)"
+            label.customColor[customType] = .black
+            label.font = .systemFont(ofSize: 12)
+            label.textColor = .black
+            captionLabel.numberOfLines = 2
+        }
+        
+        postTimelabel.text = "2일 전"
     }
     
     func configureCaption() {
