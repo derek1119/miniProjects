@@ -135,8 +135,9 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
     @objc func handleUploadComment() {
         guard
             let postId = post?.postID,
-        let commentText = commentTextField.text,
-        let uid = Auth.auth().currentUser?.uid
+            let commentText = commentTextField.text,
+            let uid = Auth.auth().currentUser?.uid,
+            !commentText.isEmpty
         else { return }
         let creationDate = Int(NSDate().timeIntervalSince1970)
         
@@ -198,9 +199,7 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
                     }
                 }
             }
-            
         }
-        
     }
     
     func uploadCommentNotificationToServer() {
