@@ -22,6 +22,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     var collectionView: UICollectionView!
     var collectionViewEnabled = true
     var posts = [Post]()
+    var currentKey: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,6 +126,14 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         return CGSize(width: width, height: width)
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if posts.count > 20 {
+            if indexPath.item == posts.count - 1 {
+                fetchPosts()
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
@@ -217,14 +226,45 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     }
     
     func fetchPosts() {
-        posts.removeAll()
         
-        POSTS_REF.observe(.childAdded) { snapshot in
-            let postID = snapshot.key
+        if currentKey == nil {
             
-            Database.fetchPosts(with: postID) { post in
-                self.posts.append(post)
-                self.collectionView.reloadData()
+            // initial data pull
+            POSTS_REF.queryLimited(toLast: 21).observeSingleEvent(of: .value) { snapshot in
+                
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                
+                allObjects.forEach { snapshot in
+                    let postId = snapshot.key
+                    
+                    Database.fetchPosts(with: postId) { post in
+                        self.posts.append(post)
+                        self.collectionView.reloadData()
+                    }
+                }
+                self.currentKey = first.key
+            }
+        } else {
+            
+            // paginate here
+            
+            POSTS_REF.queryOrderedByKey().queryEnding(atValue: self.currentKey).queryLimited(toLast: 10).observeSingleEvent(of: .value) { snapshot in
+                
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                
+                allObjects.forEach { snapshot in
+                    let postId = snapshot.key
+                    
+                    if postId != self.currentKey {
+                        Database.fetchPosts(with: postId) { post in
+                            self.posts.append(post)
+                            self.collectionView.reloadData()
+                        }
+                    }
+                }
+                self.currentKey = first.key
             }
         }
     }
