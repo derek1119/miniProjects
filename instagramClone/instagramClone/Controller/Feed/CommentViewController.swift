@@ -147,6 +147,12 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
         }
     }
     
+    func handleHashtagTapped(forCell cell: CommentCell) {
+        
+    }
+    
+    // MARK: - API
+    
     func fetchComments() {
         guard let postId = post?.postID else { return }
         
