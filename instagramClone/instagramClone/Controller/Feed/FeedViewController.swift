@@ -55,6 +55,14 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     // MARK: UICollectionViewDataSource
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if posts.count > 4 {
+            if indexPath.item == posts.count - 1 {
+                fetchPosts()
+            }
+        }
+    }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
 
@@ -290,7 +298,16 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         } else {
             // 마지막 currentkey의 데이터까지 포함해서 불러오기 때문에 6개를 지정하였다(5개를불러오기 위함) --> 추가적으로 찾아볼 것
             USER_FEED_REF.child(currentUid).queryOrderedByKey().queryEnding(atValue: self.currentKey).queryLimited(toLast: 6).observeSingleEvent(of: .value) { snapshot in
-                print(snapshot)
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                
+                allObjects.forEach { snapshot in
+                    let postId = snapshot.key
+                    if postId != self.currentKey {
+                        self.fetchPost(withPostId: postId)
+                    }
+                }
+                self.currentKey = first.key
             }
         }
        
