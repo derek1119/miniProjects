@@ -1,14 +1,14 @@
 //
-//  SearchPostCell.swift
+//  HashtagCell.swift
 //  instagramClone
 //
-//  Created by Sh Hong on 2021/10/28.
+//  Created by Sh Hong on 2021/11/06.
 //
 
 import UIKit
 
-class SearchPostCell: UICollectionViewCell {
-    
+class HashtagCell: UICollectionViewCell {
+
     // MARK: - Properties
     var post: Post? {
         didSet {
@@ -23,17 +23,22 @@ class SearchPostCell: UICollectionViewCell {
         $0.backgroundColor = .gray
     }
     
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         addSubview(postImageView)
         postImageView.snp.makeConstraints { make in
-            make.top.left.bottom.right.equalToSuperview()
+            make.edges.equalToSuperview()
         }
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
 }

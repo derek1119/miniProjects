@@ -174,7 +174,10 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     func handleHashtagTapped(forCell cell: FeedCell) {
         cell.captionLabel.handleHashtagTap { hashtag in
-            print("hashtag is \(hashtag)")
+            let hashtagVC = HashtagController(collectionViewLayout: UICollectionViewFlowLayout())
+            hashtagVC.hashtag = hashtag
+            self.navigationController?.modalPresentationStyle = .fullScreen
+            self.navigationController?.pushViewController(hashtagVC, animated: true)
         }
     }
     
