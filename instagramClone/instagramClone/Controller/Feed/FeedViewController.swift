@@ -18,6 +18,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     var posts = [Post]()
     var viewSinglePost = false
     var post: Post?
+    var currentKey: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -270,19 +271,38 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         
-        USER_FEED_REF.child(currentUid).observe(.childAdded) { snapshot in
+        if currentKey == nil {
             
-            let postId = snapshot.key
-            
-            Database.fetchPosts(with: postId) { post in
-                self.posts.append(post)
-                self.posts.sort { $0.creationDate > $1.creationDate }
-
-                // stop refreshing
+            // 파이어베이스 마지막 5개의 데이터만 일단 불러오겠다.
+            USER_FEED_REF.child(currentUid).queryLimited(toLast: 5).observeSingleEvent(of: .value) { snapshot in
+                
                 self.collectionView.refreshControl?.endRefreshing()
                 
-                self.collectionView.reloadData()
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                
+                allObjects.forEach { snapshot in
+                    let postId = snapshot.key
+                    self.fetchPost(withPostId: postId)
+                }
+                self.currentKey = first.key
             }
+        } else {
+            // 마지막 currentkey의 데이터까지 포함해서 불러오기 때문에 6개를 지정하였다(5개를불러오기 위함) --> 추가적으로 찾아볼 것
+            USER_FEED_REF.child(currentUid).queryOrderedByKey().queryEnding(atValue: self.currentKey).queryLimited(toLast: 6).observeSingleEvent(of: .value) { snapshot in
+                print(snapshot)
+            }
+        }
+       
+    }
+    
+    func fetchPost(withPostId postId: String) {
+        
+        Database.fetchPosts(with: postId) { post in
+            self.posts.append(post)
+            
+            self.posts.sort { $0.creationDate > $1.creationDate }
+            self.collectionView.reloadData()
         }
     }
 }

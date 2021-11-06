@@ -165,7 +165,6 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             attributedText.append(NSAttributedString(string: "팔로잉", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
             header.followingLabel.attributedText = attributedText
         }
-        
     }
     
     // MARK: - API
