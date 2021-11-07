@@ -15,6 +15,7 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
     // MARK: - Properties
     
     var timer: Timer?
+    var currentKey: String?
     
     var notifications = [Notification]()
     
@@ -43,6 +44,14 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return notifications.count
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if notifications.count > 4 {
+            if indexPath.row == notifications.count - 1 {
+                fetchNotification()
+            }
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,35 +115,61 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
     
     // MARK: - API
     
+    func fetchNotification(withNotificationId notificationId: String, dataSnapshot snapshot: DataSnapshot) {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+
+        guard
+            let dictionary = snapshot.value as? [String: AnyObject],
+            let uid = dictionary["uid"] as? String else { return }
+        
+        Database.fetchUser(with: uid) { user in
+            
+            // if notification for post
+            if let postID = dictionary["postID"] as? String {
+                Database.fetchPosts(with: postID) { post in
+                    let notification = Notification(user: user, post: post, dictionary: dictionary)
+                    self.notifications.append(notification)
+                    self.handleReloadTable()
+                }
+                // if notification for like
+            } else {
+                let notification = Notification(user: user, post: nil, dictionary: dictionary)
+                self.notifications.append(notification)
+                self.handleReloadTable()
+            }
+        }
+        NOTIFICATIONS_REF.child(currentUid).child(notificationId).child("checked").setValue(1)
+    }
+    
     func fetchNotification() {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         
-        NOTIFICATIONS_REF.child(currentUid).observe(.childAdded) { snapshot in
-            
-            let notificationId = snapshot.key
-            guard
-                let dictionary = snapshot.value as? [String: AnyObject],
-                let uid = dictionary["uid"] as? String else { return }
-            
-            Database.fetchUser(with: uid) { user in
+        if currentKey == nil {
+            NOTIFICATIONS_REF.child(currentUid).queryLimited(toLast: 5).observeSingleEvent(of: .value) { snapshot in
                 
-                // if notification for post
-                if let postID = dictionary["postID"] as? String {
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                
+                allObjects.forEach { snapshot in
+                    let notificationId = snapshot.key
+                    self.fetchNotification(withNotificationId: notificationId, dataSnapshot: snapshot)
+                }
+                self.currentKey = first.key
+            }
+        } else {
+            NOTIFICATIONS_REF.child(currentUid).queryOrderedByKey().queryEnding(atValue: self.currentKey).queryLimited(toLast: 6).observeSingleEvent(of: .value) { snapshot in
+                
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                
+                allObjects.forEach { snapshot in
+                    let notificationId = snapshot.key
                     
-                    Database.fetchPosts(with: postID) { post in
-                        let notification = Notification(user: user, post: post, dictionary: dictionary)
-                        self.notifications.append(notification)
-                        self.handleReloadTable()
-                    }
-                // if notification for like
-                } else {
-                    Database.fetchUser(with: uid) { user in
-                        let notification = Notification(user: user, post: nil, dictionary: dictionary)
-                        self.notifications.append(notification)
-                        self.handleReloadTable()
+                    if notificationId != self.currentKey {
+                        self.fetchNotification(withNotificationId: notificationId, dataSnapshot: snapshot)
                     }
                 }
-                NOTIFICATIONS_REF.child(currentUid).child(notificationId).child("checked").setValue(1)
+                self.currentKey = first.key
             }
         }
     }
