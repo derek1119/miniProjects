@@ -99,7 +99,33 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     func handleOptionsTapped(for cell: FeedCell) {
-        print(#function)
+        
+        guard let post = cell.post else { return }
+        
+        if post.ownerUID == Auth.auth().currentUser?.uid {
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            alertController.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { _ in
+                post.deletePost()
+                
+                if !self.viewSinglePost {
+                    self.handleRefresh()
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "수정", style: .default, handler: { _ in
+                print("handle Edit post")
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+            
+            present(alertController, animated: true, completion: nil)
+        } else {
+            // 다른 게시물의 옵션을 넣는 부분
+            // UIActivityViewController
+        }
     }
     
     func handleLikeTapped(for cell: FeedCell, isDoubleTap: Bool) {

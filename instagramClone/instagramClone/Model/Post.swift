@@ -86,6 +86,62 @@ class Post {
         }
     }
     
+    func deletePost() {
+        guard
+            let currentUid = Auth.auth().currentUser?.uid,
+            let postID = postID else { return }
+        
+        Storage.storage().reference(forURL: self.imageURL).delete(completion: nil)
+        
+        // 팔로워에게 들어가 있는 피드에 게시물 삭제
+        USER_FOLLOWER_REF.child(currentUid).observe(.childAdded) { snapshot in
+            let followerUid = snapshot.key
+            USER_FEED_REF.child(followerUid).child(self.postID).removeValue()
+        }
+        
+        // 나에게 보여지는 피드의 게시물 삭제
+        USER_FEED_REF.child(currentUid).child(postID).removeValue()
+        
+        // 나의 게시물 삭제
+        USER_POSTS_REF.child(currentUid).child(postID).removeValue()
+        
+        // 게시물에 좋아요를 누른 유저들에 대해서
+        POST_LIKES_REF.child(postID).observe(.childAdded) { snapshot in
+            let uid = snapshot.key
+            
+            // 유저가 좋아한 게시물
+            USER_LIKES_REF.child(uid).child(self.postID).observeSingleEvent(of: .value) { snapshot in
+                guard let notificationId = snapshot.value as? String else { return }
+                
+                // 유저들의 노티피케이션을 삭제
+                NOTIFICATIONS_REF.child(self.ownerUID).child(notificationId).removeValue { err, ref in
+                    
+                    // 포스트에 있는 좋아요 데이터 삭제
+                    POST_LIKES_REF.child(postID).removeValue()
+                    
+                    // 사용자가 좋아요 표시를 한 게시물 삭제
+                    USER_LIKES_REF.child(uid).child(self.postID).removeValue()
+                }
+            }
+        }
+        
+        let words = caption.components(separatedBy: .whitespacesAndNewlines)
+        
+        for var word in words {
+            if word.hasPrefix("#") || word.hasPrefix("@") {
+                
+                word = word.trimmingCharacters(in: .punctuationCharacters)
+                word = word.trimmingCharacters(in: .symbols)
+                
+                HASHTAG_POST_REF.child(word).child(postID).removeValue()
+            }
+        }
+        
+        COMMENT_REF.child(postID).removeValue()
+        
+        POSTS_REF.child(postID).removeValue()
+    }
+    
     func sendLikeNotificationToServer() {
         guard
             let currentUid = Auth.auth().currentUser?.uid,
