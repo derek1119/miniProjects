@@ -19,6 +19,8 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     var posts = [Post]()
     var currentKey: String?
     
+    // MARK: - Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,8 +28,8 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         self.collectionView!.register(UserPostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
         
-        // background color
-        self.collectionView.backgroundColor = .white
+        // configure refrech control
+        configureRefreshControl()
         
         // fetch user data
         if user == nil {
@@ -103,6 +105,8 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let feedVC = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout())
         feedVC.viewSinglePost = true
+        feedVC.userProfileController = self
+        
         feedVC.post = posts[indexPath.item]
         feedVC.modalPresentationStyle = .fullScreen
         
@@ -173,6 +177,21 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             attributedText.append(NSAttributedString(string: "팔로잉", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
             header.followingLabel.attributedText = attributedText
         }
+    }
+    
+    // MARK: - Handlers
+    
+    @objc func handleRefrech() {
+        posts.removeAll(keepingCapacity: false)
+        self.currentKey = nil
+        fetchPosts()
+        collectionView.reloadData()
+    }
+    
+    func configureRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefrech), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
     }
     
     // MARK: - API

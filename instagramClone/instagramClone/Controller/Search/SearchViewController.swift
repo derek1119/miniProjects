@@ -25,6 +25,8 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     var currentKey: String?
     var userCurrentKey: String?
     
+    // MARK: - Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +44,8 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         // configure collectionView
         configureCollectionView()
         
-        
+        // configure refresh control
+        configureRefreshControl()
     }
     
     // MARK: - Table view data source
@@ -165,6 +168,19 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     
     // MARK: - Handlers
     
+    @objc func handleRefrech() {
+        posts.removeAll(keepingCapacity: false)
+        self.currentKey = nil
+        fetchPosts()
+        collectionView.reloadData()
+    }
+    
+    func configureRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefrech), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
     func configureSearchBar() {
         searchBar.sizeToFit()
         searchBar.delegate = self
@@ -273,7 +289,8 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
             
             // initial data pull
             POSTS_REF.queryLimited(toLast: 21).observeSingleEvent(of: .value) { snapshot in
-                
+                self.tableView.refreshControl?.endRefreshing()
+
                 guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
                 guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
                 
