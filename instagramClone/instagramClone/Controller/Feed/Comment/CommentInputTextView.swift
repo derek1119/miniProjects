@@ -7,6 +7,6 @@
 
 import UIKit
 
-class CommentInputTextView: UIView {
+class CommentInputTextView: UITextView {
 
 }

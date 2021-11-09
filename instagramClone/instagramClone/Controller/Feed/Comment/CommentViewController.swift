@@ -17,45 +17,10 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
     var comments = [Comment]()
     var post: Post?
     
-    lazy var containerView = UIView().then {
-        $0.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+    lazy var containerView = CommentInputAccessoryView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)).then {
         $0.backgroundColor = .white
-        
-        $0.addSubview(postButton)
-        postButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-15)
-            make.centerY.equalToSuperview()
-            make.width.equalTo(50)
-        }
-        
-        $0.addSubview(commentTextField)
-        commentTextField.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.right.equalTo(postButton.snp.left).offset(-8)
-            make.left.equalToSuperview().offset(15)
-        }
-        
-        let separatorView = UIView().then {
-            $0.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
-        }
-        $0.addSubview(separatorView)
-        separatorView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-        }
     }
-    
-    let commentTextField = UITextField().then {
-        $0.placeholder = "댓글을 입력하세요."
-        $0.font = .systemFont(ofSize: 14)
-    }
-    
-    let postButton = UIButton(type: .system).then {
-        $0.setTitle("Post", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
-        $0.addTarget(self, action: #selector(handleUploadComment), for: .touchUpInside)
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
