@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		351E1E3D27291BFF00DFEA9E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351E1E3C27291BFF00DFEA9E /* Notification.swift */; };
 		3533511E273A2BB000EDF87C /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3533511D273A2BB000EDF87C /* EditProfileController.swift */; };
+		35335121273AAA3C00EDF87C /* CommentInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35335120273AAA3C00EDF87C /* CommentInputAccessoryView.swift */; };
+		35335123273AAA5A00EDF87C /* CommentInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35335122273AAA5A00EDF87C /* CommentInputTextView.swift */; };
 		35373BCC272A845700127532 /* SearchPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35373BCB272A845700127532 /* SearchPostCell.swift */; };
 		35373BCF272AE16500127532 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35373BCE272AE16400127532 /* MessagesViewController.swift */; };
 		35373BD2272AE37700127532 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35373BD1272AE37600127532 /* MessageCell.swift */; };
@@ -60,6 +62,8 @@
 /* Begin PBXFileReference section */
 		351E1E3C27291BFF00DFEA9E /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		3533511D273A2BB000EDF87C /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
+		35335120273AAA3C00EDF87C /* CommentInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputAccessoryView.swift; sourceTree = "<group>"; };
+		35335122273AAA5A00EDF87C /* CommentInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputTextView.swift; sourceTree = "<group>"; };
 		35373BCB272A845700127532 /* SearchPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostCell.swift; sourceTree = "<group>"; };
 		35373BCE272AE16400127532 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		35373BD1272AE37600127532 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
@@ -124,6 +128,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3533511F273AAA0800EDF87C /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				3564AD382727CA8B00493D07 /* CommentViewController.swift */,
+				35335120273AAA3C00EDF87C /* CommentInputAccessoryView.swift */,
+				35335122273AAA5A00EDF87C /* CommentInputTextView.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
 		35373BCD272AE13700127532 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,8 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				35427D5A271D78BC007FE420 /* FeedViewController.swift */,
-				3564AD382727CA8B00493D07 /* CommentViewController.swift */,
 				35383FA927364D61007BEB30 /* HashtagController.swift */,
+				3533511F273AAA0800EDF87C /* Comment */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -463,6 +477,7 @@
 				355B43F627227AD3009FBBB8 /* UserPostCell.swift in Sources */,
 				35427D5F271D78FA007FE420 /* UploadPostViewController.swift in Sources */,
 				35427D59271D7222007FE420 /* MainTabViewController.swift in Sources */,
+				35335123273AAA5A00EDF87C /* CommentInputTextView.swift in Sources */,
 				35373BD8272BC8D900127532 /* Message.swift in Sources */,
 				35427D7D27215FAA007FE420 /* SelectPhotoHeader.swift in Sources */,
 				35373BCC272A845700127532 /* SearchPostCell.swift in Sources */,
@@ -474,6 +489,7 @@
 				35427D5B271D78BC007FE420 /* FeedViewController.swift in Sources */,
 				35373BCF272AE16500127532 /* MessagesViewController.swift in Sources */,
 				355B43FA27228B73009FBBB8 /* FeedCell.swift in Sources */,
+				35335121273AAA3C00EDF87C /* CommentInputAccessoryView.swift in Sources */,
 				351E1E3D27291BFF00DFEA9E /* Notification.swift in Sources */,
 				35373BD4272B996700127532 /* NewMessageController.swift in Sources */,
 				35427D772720F8E7007FE420 /* FollowLikeCell.swift in Sources */,
