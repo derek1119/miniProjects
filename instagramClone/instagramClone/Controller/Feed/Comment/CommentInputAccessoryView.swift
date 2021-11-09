@@ -11,6 +11,8 @@ class CommentInputAccessoryView: UIView {
 
     // MARK: - Properties
     
+    var delegate: CommentInputAccessoryViewDelegate?
+    
     let commentTextView = CommentInputTextView().then {
         $0.font = .systemFont(ofSize: 16)
         $0.isScrollEnabled = false
@@ -32,16 +34,19 @@ class CommentInputAccessoryView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        autoresizingMask = .flexibleHeight
+        
         addSubview(postButton)
         postButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-15)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview()
             make.width.equalTo(50)
         }
         
         addSubview(commentTextView)
         commentTextView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalTo(safeArea.bottom)
             make.right.equalTo(postButton.snp.left).offset(-8)
             make.left.equalToSuperview().offset(15)
         }
@@ -49,6 +54,7 @@ class CommentInputAccessoryView: UIView {
         addSubview(separatorView)
         separatorView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
+            make.height.equalTo(0.5)
         }
     }
     
@@ -65,6 +71,11 @@ class CommentInputAccessoryView: UIView {
     // MARK: - Handlers
     
     @objc func handleUploadComment() {
-        
+        guard let comment = commentTextView.text else { return }
+        delegate?.didSummit(forComment: comment)
+    }
+    
+    func clearCommentTextView() {
+        commentTextView.text = nil
     }
 }

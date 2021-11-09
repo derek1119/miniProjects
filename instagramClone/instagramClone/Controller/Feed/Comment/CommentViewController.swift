@@ -19,6 +19,7 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
     
     lazy var containerView = CommentInputAccessoryView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)).then {
         $0.backgroundColor = .white
+        $0.delegate = self
     }
 
     override func viewDidLoad() {
@@ -97,28 +98,6 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
     
     // MARK: - Handlers
     
-    @objc func handleUploadComment() {
-        guard
-            let postId = post?.postID,
-            let commentText = commentTextField.text,
-            let uid = Auth.auth().currentUser?.uid,
-            !commentText.isEmpty
-        else { return }
-        let creationDate = Int(NSDate().timeIntervalSince1970)
-        
-        let values = ["commentText" : commentText,
-                      "creationDate" : creationDate,
-                      "uid" : uid] as [String: Any]
-        
-        COMMENT_REF.child(postId).childByAutoId().updateChildValues(values) { err, ref in
-            self.uploadCommentNotificationToServer()
-            if commentText.contains("@") {
-                self.uploadMentionNotification(forPostId: postId, withText: commentText, isForComment: true)
-            }
-            self.commentTextField.text = nil
-        }
-    }
-    
     func handleHashtagTapped(forCell cell: CommentCell) {
         cell.commentLabel.handleHashtagTap { hashtag in
             let hashtagVC = HashtagController(collectionViewLayout: UICollectionViewFlowLayout())
@@ -168,6 +147,29 @@ class CommentViewController: UICollectionViewController, UICollectionViewDelegat
         
         if uid != currentUid {
             NOTIFICATIONS_REF.child(uid).childByAutoId().updateChildValues(values)
+        }
+    }
+}
+
+
+extension CommentViewController: CommentInputAccessoryViewDelegate {
+    
+    func didSummit(forComment comment: String) {
+        guard
+            let postId = post?.postID,
+            let uid = Auth.auth().currentUser?.uid else { return }
+        let creationDate = Int(NSDate().timeIntervalSince1970)
+        
+        let values = ["commentText" : comment,
+                      "creationDate" : creationDate,
+                      "uid" : uid] as [String: Any]
+        
+        COMMENT_REF.child(postId).childByAutoId().updateChildValues(values) { err, ref in
+            self.uploadCommentNotificationToServer()
+            if comment.contains("@") {
+                self.uploadMentionNotification(forPostId: postId, withText: comment, isForComment: true)
+            }
+            self.containerView.clearCommentTextView()
         }
     }
 }
