@@ -14,8 +14,9 @@ class EditProfileController: UIViewController {
     
     var user: User?
     var imageChanged = false
-    var usernameChanged = false
+    var userNameChanged = false
     var userProfileVC: UserProfileViewController?
+    var updatedUserName: String?
     
     let profileImageView = CustomImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -41,6 +42,7 @@ class EditProfileController: UIViewController {
     let fullNameTextField = UITextField().then {
         $0.textAlignment = .left
         $0.borderStyle = .none
+        $0.isUserInteractionEnabled = false
     }
     
     let userNameLabel = UILabel().then {
@@ -72,6 +74,8 @@ class EditProfileController: UIViewController {
         // configure view components
         configureViewComponents()
         
+        userNameTextField.delegate = self
+        
         // load user data
         loadUserData()
     }
@@ -90,7 +94,16 @@ class EditProfileController: UIViewController {
     }
     
     @objc func handleDone() {
-        print(#function)
+        
+        view.endEditing(true)
+        
+        if userNameChanged {
+            updateUserName()
+        }
+        
+        if imageChanged {
+            updateProfileImage()
+        }
     }
     
     func loadUserData() {
@@ -191,6 +204,19 @@ class EditProfileController: UIViewController {
     
     // MARK: - API
     
+    func updateUserName() {
+        guard let updatedUserName = updatedUserName else { return }
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        guard userNameChanged == true else { return }
+        
+        USER_REF.child(currentUid).child("username").setValue(updatedUserName) { err, ref in
+            guard let userProfileVC = self.userProfileVC else { return }
+            userProfileVC.fetchCurrentUserData()
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     func updateProfileImage() {
         
         guard imageChanged == true else { return }
@@ -237,5 +263,28 @@ extension EditProfileController: UIImagePickerControllerDelegate, UINavigationCo
         }
         
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension EditProfileController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let user = user else { return }
+        
+        let trimmedString = userNameTextField.text?.replacingOccurrences(of: "\\s+S", with: "", options: .regularExpression)
+        
+        guard user.username != trimmedString else {
+            print("사용자 이름을 변경하지 않았습니다. ")
+            userNameChanged = false
+            return
+        }
+        
+        guard trimmedString != "" else {
+            print("Error : 이름을 입력해주세요.")
+            return
+        }
+        
+        updatedUserName = trimmedString
+        userNameChanged = true
     }
 }
