@@ -119,6 +119,11 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         
         if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {
             
+            let editProfileVC = EditProfileController()
+            let navController = UINavigationController(rootViewController: editProfileVC)
+            navController.modalPresentationStyle = .fullScreen
+            present(navController, animated: true, completion: nil)
+            
         } else {
             if header.editProfileFollowButton.titleLabel?.text == "Follow" {
                 header.editProfileFollowButton.setTitle("Following", for: .normal)
