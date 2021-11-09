@@ -69,12 +69,14 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         switch uploadAction {
         case .uploadPost:
             actionButton.setTitle("share", for: .normal)
-            navigationItem.title = "공유하기"
+            navigationItem.title = "게시물 올리기"
 
         case .saveChanges:
             guard let postToEdit = postToEdit else { return }
             actionButton.setTitle("Save Changes", for: .normal)
-            navigationItem.title = "수정"
+            navigationItem.title = "게시물 수정"
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(handleCancel))
+            navigationController?.navigationBar.tintColor = .black
             photoImageView.loadImage(with: postToEdit.imageURL)
             captionTextView.text = postToEdit.caption
         case .none:
@@ -117,6 +119,10 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         buttonSelector(uploadAction: uploadAction)
     }
     
+    @objc func handleCancel() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func buttonSelector(uploadAction: UploadAction) {
         switch uploadAction {
         case .uploadPost:
@@ -132,6 +138,8 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         guard
             let postToEdit = postToEdit,
             let updatedCaption = captionTextView.text else { return }
+        
+        uploadHashtagToServer(withPostId: postToEdit.postID)
         
         POSTS_REF.child(postToEdit.postID).child("caption").setValue(updatedCaption) { err, ref in
             self.dismiss(animated: true, completion: nil)
