@@ -152,3 +152,51 @@ extension UIColor {
     }
 }
 
+extension Date {
+    
+    func timeAgoToDisplay() -> String {
+        
+        let secondsAgo = Int(Date().timeIntervalSince(self))
+        
+        let minute = 60
+        let hour = 60 * minute
+        let day = 24 * hour
+        let week = 7 * day
+        let month = 4 * week
+        
+        var quotient: Int?
+        var unit: String
+        
+        switch secondsAgo {
+        case ...30:
+            unit = "방금"
+        case 30...minute:
+            quotient = secondsAgo
+            unit = "초"
+        case minute...hour:
+            quotient = secondsAgo / minute
+            unit = "분"
+        case hour...day:
+            quotient = secondsAgo / hour
+            unit = "시"
+        case day...week:
+            quotient = secondsAgo / day
+            unit = "일"
+        case week...month:
+            quotient = secondsAgo / week
+            unit = "주"
+        case month... :
+            quotient = secondsAgo / month
+            unit = "개월"
+        default:
+            return ""
+        }
+        
+        if let quotient = quotient {
+            return "\(quotient)\(unit) 전"
+        } else {
+            return "\(unit) 전"
+        }
+    }
+    
+}

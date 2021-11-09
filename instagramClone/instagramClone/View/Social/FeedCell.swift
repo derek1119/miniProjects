@@ -262,7 +262,7 @@ class FeedCell: UICollectionViewCell {
             captionLabel.numberOfLines = 2
         }
         
-        postTimelabel.text = "2일 전"
+        postTimelabel.text = post.creationDate.timeAgoToDisplay()
     }
     
     func configureCaption() {

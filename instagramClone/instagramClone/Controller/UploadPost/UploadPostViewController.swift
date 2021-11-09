@@ -21,7 +21,7 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         }
     }
 
-    var uploadAction: UploadAction!
+    var uploadAction = UploadAction()
     var selectedImage: UIImage? {
         didSet {
             photoImageView.image = selectedImage
@@ -79,8 +79,6 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
             navigationController?.navigationBar.tintColor = .black
             photoImageView.loadImage(with: postToEdit.imageURL)
             captionTextView.text = postToEdit.caption
-        case .none:
-            return 
         }
     }
     
