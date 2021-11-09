@@ -120,7 +120,13 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             }))
             
             alertController.addAction(UIAlertAction(title: "수정", style: .default, handler: { _ in
-                print("handle Edit post")
+                
+                let uploadPostVC = UploadPostViewController()
+                let navController = UINavigationController(rootViewController: uploadPostVC)
+                uploadPostVC.postToEdit = post
+                uploadPostVC.uploadAction = .saveChanges
+                navController.modalPresentationStyle = .fullScreen
+                self.present(navController, animated: true, completion: nil)
             }))
             
             alertController.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))

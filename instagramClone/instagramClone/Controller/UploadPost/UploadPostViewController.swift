@@ -12,16 +12,27 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
 
     // MARK: - Properties
     
+    enum UploadAction {
+        case uploadPost
+        case saveChanges
+        
+        init() {
+            self = .uploadPost
+        }
+    }
+
+    var uploadAction: UploadAction!
     var selectedImage: UIImage? {
         didSet {
             photoImageView.image = selectedImage
         }
     }
+    var postToEdit: Post?
     
-    let photoImageView = UIImageView().then {
+    let photoImageView = CustomImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
-        $0.backgroundColor = .blue
+        $0.backgroundColor = .lightGray
     }
     
     let captionTextView = UITextView().then {
@@ -30,13 +41,13 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         
     }
     
-    let shareBotton = UIButton(type: .system).then {
+    let actionButton = UIButton(type: .system).then {
         $0.backgroundColor = .isUnableStateColor
         $0.setTitle("Share", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 5
         $0.isEnabled = false
-        $0.addTarget(self, action: #selector(handleSharePost), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(handleUploadAction), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -52,15 +63,34 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         configureUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        switch uploadAction {
+        case .uploadPost:
+            actionButton.setTitle("share", for: .normal)
+            navigationItem.title = "공유하기"
+
+        case .saveChanges:
+            guard let postToEdit = postToEdit else { return }
+            actionButton.setTitle("Save Changes", for: .normal)
+            navigationItem.title = "수정"
+            photoImageView.loadImage(with: postToEdit.imageURL)
+            captionTextView.text = postToEdit.caption
+        case .none:
+            return 
+        }
+    }
+    
     // MARK: - UITextView
     func textViewDidChange(_ textView: UITextView) {
         
         guard !textView.text.isEmpty else {
-            shareBotton.isEnabled = false
-            shareBotton.backgroundColor = .isUnableStateColor
+            actionButton.isEnabled = false
+            actionButton.backgroundColor = .isUnableStateColor
             return }
-        shareBotton.isEnabled = true
-        shareBotton.backgroundColor = .isEnableStateColor
+        actionButton.isEnabled = true
+        actionButton.backgroundColor = .isEnableStateColor
     }
     
     // MARK: - handlers
@@ -83,8 +113,32 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         USER_FEED_REF.child(currentUid).updateChildValues(values)
     }
     
-    @objc func handleSharePost() {
+    @objc func handleUploadAction() {
+        buttonSelector(uploadAction: uploadAction)
+    }
+    
+    func buttonSelector(uploadAction: UploadAction) {
+        switch uploadAction {
+        case .uploadPost:
+            handleUploadPost()
+            
+        case .saveChanges:
+            handleSavePostChanges()
+            
+        }
+    }
+    
+    func handleSavePostChanges() {
+        guard
+            let postToEdit = postToEdit,
+            let updatedCaption = captionTextView.text else { return }
         
+        POSTS_REF.child(postToEdit.postID).child("caption").setValue(updatedCaption) { err, ref in
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func handleUploadPost() {
         // paramaters
         guard
             let caption = captionTextView.text,
@@ -154,7 +208,6 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
                     }
                 }
             })
-            
         }
     }
     
@@ -174,8 +227,8 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
             make.height.equalTo(100)
         }
         
-        view.addSubview(shareBotton)
-        shareBotton.snp.makeConstraints { make in
+        view.addSubview(actionButton)
+        actionButton.snp.makeConstraints { make in
             make.top.equalTo(photoImageView.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
