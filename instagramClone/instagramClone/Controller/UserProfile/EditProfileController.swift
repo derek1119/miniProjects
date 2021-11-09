@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import Firebase
 
 class EditProfileController: UIViewController {
     
     // MARK: - Properties
+    
+    var user: User?
+    var imageChanged = false
+    var usernameChanged = false
+    var userProfileVC: UserProfileViewController?
     
     let profileImageView = CustomImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -65,12 +71,18 @@ class EditProfileController: UIViewController {
         
         // configure view components
         configureViewComponents()
+        
+        // load user data
+        loadUserData()
     }
     
     // MARK: - Handler
     
     @objc func handleChangeProfilePhoto() {
-        print(#function)
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
     }
     
     @objc func handleCancel() {
@@ -79,6 +91,15 @@ class EditProfileController: UIViewController {
     
     @objc func handleDone() {
         print(#function)
+    }
+    
+    func loadUserData() {
+        guard let user = user else { return }
+        
+        profileImageView.loadImage(with: user.profileImageURL)
+        fullNameTextField.text = user.name
+        userNameTextField.text = user.username
+
     }
     
     func configureViewComponents() {
@@ -144,13 +165,15 @@ class EditProfileController: UIViewController {
         
         view.addSubview(fullNameSeparatorView)
         fullNameSeparatorView.snp.makeConstraints { make in
-            make.width.bottom.left.equalTo(fullNameTextField)
+            make.bottom.equalTo(fullNameLabel).offset(8)
+            make.width.left.equalTo(fullNameTextField)
             make.height.equalTo(0.5)
         }
         
         view.addSubview(userNameSeparatorView)
         userNameSeparatorView.snp.makeConstraints { make in
-            make.width.bottom.left.equalTo(userNameTextField)
+            make.bottom.equalTo(userNameTextField).offset(8)
+            make.width.left.equalTo(userNameTextField)
             make.height.equalTo(0.5)
         }
     }
@@ -167,4 +190,52 @@ class EditProfileController: UIViewController {
     }
     
     // MARK: - API
+    
+    func updateProfileImage() {
+        
+        guard imageChanged == true else { return }
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        guard let user = user else { return }
+        
+        Storage.storage().reference(forURL: user.profileImageURL).delete(completion: nil)
+        
+        let filename = NSUUID().uuidString
+        
+        guard let updatedProfileImage = profileImageView.image else { return }
+        guard let imageData = updatedProfileImage.jpegData(compressionQuality: 0.3) else { return }
+        
+        let storageRef = STORAGE_PROFILE_IMAGES_REF.child(filename)
+        
+        storageRef.putData(imageData, metadata: nil) { metadata, err in
+            if let err = err {
+                print("Failed to upload image to storage with error: ", err.localizedDescription)
+            }
+            
+            storageRef.downloadURL { downloadUrl, error in
+                guard let updatedProfileImageUrl = downloadUrl?.absoluteString else { return }
+                
+                USER_REF.child(currentUid).child("profileImageURL").setValue(updatedProfileImageUrl) { err, ref in
+                    guard let userProfileVC = self.userProfileVC else { return }
+                    userProfileVC.fetchCurrentUserData()
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+            
+            
+        }
+
+        
+    }
+}
+
+extension EditProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[.editedImage] as? UIImage {
+            profileImageView.image = selectedImage
+            self.imageChanged = true
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
 }
