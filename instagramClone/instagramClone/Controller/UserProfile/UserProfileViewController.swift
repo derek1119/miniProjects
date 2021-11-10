@@ -184,6 +184,10 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             attributedText.append(NSAttributedString(string: "팔로잉", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
             header.followingLabel.attributedText = attributedText
         }
+        
+        let attributedText = NSMutableAttributedString(string: "\(self.posts.count)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "게시물", attributes: [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+        header.postsLabel.attributedText = attributedText
     }
     
     // MARK: - Handlers

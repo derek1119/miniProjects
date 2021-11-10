@@ -58,7 +58,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     // MARK: UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if posts.count > 4 {
+        if posts.count > 0 {
             if indexPath.item == posts.count - 1 {
                 fetchPosts()
             }
@@ -320,7 +320,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         if currentKey == nil {
             
             // 파이어베이스 마지막 5개의 데이터만 일단 불러오겠다.
-            USER_FEED_REF.child(currentUid).queryLimited(toLast: 5).observeSingleEvent(of: .value) { snapshot in
+            USER_FEED_REF.child(currentUid).queryLimited(toLast: 1).observeSingleEvent(of: .value) { snapshot in
                 
                 self.collectionView.refreshControl?.endRefreshing()
                 
@@ -335,7 +335,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             }
         } else {
             // 마지막 currentkey의 데이터까지 포함해서 불러오기 때문에 6개를 지정하였다(5개를불러오기 위함) --> 추가적으로 찾아볼 것
-            USER_FEED_REF.child(currentUid).queryOrderedByKey().queryEnding(atValue: self.currentKey).queryLimited(toLast: 6).observeSingleEvent(of: .value) { snapshot in
+            USER_FEED_REF.child(currentUid).queryOrderedByKey().queryEnding(atValue: self.currentKey).queryLimited(toLast: 2).observeSingleEvent(of: .value) { snapshot in
                 guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
                 guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
                 
