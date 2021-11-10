@@ -296,6 +296,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     // MARK: - API
  
     func updateUserFeeds() {
+        print(#function)
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         USER_FOLLOWING_REF.child(currentUid).observe(.childAdded) { snapshot in
             
@@ -305,7 +306,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
                 
                 let postID = snapshot.key
                 USER_FEED_REF.child(currentUid).updateChildValues([postID: 1])
-                
+                self.fetchPost(withPostId: postID)
             }
         }
         
@@ -313,6 +314,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             
             let postID = snapshot.key
             USER_FEED_REF.child(currentUid).updateChildValues([postID: 1])
+            self.fetchPost(withPostId: postID)
         }
     }
     
