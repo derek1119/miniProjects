@@ -95,13 +95,29 @@ class NotificationCell: UITableViewCell {
 
         switch notification.notificationType {
         case .Comment, .Like, .CommentMention, .PostMention:
-            followButton.isHidden = true
-            postImageView.isHidden = false
+            contentView.addSubview(postImageView)
+            postImageView.snp.makeConstraints { make in
+                make.right.equalToSuperview().offset(-12)
+                make.width.height.equalTo(40)
+                make.centerY.equalToSuperview()
+            }
+            notificationLabel.snp.makeConstraints { make in
+                make.right.equalTo(self.postImageView.snp.left).offset(-8)
+            }
             guard let post = notification.post else { return }
             postImageView.loadImage(with: post.imageURL)
         case .Follow:
-            postImageView.isHidden = true
-            followButton.isHidden = false
+            contentView.addSubview(followButton)
+            followButton.snp.makeConstraints { make in
+                make.right.equalToSuperview().offset(-12)
+                make.centerY.equalToSuperview()
+                make.width.equalTo(90)
+                make.height.equalTo(30)
+            }
+            notificationLabel.snp.makeConstraints { make in
+                make.right.equalTo(self.followButton.snp.left).offset(-8)
+            }
+
             user.checkIfUserIsFollowed { followed in
                 if followed {
                     // configure follow button for followed user
@@ -113,15 +129,6 @@ class NotificationCell: UITableViewCell {
             }
         case .none:
             return
-        }
-        notificationLabel.snp.makeConstraints { make in
-            make.left.equalTo(profileImageView.snp.right).offset(8)
-            make.top.bottom.equalToSuperview()
-            if notification.notificationType == .Follow {
-                make.right.equalTo(self.followButton.snp.left).offset(-8)
-            } else {
-                make.right.equalTo(self.postImageView.snp.left).offset(-8)
-            }
         }
     }
     
@@ -159,28 +166,27 @@ class NotificationCell: UITableViewCell {
             make.centerY.equalToSuperview()
             profileImageView.layer.cornerRadius = 40 / 2
         }
-        
-        contentView.addSubview(postImageView)
-        postImageView.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-12)
-            make.width.height.equalTo(40)
-            make.centerY.equalToSuperview()
-        }
-        
-        contentView.addSubview(followButton)
-        followButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-12)
-            make.centerY.equalToSuperview()
-            make.width.equalTo(90)
-            make.height.equalTo(30)
-        }
-        
+   
         contentView.addSubview(notificationLabel)
         
+        notificationLabel.snp.makeConstraints { make in
+            make.left.equalTo(profileImageView.snp.right).offset(8)
+            make.top.bottom.equalToSuperview()
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profileImageView.image = nil
+
+        if contentView.subviews.contains(postImageView) {
+            postImageView.removeFromSuperview()
+        } else if contentView.subviews.contains(followButton) {
+            followButton.removeFromSuperview()
+        }
+    }
 }
