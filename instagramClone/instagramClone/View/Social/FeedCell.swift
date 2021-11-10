@@ -110,7 +110,7 @@ class FeedCell: UICollectionViewCell {
     let postTimelabel = UILabel().then {
         $0.textColor = .lightGray
         $0.font = .systemFont(ofSize: 12, weight: .bold)
-        $0.text = "2일 전"
+        $0.text = "0일 전"
     }
     
     // MARK: - Init
@@ -131,6 +131,17 @@ class FeedCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        profileImageView.image = nil
+        userNameButton.setTitle(nil, for: .normal)
+        likeButton.setImage(UIImage().Image("like_unselected"), for: .normal)
+        likesLabel.text = "좋아요 0개"
+        captionLabel.text = ""
+        postTimelabel.text = ""
     }
     
     // MARK: - Handlers
