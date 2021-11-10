@@ -38,6 +38,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         
         // fetch post
         fetchPosts()
+        
     }
 
     // MARK: - UICollectionViewFlowLayout
@@ -192,7 +193,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     
     // MARK: - Handlers
     
-    @objc func handleRefrech() {
+    @objc func handleRefresh() {
         posts.removeAll(keepingCapacity: false)
         self.currentKey = nil
         fetchPosts()
@@ -201,7 +202,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     
     func configureRefreshControl() {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(handleRefrech), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
     
@@ -250,7 +251,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             }
         }
     }
-    
+
     func fetchPost(withPostId postId: String) {
         
         Database.fetchPosts(with: postId) { post in
@@ -262,8 +263,6 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         
     }
     
-
-
     func fetchCurrentUserData() {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         

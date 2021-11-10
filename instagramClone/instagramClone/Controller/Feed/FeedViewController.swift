@@ -303,6 +303,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
                 
                 let postID = snapshot.key
                 USER_FEED_REF.child(currentUid).updateChildValues([postID: 1])
+                self.fetchPost(withPostId: postID)
             }
         }
         
@@ -310,6 +311,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             
             let postID = snapshot.key
             USER_FEED_REF.child(currentUid).updateChildValues([postID: 1])
+            self.fetchPost(withPostId: postID)
         }
     }
     
