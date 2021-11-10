@@ -168,7 +168,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     
     // MARK: - Handlers
     
-    @objc func handleRefrech() {
+    @objc func handleRefresh() {
         posts.removeAll(keepingCapacity: false)
         self.currentKey = nil
         fetchPosts()
@@ -177,7 +177,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     
     func configureRefreshControl() {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(handleRefrech), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
     

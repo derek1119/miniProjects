@@ -40,3 +40,7 @@ protocol Printable {
 protocol CommentInputAccessoryViewDelegate {
     func didSummit(forComment comment: String)
 }
+
+protocol RefreshableData {
+    func refreshData()
+}

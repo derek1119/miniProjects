@@ -11,13 +11,14 @@ import Firebase
 private let reuseIdentifier = "UserPostCell"
 private let headerIdentifier = "UserProfileHeader"
 
-class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate {
-
+class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate, RefreshableData {
+    
     // MARK: - Properties
     
     var user: User?
     var posts = [Post]()
     var currentKey: String?
+    var uploadPostVC: UploadPostViewController?
     
     // MARK: - Init
     
@@ -38,6 +39,11 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         
         // fetch post
         fetchPosts()
+        
+        guard let uploadPostVC = uploadPostVC else {
+            return
+        }
+        uploadPostVC.listner = self
     }
 
     // MARK: - UICollectionViewFlowLayout
@@ -192,16 +198,22 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     
     // MARK: - Handlers
     
-    @objc func handleRefrech() {
+    @objc func handleRefresh() {
         posts.removeAll(keepingCapacity: false)
         self.currentKey = nil
         fetchPosts()
         collectionView.reloadData()
     }
     
+    func refreshData() {
+        posts.removeAll(keepingCapacity: false)
+        fetchPosts()
+        collectionView.reloadData()
+    }
+    
     func configureRefreshControl() {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(handleRefrech), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
     

@@ -11,7 +11,7 @@ import ActiveLabel
 
 private let reuseIdentifier = "FeedCell"
 
-class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FeedCellDelegate {
+class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FeedCellDelegate, RefreshableData {
     
     // MARK: - Properties
     
@@ -20,6 +20,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     var post: Post?
     var currentKey: String?
     var userProfileController: UserProfileViewController?
+    var uploadPostVC: UploadPostViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,11 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
         
         updateUserFeeds()
+        
+        guard let uploadPostVC = uploadPostVC else {
+            return
+        }
+        uploadPostVC.listner = self
     }
 
     // MARK: - UICollectionViewFlowLayout
@@ -114,7 +120,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
                 } else {
                     if let userProfileController = self.userProfileController {
                         self.navigationController?.popViewController(animated: true)
-                        userProfileController.handleRefrech()
+                        userProfileController.handleRefresh()
                     }
                 }
             }))
@@ -218,6 +224,12 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         let messageVC = MessagesViewController()
         navigationController?.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(messageVC, animated: true)
+    }
+    
+    func refreshData() {
+        posts.removeAll(keepingCapacity: false)
+        fetchPosts()
+        collectionView.reloadData()
     }
     
     func handleHashtagTapped(forCell cell: FeedCell) {
