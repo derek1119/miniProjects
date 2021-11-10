@@ -292,7 +292,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     // MARK: - API
-    
+ 
     func updateUserFeeds() {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         USER_FOLLOWING_REF.child(currentUid).observe(.childAdded) { snapshot in
