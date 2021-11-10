@@ -76,6 +76,7 @@ class CommentInputAccessoryView: UIView {
     }
     
     func clearCommentTextView() {
+        commentTextView.placeholderLabel.isHidden = false
         commentTextView.text = nil
     }
 }

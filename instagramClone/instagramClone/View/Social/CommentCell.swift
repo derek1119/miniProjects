@@ -38,14 +38,14 @@ class CommentCell: UICollectionViewCell {
         profileImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(8)
             make.width.height.equalTo(40)
-            make.top.equalToSuperview().offset(4)
+            make.centerY.equalToSuperview()
             profileImageView.layer.cornerRadius = 40 / 2
         }
         
         addSubview(commentLabel)
         commentLabel.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
-            make.left.equalTo(profileImageView.snp.right).offset(4)
+            make.left.equalTo(profileImageView.snp.right).offset(8)
             make.right.equalToSuperview().offset(-4)
         }
     }
