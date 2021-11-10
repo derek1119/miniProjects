@@ -69,6 +69,10 @@ class SearchUserTableViewCell: UITableViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        setNeedsLayout()
+    }
+    
     func fetchUI() {
         if #available(iOS 14.0, *) {
             var content = self.defaultContentConfiguration()
