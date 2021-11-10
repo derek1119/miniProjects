@@ -208,6 +208,9 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
                         self.uploadMentionNotification(forPostId: postId, withText: caption, isForComment: false)
                     }
                     
+                    // refresh views
+                    let userprofileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+                    userprofileVC.uploadPostVC = self
                     // return to home feed
                     self.dismiss(animated: true) {
                         self.tabBarController?.selectedIndex = 0

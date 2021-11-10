@@ -12,18 +12,19 @@ private let reuseIdentifier = "UserPostCell"
 private let headerIdentifier = "UserProfileHeader"
 
 class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate {
-
+    
     // MARK: - Properties
     
     var user: User?
     var posts = [Post]()
     var currentKey: String?
+    var uploadPostVC: UploadPostViewController?
     
     // MARK: - Init
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Register cell classes
         self.collectionView!.register(UserPostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
@@ -40,7 +41,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         fetchPosts()
         
     }
-
+    
     // MARK: - UICollectionViewFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -65,7 +66,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         if posts.count > 9 {
@@ -74,12 +75,12 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             }
         }
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+        
         return posts.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         // declare header
@@ -99,7 +100,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? UserPostCell else { return UICollectionViewCell() }
         
         cell.post = posts[indexPath.row]
-    
+        
         return cell
     }
     
@@ -156,10 +157,10 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     func setUserStats(for header: UserProfileHeader) {
         
         guard let uid = header.user?.uid else { return }
-
+        
         var numberOfFollowers: Int!
         var numberOfFollowing: Int!
-
+        
         // get number of followers
         USER_FOLLOWER_REF.child(uid).observe(.value) { snapshot in
             if let snapshot = snapshot.value as? Dictionary<String, AnyObject> {
@@ -167,12 +168,12 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             } else {
                 numberOfFollowers = 0
             }
-
+            
             let attributedText = NSMutableAttributedString(string: "\(numberOfFollowers!)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
             attributedText.append(NSAttributedString(string: "팔로워", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
             header.followersLabel.attributedText = attributedText
         }
-
+        
         // get number of following
         // observeSingleEvent는 한번의 이벤트만 받고 끝나지만 observe는 실시간(realtime) 추적을 한다.
         USER_FOLLOWING_REF.child(uid).observe(.value) { snapshot in
@@ -251,7 +252,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             }
         }
     }
-
+    
     func fetchPost(withPostId postId: String) {
         
         Database.fetchPosts(with: postId) { post in
@@ -276,3 +277,4 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         }
     }
 }
+

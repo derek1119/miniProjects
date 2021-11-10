@@ -20,6 +20,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     var post: Post?
     var currentKey: String?
     var userProfileController: UserProfileViewController?
+    var uploadPostVC: UploadPostViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
         
         updateUserFeeds()
+        
     }
 
     // MARK: - UICollectionViewFlowLayout
@@ -114,7 +116,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
                 } else {
                     if let userProfileController = self.userProfileController {
                         self.navigationController?.popViewController(animated: true)
-                        userProfileController.handleRefrech()
+                        userProfileController.handleRefresh()
                     }
                 }
             }))
@@ -303,7 +305,6 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
                 
                 let postID = snapshot.key
                 USER_FEED_REF.child(currentUid).updateChildValues([postID: 1])
-                self.fetchPost(withPostId: postID)
             }
         }
         
@@ -311,7 +312,6 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             
             let postID = snapshot.key
             USER_FEED_REF.child(currentUid).updateChildValues([postID: 1])
-            self.fetchPost(withPostId: postID)
         }
     }
     
