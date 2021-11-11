@@ -135,8 +135,11 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             
             present(alertController, animated: true, completion: nil)
         } else {
-            // 다른 게시물의 옵션을 넣는 부분
-            // UIActivityViewController
+            guard let image = cell.postImageView.image else { return }
+            var shareContent = [UIImage]()
+            shareContent.append(image)
+            let activityController = UIActivityViewController(activityItems: shareContent, applicationActivities: nil)
+            self.present(activityController, animated: true, completion: nil)
         }
     }
     
@@ -305,11 +308,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
                 
                 let postID = snapshot.key
                 USER_FEED_REF.child(currentUid).updateChildValues([postID: 1])
-<<<<<<< HEAD
-                self.fetchPost(withPostId: postID)
-=======
-                
->>>>>>> main
+
             }
         }
         
@@ -317,7 +316,6 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             
             let postID = snapshot.key
             USER_FEED_REF.child(currentUid).updateChildValues([postID: 1])
-            self.fetchPost(withPostId: postID)
         }
     }
     

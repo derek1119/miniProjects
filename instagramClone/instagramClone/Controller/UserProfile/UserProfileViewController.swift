@@ -40,12 +40,6 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         // fetch post
         fetchPosts()
         
-<<<<<<< HEAD
-=======
-        guard let uploadPostVC = uploadPostVC else {
-            return
-        }
->>>>>>> main
     }
     
     // MARK: - UICollectionViewFlowLayout
