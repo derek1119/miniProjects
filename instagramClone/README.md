@@ -25,7 +25,7 @@
 #### 개발 아키텍처
 
 + MVC
-+ Delegate
++ Delegate, NotificationCenter
 
 #### 이외에 사용한 오픈소스
 
