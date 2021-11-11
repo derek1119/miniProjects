@@ -12,5 +12,5 @@ target 'instagramClone' do
 	pod 'ActiveLabel'
 	pod 'Firebase/Messaging'
 	pod 'NVActivityIndicatorView'
-
+	pod 'Toast-Swift', '~> 5.0.1'
 end

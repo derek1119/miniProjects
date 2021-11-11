@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Firebase
+import Toast_Swift
 
 extension UIView {
     
@@ -26,10 +27,10 @@ extension UIView {
 
 extension UIApplication {
     static let KeyWindow = UIApplication.shared.connectedScenes
-            .filter({$0.activationState == .foregroundActive})
-            .compactMap({$0 as? UIWindowScene})
-            .first?.windows
-            .filter({$0.isKeyWindow}).first
+        .filter({$0.activationState == .foregroundActive})
+        .compactMap({$0 as? UIWindowScene})
+        .first?.windows
+        .filter({$0.isKeyWindow}).first
 }
 
 extension UIImage {
@@ -77,7 +78,7 @@ extension Database {
     
     static func fetchPosts(with postId: String, completion: @escaping(Post) -> Void) {
         POSTS_REF.child(postId).observeSingleEvent(of: .value) { snapshot in
-
+            
             guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
             guard let ownerUid = dictionary["ownerUID"] as? String else { return }
             
@@ -112,6 +113,26 @@ extension UIViewController {
         }
     }
     
+    func showToast(message: String, font: UIFont = .systemFont(ofSize: 14.0), _ superView: UIView) {
+        let toastLabel = UILabel(frame: CGRect(x: superView.frame.size.width/2 - 75, y: superView.frame.size.height - 130, width: 150, height: 35)).then { label in
+            label.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+            label.textColor = UIColor.white
+            label.font = font
+            label.textAlignment = .center
+            label.text = message
+            label.alpha = 1.0
+            label.layer.cornerRadius = 10
+            label.clipsToBounds = true
+        }
+        
+        superView.addSubview(toastLabel)
+        UIView.animate(withDuration: 5.0, delay: 0.1, options: .curveEaseOut) {
+            toastLabel.alpha = 0.0
+        } completion: { isCompleted in
+            toastLabel.removeFromSuperview()
+        }
+    }
+    
     func uploadMentionNotification(forPostId postId: String, withText text: String, isForComment: Bool) {
         guard let currentUID = Auth.auth().currentUser?.uid else { return }
         let creationDate = Int(NSDate().timeIntervalSince1970)
@@ -132,7 +153,7 @@ extension UIViewController {
                         if word == dictionary["username"] as? String {
                             let notificationValues = ["postID": postId,
                                                       "uid": currentUID, "type": mentionIntegerValue,
-                                                            "creationDate": creationDate] as [String: Any]
+                                                      "creationDate": creationDate] as [String: Any]
                             if currentUID != uid {
                                 NOTIFICATIONS_REF.child(uid).childByAutoId().updateChildValues(notificationValues)
                             }

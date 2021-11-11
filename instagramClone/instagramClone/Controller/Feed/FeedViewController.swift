@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import ActiveLabel
+import Toast_Swift
 
 private let reuseIdentifier = "FeedCell"
 
@@ -139,6 +140,17 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             var shareContent = [UIImage]()
             shareContent.append(image)
             let activityController = UIActivityViewController(activityItems: shareContent, applicationActivities: nil)
+            activityController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
+                if completed {
+                    self.showToast(message: "Share Success", self.view)
+                } else {
+                    self.showToast(message: "Share Cancel", self.view)
+                }
+                
+                if let error = error {
+                    self.showToast(message: "\(error.localizedDescription)", self.view)
+                }
+            }
             self.present(activityController, animated: true, completion: nil)
         }
     }
