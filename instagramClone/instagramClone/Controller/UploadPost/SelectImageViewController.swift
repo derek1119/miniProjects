@@ -186,17 +186,9 @@ class SelectImageViewController: UICollectionViewController, UICollectionViewDel
                                 self.collectionView.reloadData()
                             }
                         }
-                        
-                        
                     }
                 }
             }
-            
         }
-        
-        
     }
-    
-    
-    
 }

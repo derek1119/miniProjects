@@ -64,10 +64,18 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let notification = notifications[indexPath.row]
         
-        let userProfileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        userProfileVC.user = notification.user
-        navigationController?.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(userProfileVC, animated: true)
+        if let post = notification.post {
+            let feedVC = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout())
+            feedVC.post = post
+            feedVC.viewSinglePost = true
+            navigationController?.modalPresentationStyle = .fullScreen
+            navigationController?.pushViewController(feedVC, animated: true)
+        } else {
+            let userProfileVC = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+            userProfileVC.user = notification.user
+            navigationController?.modalPresentationStyle = .fullScreen
+            navigationController?.pushViewController(userProfileVC, animated: true)
+        }
     }
     
     // MARK: - Notification Delegate Protocols

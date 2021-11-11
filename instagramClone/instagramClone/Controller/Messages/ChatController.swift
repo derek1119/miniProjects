@@ -97,7 +97,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         var height: CGFloat = 80
         
         if let message = messages[indexPath.row].messageText {
-            height = extimateFrameForText(message).height + 20
+            height = estimateFrameForText(message).height + 20
 
         }
         
@@ -133,7 +133,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     // text의 Rect을 구하는 방법
-    func extimateFrameForText(_ text: String) -> CGRect {
+    func estimateFrameForText(_ text: String) -> CGRect {
         let size = CGSize(width: 200, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], context: nil)
@@ -143,9 +143,9 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         
         cell.bubbleView.snp.updateConstraints { make in
-            make.width.equalTo(extimateFrameForText(message.messageText).width + 32)
+            make.width.equalTo(estimateFrameForText(message.messageText).width + 32)
         }
-        cell.frame.size.height = extimateFrameForText(message.messageText).height + 20
+        cell.frame.size.height = estimateFrameForText(message.messageText).height + 20
         
         if message.fromID == currentUid {
             cell.bubbleViewRightContraint?.activate()
@@ -161,7 +161,6 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
             cell.textView.textColor = .black
             cell.profileImageView.isHidden = false
         }
-        
     }
     
     func configureNavigationBar() {
