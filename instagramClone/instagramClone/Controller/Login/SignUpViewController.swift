@@ -10,7 +10,10 @@ import Firebase
 
 class SignUpViewController: UIViewController, UINavigationControllerDelegate {
 
+    // MARK: - Properties
+    
     var imageSelected = false
+    let loadingVC = LoadingViewController()
     
     let plusPhotoButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "plus_photo")!.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -88,6 +91,11 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
         guard let fullName = fullNameTextField.text?.lowercased() else { return }
         guard let userName = userNameTextField.text?.lowercased() else { return }
         
+        self.loadingVC.modalPresentationStyle = .overCurrentContext
+        self.loadingVC.modalTransitionStyle = .crossDissolve
+        
+        self.present(self.loadingVC, animated: true, completion: nil)
+        
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
 
             // handle error
@@ -161,6 +169,7 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate {
                             mainTabVC.isInitialLoad = true
                         }
                         // dismiss login controller
+                        self.loadingVC.dismiss(animated: true, completion: nil)
                         self.dismiss(animated: true, completion: nil)
                     }
 
@@ -253,7 +262,7 @@ extension SignUpViewController: UIImagePickerControllerDelegate {
         plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
         plusPhotoButton.layer.masksToBounds = true
         plusPhotoButton.layer.borderColor = UIColor.black.cgColor
-        plusPhotoButton.layer.borderWidth = 2
+        plusPhotoButton.layer.borderWidth = 0.5
         plusPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
         
         self.dismiss(animated: true, completion: nil)

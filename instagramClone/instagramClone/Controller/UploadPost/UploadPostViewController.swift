@@ -146,13 +146,11 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
     }
     
     func handleUploadPost() {
-        DispatchQueue.main.async {
-            
-            self.loadingVC.modalPresentationStyle = .overCurrentContext
-            self.loadingVC.modalTransitionStyle = .crossDissolve
-            
-            self.present(self.loadingVC, animated: true, completion: nil)
-        }
+        self.loadingVC.modalPresentationStyle = .overCurrentContext
+        self.loadingVC.modalTransitionStyle = .crossDissolve
+        
+        self.present(self.loadingVC, animated: true, completion: nil)
+        
         // paramaters
         guard
             let caption = captionTextView.text,
