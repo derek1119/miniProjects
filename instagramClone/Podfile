@@ -11,6 +11,6 @@ target 'instagramClone' do
 	pod 'Firebase/Storage'
 	pod 'ActiveLabel'
 	pod 'Firebase/Messaging'
-
+	pod 'NVActivityIndicatorView'
 
 end

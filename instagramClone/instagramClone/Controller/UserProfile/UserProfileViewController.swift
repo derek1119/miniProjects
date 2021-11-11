@@ -11,7 +11,7 @@ import Firebase
 private let reuseIdentifier = "UserPostCell"
 private let headerIdentifier = "UserProfileHeader"
 
-class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate, RefreshableData {
+class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate {
     
     // MARK: - Properties
     
@@ -43,7 +43,6 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         guard let uploadPostVC = uploadPostVC else {
             return
         }
-        uploadPostVC.listner = self
     }
 
     // MARK: - UICollectionViewFlowLayout

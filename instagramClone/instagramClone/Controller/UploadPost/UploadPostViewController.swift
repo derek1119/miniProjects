@@ -21,7 +21,6 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         }
     }
 
-    var listner: RefreshableData?
     var uploadAction = UploadAction()
     var selectedImage: UIImage? {
         didSet {
@@ -29,6 +28,7 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         }
     }
     var postToEdit: Post?
+    let loadingVC = LoadingViewController()
     
     let photoImageView = CustomImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -146,6 +146,13 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
     }
     
     func handleUploadPost() {
+        DispatchQueue.main.async {
+            
+            self.loadingVC.modalPresentationStyle = .overCurrentContext
+            self.loadingVC.modalTransitionStyle = .crossDissolve
+            
+            self.present(self.loadingVC, animated: true, completion: nil)
+        }
         // paramaters
         guard
             let caption = captionTextView.text,
@@ -209,8 +216,7 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
                         self.uploadMentionNotification(forPostId: postId, withText: caption, isForComment: false)
                     }
                     
-                    // refresh views
-                    self.listner?.refreshData()
+                    self.loadingVC.dismiss(animated: true)
                     // return to home feed
                     self.dismiss(animated: true) {
                         self.tabBarController?.selectedIndex = 0

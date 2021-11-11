@@ -11,7 +11,7 @@ import ActiveLabel
 
 private let reuseIdentifier = "FeedCell"
 
-class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FeedCellDelegate, RefreshableData {
+class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FeedCellDelegate {
     
     // MARK: - Properties
     
@@ -42,11 +42,6 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
         
         updateUserFeeds()
-        
-        guard let uploadPostVC = uploadPostVC else {
-            return
-        }
-        uploadPostVC.listner = self
     }
 
     // MARK: - UICollectionViewFlowLayout
@@ -224,12 +219,6 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         let messageVC = MessagesViewController()
         navigationController?.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(messageVC, animated: true)
-    }
-    
-    func refreshData() {
-        posts.removeAll(keepingCapacity: false)
-        fetchPosts()
-        collectionView.reloadData()
     }
     
     func handleHashtagTapped(forCell cell: FeedCell) {
