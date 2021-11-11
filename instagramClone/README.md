@@ -18,7 +18,8 @@
 
 #### 백앤드
 
-+ Firebase FireStore
++ Firebase Auth
++ Firebase Realtime Database
 + Firebase Storage
 
 #### 개발 아키텍처
