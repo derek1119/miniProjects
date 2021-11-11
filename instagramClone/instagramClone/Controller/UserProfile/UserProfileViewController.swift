@@ -40,6 +40,12 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         // fetch post
         fetchPosts()
         
+<<<<<<< HEAD
+=======
+        guard let uploadPostVC = uploadPostVC else {
+            return
+        }
+>>>>>>> main
     }
     
     // MARK: - UICollectionViewFlowLayout
@@ -197,6 +203,12 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     @objc func handleRefresh() {
         posts.removeAll(keepingCapacity: false)
         self.currentKey = nil
+        fetchPosts()
+        collectionView.reloadData()
+    }
+    
+    func refreshData() {
+        posts.removeAll(keepingCapacity: false)
         fetchPosts()
         collectionView.reloadData()
     }

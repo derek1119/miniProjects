@@ -305,7 +305,11 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
                 
                 let postID = snapshot.key
                 USER_FEED_REF.child(currentUid).updateChildValues([postID: 1])
+<<<<<<< HEAD
                 self.fetchPost(withPostId: postID)
+=======
+                
+>>>>>>> main
             }
         }
         
