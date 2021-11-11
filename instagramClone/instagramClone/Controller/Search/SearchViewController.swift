@@ -109,7 +109,6 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         layout.scrollDirection = .vertical
         
         let frame = CGRect(x: 0, y: 0, width: CGFloat().windowWidth, height: CGFloat().windowHeight - (tabBarController?.tabBar.frame.height)!)
-        
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         
         collectionView.delegate = self

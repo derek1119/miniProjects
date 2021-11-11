@@ -201,12 +201,6 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         collectionView.reloadData()
     }
     
-    func refreshData() {
-        posts.removeAll(keepingCapacity: false)
-        fetchPosts()
-        collectionView.reloadData()
-    }
-    
     func configureRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
