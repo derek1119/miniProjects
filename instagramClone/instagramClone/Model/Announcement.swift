@@ -7,9 +7,9 @@
 
 import Foundation
 
-class Notification {
+class Announcement {
     
-    enum NotificationType: Int, Printable {
+    enum AnnouncementType: Int, Printable {
         
         case Like = 0
         case Comment
@@ -38,7 +38,7 @@ class Notification {
     var postID: String?
     var post: Post?
     var user: User!
-    var notificationType: NotificationType!
+    var announcementType: AnnouncementType!
     var didCheck = false
     
     init(user: User, post: Post? = nil, dictionary: Dictionary<String, AnyObject>) {
@@ -52,7 +52,7 @@ class Notification {
         }
         
         if let type = dictionary["type"] as? Int {
-            self.notificationType = NotificationType(rawValue: type)
+            self.announcementType = AnnouncementType(rawValue: type)
         }
         
         if let uid = dictionary["uid"] as? String {

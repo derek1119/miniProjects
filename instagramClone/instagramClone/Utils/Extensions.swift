@@ -5,6 +5,7 @@
 //  Created by Sh Hong on 2021/10/12.
 //
 
+import Foundation
 import UIKit
 import SnapKit
 import Firebase
@@ -220,4 +221,8 @@ extension Date {
         }
     }
     
+}
+
+extension Notification.Name {
+    static let fetchNewData = Notification.Name("fetchNewData")
 }

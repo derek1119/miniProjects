@@ -44,6 +44,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         updateUserFeeds()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchNewData), name: .fetchNewData, object: nil)
     }
 
     // MARK: - UICollectionViewFlowLayout
@@ -223,6 +224,11 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     // MARK: - Handlers
+    
+    @objc func fetchNewData() {
+        print("Feed View Controller :", #function)
+        handleRefresh()
+    }
     
     @objc func handleRefresh() {
         posts.removeAll(keepingCapacity: false)

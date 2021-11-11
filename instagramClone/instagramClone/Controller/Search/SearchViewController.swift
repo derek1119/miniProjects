@@ -46,6 +46,8 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         
         // configure refresh control
         configureRefreshControl()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchNewData), name: .fetchNewData, object: nil)
     }
     
     // MARK: - Table view data source
@@ -166,6 +168,10 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     }
     
     // MARK: - Handlers
+    
+    @objc func fetchNewData() {
+        handleRefresh()
+    }
     
     @objc func handleRefresh() {
         posts.removeAll(keepingCapacity: false)

@@ -129,7 +129,6 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
             
         case .saveChanges:
             handleSavePostChanges()
-            
         }
     }
     
@@ -214,7 +213,7 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
                         self.uploadMentionNotification(forPostId: postId, withText: caption, isForComment: false)
                     }
                     
-
+                    NotificationCenter.default.post(name: .fetchNewData, object: nil)
                     self.loadingVC.dismiss(animated: true)
                     // return to home feed
                     self.dismiss(animated: true) {

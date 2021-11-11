@@ -40,6 +40,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         // fetch post
         fetchPosts()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchNewData), name: .fetchNewData, object: nil)
     }
     
     // MARK: - UICollectionViewFlowLayout
@@ -193,6 +194,10 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     }
     
     // MARK: - Handlers
+    
+    @objc func fetchNewData() {
+        handleRefresh()
+    }
     
     @objc func handleRefresh() {
         posts.removeAll(keepingCapacity: false)

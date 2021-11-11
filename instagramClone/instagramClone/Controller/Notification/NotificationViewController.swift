@@ -17,7 +17,7 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
     var timer: Timer?
     var currentKey: String?
     
-    var notifications = [Notification]()
+    var notifications = [Announcement]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,13 +135,13 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
             // if notification for post
             if let postID = dictionary["postID"] as? String {
                 Database.fetchPosts(with: postID) { post in
-                    let notification = Notification(user: user, post: post, dictionary: dictionary)
+                    let notification = Announcement(user: user, post: post, dictionary: dictionary)
                     self.notifications.append(notification)
                     self.handleReloadTable()
                 }
                 // if notification for like
             } else {
-                let notification = Notification(user: user, post: nil, dictionary: dictionary)
+                let notification = Announcement(user: user, post: nil, dictionary: dictionary)
                 self.notifications.append(notification)
                 self.handleReloadTable()
             }

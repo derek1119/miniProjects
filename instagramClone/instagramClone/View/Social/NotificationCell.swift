@@ -11,7 +11,7 @@ class NotificationCell: UITableViewCell {
     
     var delegate: NotificationCellDelegate?
     
-    var notification: Notification? {
+    var notification: Announcement? {
         
         didSet {
             
@@ -80,7 +80,7 @@ class NotificationCell: UITableViewCell {
             let username = user.username,
             let notificationTime = getNotificationTimeStamp() else { return }
         
-        let notificationMessage = notification.notificationType.description
+        let notificationMessage = notification.announcementType.description
         
         let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)])
         attributedText.append(NSAttributedString(string: "님이 \(notificationMessage)\n", attributes: [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
@@ -93,7 +93,7 @@ class NotificationCell: UITableViewCell {
         guard let notification = notification else { return }
         guard let user = notification.user else { return }
 
-        switch notification.notificationType {
+        switch notification.announcementType {
         case .Comment, .Like, .CommentMention, .PostMention:
             contentView.addSubview(postImageView)
             postImageView.snp.makeConstraints { make in

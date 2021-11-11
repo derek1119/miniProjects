@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		351E1E3D27291BFF00DFEA9E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351E1E3C27291BFF00DFEA9E /* Notification.swift */; };
+		351E1E3D27291BFF00DFEA9E /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351E1E3C27291BFF00DFEA9E /* Announcement.swift */; };
 		3533511E273A2BB000EDF87C /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3533511D273A2BB000EDF87C /* EditProfileController.swift */; };
 		35335121273AAA3C00EDF87C /* CommentInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35335120273AAA3C00EDF87C /* CommentInputAccessoryView.swift */; };
 		35335123273AAA5A00EDF87C /* CommentInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35335122273AAA5A00EDF87C /* CommentInputTextView.swift */; };
@@ -61,7 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		351E1E3C27291BFF00DFEA9E /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		351E1E3C27291BFF00DFEA9E /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
 		3533511D273A2BB000EDF87C /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		35335120273AAA3C00EDF87C /* CommentInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputAccessoryView.swift; sourceTree = "<group>"; };
 		35335122273AAA5A00EDF87C /* CommentInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputTextView.swift; sourceTree = "<group>"; };
@@ -290,7 +290,7 @@
 				35427D6C271EEA5B007FE420 /* User.swift */,
 				355B43F327224EBB009FBBB8 /* Post.swift */,
 				35D5C1BA2727FA2C00D8F3FB /* Comment.swift */,
-				351E1E3C27291BFF00DFEA9E /* Notification.swift */,
+				351E1E3C27291BFF00DFEA9E /* Announcement.swift */,
 				35373BD7272BC8D900127532 /* Message.swift */,
 			);
 			path = Model;
@@ -494,7 +494,7 @@
 				35373BCF272AE16500127532 /* MessagesViewController.swift in Sources */,
 				355B43FA27228B73009FBBB8 /* FeedCell.swift in Sources */,
 				35335121273AAA3C00EDF87C /* CommentInputAccessoryView.swift in Sources */,
-				351E1E3D27291BFF00DFEA9E /* Notification.swift in Sources */,
+				351E1E3D27291BFF00DFEA9E /* Announcement.swift in Sources */,
 				35373BD4272B996700127532 /* NewMessageController.swift in Sources */,
 				35427D772720F8E7007FE420 /* FollowLikeCell.swift in Sources */,
 				35383FAC27364F64007BEB30 /* HashtagCell.swift in Sources */,
