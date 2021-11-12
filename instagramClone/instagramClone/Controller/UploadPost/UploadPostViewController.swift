@@ -140,6 +140,7 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         uploadHashtagToServer(withPostId: postToEdit.postID)
         
         POSTS_REF.child(postToEdit.postID).child("caption").setValue(updatedCaption) { err, ref in
+            NotificationCenter.default.post(name: .fetchNewData, object: nil)
             self.dismiss(animated: true, completion: nil)
         }
     }

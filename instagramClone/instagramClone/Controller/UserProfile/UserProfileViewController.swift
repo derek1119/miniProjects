@@ -40,6 +40,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         // fetch post
         fetchPosts()
         
+        // Notification Center addObserver
         NotificationCenter.default.addObserver(self, selector: #selector(fetchNewData), name: .fetchNewData, object: nil)
     }
     

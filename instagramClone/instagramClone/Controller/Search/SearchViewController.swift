@@ -47,6 +47,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         // configure refresh control
         configureRefreshControl()
         
+        // Notification Center addObserver
         NotificationCenter.default.addObserver(self, selector: #selector(fetchNewData), name: .fetchNewData, object: nil)
     }
     

@@ -23,6 +23,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     var userProfileController: UserProfileViewController?
     var uploadPostVC: UploadPostViewController?
     
+    // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +45,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         updateUserFeeds()
         
+        // Notification Center addObserver
         NotificationCenter.default.addObserver(self, selector: #selector(fetchNewData), name: .fetchNewData, object: nil)
     }
 
