@@ -151,8 +151,8 @@ class SelectImageViewController: UICollectionViewController, UICollectionViewDel
         
         let allPhotos = PHAsset.fetchAssets(with: .image, options: getAssetFetchOptions())
         
-        // fetch images on background thread
-        DispatchQueue.global(qos: .background).async {
+        // fetch images on default thread
+        DispatchQueue.global().async {
             
             // enumerate objects -> 객체와 인덱스를 함께,
             allPhotos.enumerateObjects { asset, count, stop in
