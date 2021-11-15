@@ -18,7 +18,7 @@ KxCoding Memo App 강의
 
 #### SHMemo
 
-위에서 만든 App을 직접 만들어보고 변경 사항 적용
+위에서 만든 Memo App을 직접 만들어보고 복습하며 변경 사항 적용
 
 #### SimpleApp
 
