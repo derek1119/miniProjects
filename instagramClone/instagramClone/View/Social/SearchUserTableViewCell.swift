@@ -13,17 +13,10 @@ class SearchUserTableViewCell: UITableViewCell {
     
     var user: User? {
         didSet {
-            guard let profileImageURL = user?.profileImageURL,
-                  let username = user?.username,
-                  let fullName = user?.name
+            guard let profileImageURL = user?.profileImageURL
             else { return }
-            
             profileImageView.loadImage(with: profileImageURL)
-            
-            // Fallback on earlier versions
-            self.textLabel?.text = username
-            self.detailTextLabel?.text = fullName
-            
+            fetchUI()
         }
     }
     
