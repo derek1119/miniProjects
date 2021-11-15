@@ -58,6 +58,5 @@ class CustomImageView: UIImageView {
             }
             
         }.resume()
-        
     }
 }

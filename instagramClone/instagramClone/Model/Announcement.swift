@@ -11,7 +11,7 @@ class Announcement {
     
     enum AnnouncementType: Int, Printable {
         
-        case Like = 0
+        case Like
         case Comment
         case Follow
         case CommentMention

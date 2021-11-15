@@ -19,13 +19,11 @@ class SearchUserTableViewCell: UITableViewCell {
             else { return }
             
             profileImageView.loadImage(with: profileImageURL)
-            if #available(iOS 14.0, *) {
-                fetchUI()
-            } else {
-                // Fallback on earlier versions
-                self.textLabel?.text = username
-                self.detailTextLabel?.text = fullName
-            }
+            
+            // Fallback on earlier versions
+            self.textLabel?.text = username
+            self.detailTextLabel?.text = fullName
+            
         }
     }
     
@@ -48,7 +46,7 @@ class SearchUserTableViewCell: UITableViewCell {
         }
         
         self.selectionStyle = .none
-
+        
         fetchUI()
     }
     
@@ -58,15 +56,13 @@ class SearchUserTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        if #available(iOS 15.0, *) {
-            return
-        } else {
-            textLabel?.frame = CGRect(x: 60, y: (textLabel?.frame.origin.y)! - 2, width: (textLabel?.frame.width)!, height: (textLabel?.frame.height)!)
-            textLabel?.font = .boldSystemFont(ofSize: 12)
-            
-            detailTextLabel?.frame = CGRect(x: 60, y: (detailTextLabel?.frame.origin.y)! - 2, width: (detailTextLabel?.frame.width)!, height: (detailTextLabel?.frame.height)!)
-            detailTextLabel?.font = .boldSystemFont(ofSize: 12)
-        }
+        
+        textLabel?.frame = CGRect(x: 60, y: (textLabel?.frame.origin.y)! - 2, width: (textLabel?.frame.width)!, height: (textLabel?.frame.height)!)
+        textLabel?.font = .boldSystemFont(ofSize: 12)
+        
+        detailTextLabel?.frame = CGRect(x: 60, y: (detailTextLabel?.frame.origin.y)! - 2, width: (detailTextLabel?.frame.width)!, height: (detailTextLabel?.frame.height)!)
+        detailTextLabel?.font = .boldSystemFont(ofSize: 12)
+        
     }
     
     override func prepareForReuse() {

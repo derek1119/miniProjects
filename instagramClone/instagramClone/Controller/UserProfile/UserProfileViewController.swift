@@ -41,9 +41,9 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         fetchPosts()
         
         // Notification Center addObserver
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchNewData), name: .fetchNewData, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRefresh), name: .fetchNewData, object: nil)
     }
-    
+
     // MARK: - UICollectionViewFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -195,11 +195,6 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     }
     
     // MARK: - Handlers
-    
-    @objc func fetchNewData() {
-        handleRefresh()
-    }
-    
     @objc func handleRefresh() {
         posts.removeAll(keepingCapacity: false)
         self.currentKey = nil

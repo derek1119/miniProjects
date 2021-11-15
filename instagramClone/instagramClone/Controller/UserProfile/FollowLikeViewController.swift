@@ -21,15 +21,6 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
         case Following
         case Followers
         case Likes
-        
-        init(index: Int) {
-            switch index {
-            case 0: self = .Following
-            case 1: self = .Followers
-            case 2: self = .Likes
-            default: self = .Following
-            }
-        }
     }
     
     var viewingMode: ViewingMode!
