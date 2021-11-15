@@ -8,8 +8,6 @@
 import UIKit
 import Firebase
 
-private let reuseIdentifier = "ChatCell"
-
 class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     // MARK: - Properties
@@ -61,7 +59,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         super.viewDidLoad()
         
         // register cell
-        collectionView.register(ChatCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(ChatCell.self)
         
         // configure navigation bar
         configureNavigationBar()
@@ -109,7 +107,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ChatCell else { return UICollectionViewCell() }
+        let cell: ChatCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         let message = messages[indexPath.item]
         cell.message = message
         configureMessage(cell: cell, message: message)

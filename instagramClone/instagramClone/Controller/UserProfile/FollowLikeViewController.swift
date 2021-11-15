@@ -8,8 +8,6 @@
 import UIKit
 import Firebase
 
-private let reuseIdentifier = "FollowCell"
-
 class FollowLikeViewController: UITableViewController, FollowCellDelegate {
     
     // MARK: - Properties
@@ -32,7 +30,7 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
         super.viewDidLoad()
         
         // register cell class
-        tableView.register(FollowLikeCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(FollowLikeCell.self)
         
         // clear seperator line
         tableView.separatorColor = .clear
@@ -68,7 +66,7 @@ class FollowLikeViewController: UITableViewController, FollowCellDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? FollowLikeCell else { return UITableViewCell() }
+        let cell: FollowLikeCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         cell.user = users[indexPath.row]
         cell.delegate = self
         

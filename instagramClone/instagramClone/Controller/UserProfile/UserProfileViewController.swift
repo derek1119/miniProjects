@@ -8,9 +8,6 @@
 import UIKit
 import Firebase
 
-private let reuseIdentifier = "UserPostCell"
-private let headerIdentifier = "UserProfileHeader"
-
 class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate {
     
     // MARK: - Properties
@@ -26,8 +23,8 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         super.viewDidLoad()
         
         // Register cell classes
-        self.collectionView!.register(UserPostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        self.collectionView.register(UserPostCell.self)
+        self.collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: UserProfileHeader.defaultReuseIdentifier)
         
         // configure refrech control
         configureRefreshControl()
@@ -86,7 +83,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         // declare header
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! UserProfileHeader
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: UserProfileHeader.defaultReuseIdentifier, for: indexPath) as! UserProfileHeader
         
         header.delegate = self
         
@@ -99,7 +96,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? UserPostCell else { return UICollectionViewCell() }
+        let cell: UserPostCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         
         cell.post = posts[indexPath.row]
         

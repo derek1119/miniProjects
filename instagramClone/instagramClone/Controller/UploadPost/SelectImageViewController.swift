@@ -8,9 +8,6 @@
 import UIKit
 import Photos
 
-private let reuseIdentifier = "SelectPhotoCell"
-private let headerIdentifier = "SelectPhotoHeader"
-
 class SelectImageViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     // MARK: - Properties
@@ -24,8 +21,8 @@ class SelectImageViewController: UICollectionViewController, UICollectionViewDel
         super.viewDidLoad()
         
         // register cell classes
-        collectionView.register(SelectPhotoCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView.register(SelectPhotoHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        collectionView.register(SelectPhotoCell.self)
+        collectionView.register(SelectPhotoHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SelectPhotoHeader.defaultReuseIdentifier)
         
         // configure nav buttons
         configureNavigationButton()
@@ -65,7 +62,7 @@ class SelectImageViewController: UICollectionViewController, UICollectionViewDel
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? SelectPhotoCell else { return UICollectionViewCell() }
+        let cell: SelectPhotoCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         
             cell.photoImageView.image = images[indexPath.row]
         
@@ -85,7 +82,7 @@ class SelectImageViewController: UICollectionViewController, UICollectionViewDel
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as? SelectPhotoHeader else { return UICollectionReusableView()}
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SelectPhotoHeader.defaultReuseIdentifier, for: indexPath) as? SelectPhotoHeader else { return UICollectionReusableView()}
         
         self.header = header
         

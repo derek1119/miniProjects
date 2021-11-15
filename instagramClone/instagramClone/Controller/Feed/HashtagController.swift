@@ -8,8 +8,6 @@
 import UIKit
 import Firebase
 
-private let reuserIdentifier = "HashtagCell"
-
 class HashtagController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     // MARK: - Properties
@@ -25,7 +23,7 @@ class HashtagController: UICollectionViewController, UICollectionViewDelegateFlo
         configureNavigationBar()
         
         // register cell
-        collectionView.register(HashtagCell.self, forCellWithReuseIdentifier: reuserIdentifier)
+        collectionView.register(HashtagCell.self)
         
         // fetch posts
         fetchPosts()
@@ -53,7 +51,7 @@ class HashtagController: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuserIdentifier, for: indexPath) as? HashtagCell else { return UICollectionViewCell() }
+        let cell: HashtagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         cell.post = posts[indexPath.row]
         return cell
     }

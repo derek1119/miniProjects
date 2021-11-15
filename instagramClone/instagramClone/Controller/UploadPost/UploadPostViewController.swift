@@ -51,6 +51,8 @@ class UploadPostViewController: UIViewController, UITextViewDelegate {
         $0.addTarget(self, action: #selector(handleUploadAction), for: .touchUpInside)
     }
     
+    // MARK: - Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

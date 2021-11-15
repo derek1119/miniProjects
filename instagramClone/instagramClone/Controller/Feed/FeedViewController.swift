@@ -25,7 +25,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView!.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.reuseIdentifier)
+        self.collectionView.register(FeedCell.self)
         
         // configure refresh control
         let refreshControl = UIRefreshControl().then {
@@ -81,7 +81,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.reuseIdentifier, for: indexPath) as? FeedCell else { return UICollectionViewCell() }
+        let cell: FeedCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
     
         cell.delegate = self
 

@@ -5,6 +5,8 @@
 //  Created by Sh Hong on 2021/10/20.
 //
 
+import UIKit
+
 protocol UserProfileHeaderDelegate {
     func handleEditFollowTapped(for header: UserProfileHeader)
     func setUserStats(for header: UserProfileHeader)
@@ -41,3 +43,12 @@ protocol CommentInputAccessoryViewDelegate {
     func didSummit(forComment comment: String)
 }
 
+protocol ReusableView: AnyObject {
+    static var defaultReuseIdentifier: String { get }
+}
+
+extension ReusableView where Self: UIView {
+    static var defaultReuseIdentifier: String {
+        return NSStringFromClass(self)
+    }
+}

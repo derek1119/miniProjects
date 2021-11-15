@@ -8,8 +8,6 @@
 import UIKit
 import Firebase
 
-private let reuseIdentifier = "NotificationCell"
-
 class NotificationViewController: UITableViewController, NotificationCellDelegate {
  
     // MARK: - Properties
@@ -26,7 +24,7 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
         tableView.separatorColor = .clear
         
         // register cell
-        tableView.register(NotificationCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(NotificationCell.self)
         
         // navigation title
         navigationItem.title = "알림"
@@ -55,7 +53,7 @@ class NotificationViewController: UITableViewController, NotificationCellDelegat
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? NotificationCell else { return UITableViewCell()}
+        let cell: NotificationCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         cell.notification = notifications[indexPath.row]
         cell.delegate = self
         return cell

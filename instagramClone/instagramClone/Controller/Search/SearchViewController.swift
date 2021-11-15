@@ -8,9 +8,6 @@
 import UIKit
 import Firebase
 
-private let searchPostReuseIdentifier = "SearchPostCell"
-private let reuseIdentifier = "SeachUserTableViewCell"
-
 class SearchViewController: UITableViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // MARK: - Properties
@@ -31,7 +28,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         super.viewDidLoad()
         
         // register cell classes
-        tableView.register(SearchUserTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(SearchUserTableViewCell.self)
         
         tableView.separatorStyle = .none
         
@@ -76,7 +73,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SearchUserTableViewCell
+        let cell: SearchUserTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         
         if inSearchMode {
             cell.user = filteredUsers[indexPath.row]
@@ -118,7 +115,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         collectionView.dataSource = self
         collectionView.alwaysBounceVertical = true
         collectionView.backgroundColor = .white
-        collectionView.register(SearchPostCell.self, forCellWithReuseIdentifier: searchPostReuseIdentifier)
+        collectionView.register(SearchPostCell.self)
         
         tableView.addSubview(collectionView)
         tableView.separatorColor = .clear
@@ -152,7 +149,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: searchPostReuseIdentifier, for: indexPath) as? SearchPostCell else { return UICollectionViewCell() }
+        let cell: SearchPostCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         
         cell.post = posts[indexPath.item]
         

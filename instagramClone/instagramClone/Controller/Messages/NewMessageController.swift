@@ -8,8 +8,6 @@
 import UIKit
 import Firebase
 
-private let reuseIdentifier = "NewMessageCell"
-
 class NewMessageController: UITableViewController {
     
     // MARK: - Properties
@@ -25,7 +23,7 @@ class NewMessageController: UITableViewController {
         configureNavigationBar()
         
         // register cell
-        tableView.register(NewMessageCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(NewMessageCell.self)
         
         // fetch users
         fetchUsers()
@@ -41,7 +39,7 @@ class NewMessageController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? NewMessageCell else { return UITableViewCell() }
+        let cell: NewMessageCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         cell.user = users[indexPath.row]
         return cell
     }
