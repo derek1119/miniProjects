@@ -40,3 +40,4 @@ protocol Printable {
 protocol CommentInputAccessoryViewDelegate {
     func didSummit(forComment comment: String)
 }
+

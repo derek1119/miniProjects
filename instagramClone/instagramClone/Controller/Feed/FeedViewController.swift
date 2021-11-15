@@ -10,8 +10,6 @@ import Firebase
 import ActiveLabel
 import Toast_Swift
 
-private let reuseIdentifier = "FeedCell"
-
 class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FeedCellDelegate {
     
     // MARK: - Properties
@@ -27,7 +25,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView!.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.reuseIdentifier)
         
         // configure refresh control
         let refreshControl = UIRefreshControl().then {
@@ -83,7 +81,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? FeedCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.reuseIdentifier, for: indexPath) as? FeedCell else { return UICollectionViewCell() }
     
         cell.delegate = self
 

@@ -12,6 +12,8 @@ import ActiveLabel
 class FeedCell: UICollectionViewCell {
     
     // MARK: - Properties
+    static let reuseIdentifier = String(describing: FollowLikeCell.self)
+    
     var delegate: FeedCellDelegate?
     
     var post : Post? {
