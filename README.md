@@ -10,7 +10,11 @@ Weather Open API를 기반으로 도시 이름 정보와 위치 정보를 통해
 
 유데미 강의 프로젝트, 새로운 학습 내용을 적용하여 업데이트 및 리팩토링 중
 
+### MusicPlay
 
+AVFoundation을 사용한 음악 재생 앱
+
+Model Singleton Pattern 사용
 
 #### Memo
 
