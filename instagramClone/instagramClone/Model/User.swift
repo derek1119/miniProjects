@@ -7,6 +7,7 @@
 
 import Firebase
 
+// Firebase 클로저에서 @escaping이 존재하는데 값의 캡처가 일어나야하기 때문에 class를 사용해야 한다. 
 class User {
     // attributes
     var username: String!
