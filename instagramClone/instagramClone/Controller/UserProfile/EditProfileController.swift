@@ -109,7 +109,7 @@ class EditProfileController: UIViewController {
     func loadUserData() {
         guard let user = user else { return }
         
-        profileImageView.loadImage(with: user.profileImageURL)
+        profileImageView.loadImage(with: user.profileImageURL!)
         fullNameTextField.text = user.name
         userNameTextField.text = user.username
 
@@ -223,7 +223,7 @@ class EditProfileController: UIViewController {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         guard let user = user else { return }
         
-        Storage.storage().reference(forURL: user.profileImageURL).delete(completion: nil)
+        Storage.storage().reference(forURL: user.profileImageURL!).delete(completion: nil)
         
         let filename = NSUUID().uuidString
         

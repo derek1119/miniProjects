@@ -10,10 +10,10 @@ import Firebase
 // Firebase 클로저에서 @escaping이 존재하는데 값의 캡처가 일어나야하기 때문에 class를 사용해야 한다. 
 class User {
     // attributes
-    var username: String!
-    var name: String!
-    var profileImageURL: String!
-    var uid: String!
+    var username: String?
+    var name: String?
+    var profileImageURL: String?
+    var uid: String?
     var isFollowed = false
     
     init(uid: String, dictionary: Dictionary<String, AnyObject>) {
@@ -48,7 +48,7 @@ class User {
         uploadFollowNotificationToServer()
         
         // add followed uwers posts to current user feed
-        USER_POSTS_REF.child(self.uid).observe(.childAdded) { snapshot in
+        USER_POSTS_REF.child(uid).observe(.childAdded) { snapshot in
             let postId = snapshot.key
             USER_FEED_REF.child(currentUID).updateChildValues([postId: 1])
         }
@@ -68,7 +68,7 @@ class User {
         USER_FOLLOWER_REF.child(uid).child(currentUID).removeValue()
         
         // remove unfollowed users posts from current user-feed
-        USER_POSTS_REF.child(self.uid).observe(.childAdded) { snapshot in
+        USER_POSTS_REF.child(uid).observe(.childAdded) { snapshot in
             let postId = snapshot.key
             USER_FEED_REF.child(currentUID).child(postId).removeValue()
         }
@@ -76,9 +76,9 @@ class User {
     
     func checkIfUserIsFollowed(completion: @escaping(Bool) -> Void) {
         guard let currentUID = Auth.auth().currentUser?.uid else { return }
-
+        guard let uid = uid else { return }
         USER_FOLLOWING_REF.child(currentUID).observeSingleEvent(of: .value) { snapshot in
-            if snapshot.hasChild(self.uid) {
+            if snapshot.hasChild(uid) {
                 self.isFollowed = true
                 completion(true)
             } else {
@@ -90,6 +90,7 @@ class User {
     
     func uploadFollowNotificationToServer() {
         guard let currentUID = Auth.auth().currentUser?.uid else { return }
+        guard let uid = uid else { return }
         let creationDate = Int(NSDate().timeIntervalSince1970)
 
         // notification values
@@ -98,6 +99,6 @@ class User {
                       "uid": currentUID,
                       "type": FOLLOW_INT_VALUE] as [String : Any]
 
-        NOTIFICATIONS_REF.child(self.uid).childByAutoId().updateChildValues(values)
+        NOTIFICATIONS_REF.child(uid).childByAutoId().updateChildValues(values)
     }
 }

@@ -25,7 +25,7 @@ class FeedCell: UICollectionViewCell {
                   let likes = post?.likes else { return }
             
             Database.fetchUser(with: ownerUID) { user in
-                self.profileImageView.loadImage(with: user.profileImageURL)
+                self.profileImageView.loadImage(with: user.profileImageURL!)
                 self.userNameButton.setTitle(user.username, for: .normal)
                 self.configurePostCaption(user: user)
             }

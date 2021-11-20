@@ -212,7 +212,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate, UICollec
         } else {
             inSearchMode = true
             filteredUsers = users.filter {
-                $0.username.contains(searchText)
+                $0.username!.contains(searchText)
             }
             tableView.reloadData()
         }
