@@ -33,8 +33,8 @@ class Announcement {
         }
     }
     
-    var creationDate: Date!
-    var uid: String!
+    var creationDate: Date = Date()
+    var uid: String = ""
     var postID: String?
     var post: Post?
     var user: User!

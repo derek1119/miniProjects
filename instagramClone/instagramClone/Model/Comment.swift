@@ -9,9 +9,9 @@ import Foundation
 import Firebase
 
 class Comment {
-    var uid: String!
-    var commentText: String!
-    var creationDate: Date!
+    var uid: String = ""
+    var commentText: String = ""
+    var creationDate: Date = Date()
     var user: User?
     
     init(user: User, dictionary: Dictionary<String, AnyObject>) {

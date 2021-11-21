@@ -60,10 +60,8 @@ class CommentCell: UICollectionViewCell {
         guard
             let user = comment?.user,
             let comment = comment,
-            let username = user.username,
-            let commentText = comment.commentText
-        else { return }
-        
+            let username = user.username else { return }
+        let commentText = comment.commentText
         let customType = ActiveType.custom(pattern: "^\(username)\\b")
         
         commentLabel.enabledTypes = [.hashtag, .mention, .url, customType]

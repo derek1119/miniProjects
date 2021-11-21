@@ -94,10 +94,10 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var height: CGFloat = 80
         
-        if let message = messages[indexPath.row].messageText {
-            height = estimateFrameForText(message).height + 20
+        let message = messages[indexPath.row].messageText
+        height = estimateFrameForText(message).height + 20
 
-        }
+        
         
         return CGSize(width: view.frame.width , height: height)
     }

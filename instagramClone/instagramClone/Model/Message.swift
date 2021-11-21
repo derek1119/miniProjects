@@ -10,10 +10,10 @@ import Firebase
 
 class Message {
     
-    var messageText: String!
-    var fromID: String!
-    var toID: String!
-    var creationDate: Date!
+    var messageText: String = ""
+    var fromID: String = ""
+    var toID: String = ""
+    var creationDate: Date = Date()
     
     init(dictionary: Dictionary<String, AnyObject>) {
         

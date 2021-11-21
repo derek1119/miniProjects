@@ -183,11 +183,11 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     func handleConfigureLikeButton(for cell: FeedCell) {
         guard
             let currentUid = Auth.auth().currentUser?.uid,
-            let post = cell.post,
-            let postId = post.postID else { return }
+            let post = cell.post else { return }
+        let postId = post.postID
         USER_LIKES_REF.child(currentUid).observeSingleEvent(of: .value) { snapshot in
             
-            // user-like 데이터에 post id가 있는지 확인 
+            // user-like 데이터에 post id가 있는지 확인
             if snapshot.hasChild(postId) {
                 post.didLike = true
                 cell.likeButton.setImage(UIImage().Image("like_selected"), for: .normal)
@@ -196,10 +196,8 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     func handleShowLikes(for cell: FeedCell) {
-        guard
-            let post = cell.post,
-            let postId = post.postID else { return }
-              
+        guard let post = cell.post else { return }
+        let postId = post.postID
         let followLikeVC = FollowLikeViewController()
         followLikeVC.viewingMode = .Likes
         followLikeVC.postId = postId
