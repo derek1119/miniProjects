@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
             make.height.equalTo(50)
             make.centerX.centerY.equalToSuperview()
         }
-    } 
+    }
     
     let emailTextField = UITextField().then {
         $0.placeholder = "Email"

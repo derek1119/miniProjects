@@ -14,7 +14,7 @@ class Post {
     var imageURL: String = ""
     var ownerUID: String = ""
     var creationDate: Date = Date()
-    var postID: String = ""
+    var postID: String
     var user: User?
     var didLike = false
     
