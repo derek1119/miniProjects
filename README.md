@@ -4,6 +4,14 @@
 
 인스타그램 클론 앱
 
+### [GitHubRepoApp](https://github.com/derek1119/miniProjects/tree/main/GitHubRepoApp)
+
+RxSwift를 사용하여 GitHubAPI의 Repository 데이터를 불러오는 토이 앱
+
+### [GitRPApp](https://github.com/derek1119/miniProjects/tree/main/GitPRApp)
+
+RxSwift를 사용하여 GitHub 로그인과 GitHubAPI의 나의 private과 public Repository 데이터를 불러오는 토이 앱
+
 ### [Clima](https://github.com/derek1119/miniProjects/tree/main/Clima)
 
 Weather Open API를 기반으로 도시 이름 정보와 위치 정보를 통해 날씨를 알려주는 서비스
