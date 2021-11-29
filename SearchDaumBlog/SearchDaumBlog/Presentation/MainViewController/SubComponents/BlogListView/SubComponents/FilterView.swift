@@ -52,6 +52,7 @@ class FilterView: UITableViewHeaderFooterView, BindableView {
             make.top.equalToSuperview()
             make.trailing.equalToSuperview().inset(12)
             make.width.equalTo(28)
+            make.centerY.equalToSuperview()
         }
         
         bottomBorder.snp.makeConstraints { make in
