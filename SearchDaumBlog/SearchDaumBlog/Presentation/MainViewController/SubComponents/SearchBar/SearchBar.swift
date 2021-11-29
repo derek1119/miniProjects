@@ -25,6 +25,10 @@ class SearchBar: UISearchBar, BindableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        bind()
+        attribute()
+        layout()
     }
     
     required init?(coder: NSCoder) {
@@ -62,6 +66,10 @@ class SearchBar: UISearchBar, BindableView {
     func layout() {
         addSubview(searchButton)
         
+        searchButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(12)
+            make.centerY.equalToSuperview()
+        }
         
         searchTextField.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(12)
@@ -69,10 +77,7 @@ class SearchBar: UISearchBar, BindableView {
             make.centerY.equalToSuperview()
         }
         
-        searchButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(12)
-            make.centerY.equalToSuperview()
-        }
+       
     }
 }
 

@@ -35,27 +35,25 @@ class BlogListCell: UITableViewCell {
             contentView.addSubview($0)
         }
         
-        nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(8)
-            make.trailing.lessThanOrEqualTo(thumbnailImageView.snp.leading).offset(-8)
-        }
-        
         thumbnailImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.top.trailing.bottom.equalToSuperview().inset(8)
+            make.trailing.equalToSuperview().inset(8)
             make.width.height.equalTo(80)
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().inset(8)
+            make.trailing.lessThanOrEqualTo(thumbnailImageView.snp.leading).offset(-8)
         }
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(8)
-            make.leading.equalTo(nameLabel)
-            make.trailing.equalTo(thumbnailImageView.snp.leading).offset(-8)
+            make.leading.trailing.equalTo(nameLabel)
         }
         
         datetimeLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
-            make.leading.equalTo(nameLabel)
-            make.trailing.equalTo(titleLabel)
+            make.leading.trailing.equalTo(titleLabel)
             make.bottom.equalTo(thumbnailImageView)
         }
     }

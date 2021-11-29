@@ -35,6 +35,7 @@ class SearchBlogNetwork {
                     let blogData = try JSONDecoder().decode(DKBlog.self, from: data)
                     return .success(blogData)
                 } catch {
+                    print("여기서 오류 발생")
                     return .failure(.invalidJSON)
                 }
             }
