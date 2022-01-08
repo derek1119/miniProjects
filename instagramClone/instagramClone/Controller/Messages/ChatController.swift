@@ -8,16 +8,19 @@
 import UIKit
 import Firebase
 
-class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ChatController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     // MARK: - Properties
     
     var user: User?
     var messages = [Message]()
+    var collectionView: UICollectionView!
     
     lazy var containerView = UIView().then { containerView in
         containerView.frame = CGRect(x: 0, y: 0, width: CGFloat().windowWidth, height: 55)
                 
+        containerView.backgroundColor = .white
+        
         containerView.addSubview(sendButton)
         sendButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-15)
@@ -58,13 +61,17 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // register cell
-        collectionView.register(ChatCell.self)
+        self.view.backgroundColor = .white
         
+        configureCollectionView()
+   
         // configure navigation bar
         configureNavigationBar()
         
         observeMessages()
+        
+        configureUI()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,38 +86,63 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         tabBarController?.tabBar.isHidden = false
     }
     
-    override var inputAccessoryView: UIView? {
-        get {
-            return containerView
-        }
-    }
-    
     override var canBecomeFirstResponder: Bool {
         return true
     }
     
     // MARK: - UICollectionView
     
+    func configureCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let frame = CGRect(x: 0, y: 0, width: CGFloat().windowWidth, height: 100)
+        collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.alwaysBounceVertical = true
+        collectionView.register(ChatMyCell.self)
+    }
+    
+    func configureUI() {
+        [collectionView, containerView].forEach { self.view.addSubview($0) }
+        containerView.snp.makeConstraints { make in
+            make.bottom.left.right.equalToSuperview()
+            make.height.equalTo(50)
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.top.left.right.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.equalTo(containerView.snp.top)
+        }
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var height: CGFloat = 80
         
         let message = messages[indexPath.row].messageText
         height = estimateFrameForText(message).height + 20
-
-        
         
         return CGSize(width: view.frame.width , height: height)
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: ChatCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: ChatMyCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         let message = messages[indexPath.item]
         cell.message = message
-        configureMessage(cell: cell, message: message)
+        if indexPath.item > 0 {
+            let prevMessageId = messages[indexPath.item - 1].fromID
+            let isFirstMessage = prevMessageId != message.fromID
+            configureMessage(cell: cell, message: message, isFirstMessage: isFirstMessage)
+        } else {
+            configureMessage(cell: cell, message: message, isFirstMessage: true)
+        }
         
         return cell
     }
@@ -137,27 +169,16 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], context: nil)
     }
     
-    func configureMessage(cell: ChatCell, message: Message) {
+    func configureMessage(cell: ChatMyCell, message: Message, isFirstMessage: Bool) {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        
-        cell.bubbleView.snp.updateConstraints { make in
-            make.width.equalTo(estimateFrameForText(message.messageText).width + 32)
-        }
-        cell.frame.size.height = estimateFrameForText(message.messageText).height + 20
-        
+
         if message.fromID == currentUid {
-            cell.bubbleViewRightContraint?.activate()
-            cell.bubbleViewLeftContraint?.deactivate()
             cell.bubbleView.backgroundColor = UIColor.rgb(red: 0, green: 137, blue: 249)
             cell.textView.textColor = .white
-            cell.profileImageView.isHidden = true
             
         } else {
-            cell.bubbleViewRightContraint?.deactivate()
-            cell.bubbleViewLeftContraint?.activate()
             cell.bubbleView.backgroundColor = UIColor.rgb(red: 240, green: 240, blue: 240)
             cell.textView.textColor = .black
-            cell.profileImageView.isHidden = false
         }
     }
     
@@ -216,7 +237,8 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
             guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
             let message = Message(dictionary: dictionary)
             self.messages.append(message)
-            self.collectionView.reloadData()
+            let lastIndexPath = IndexPath(item: self.messages.count - 1, section: 0)
+            self.collectionView.insertItems(at: [lastIndexPath])
         }
     }
 }

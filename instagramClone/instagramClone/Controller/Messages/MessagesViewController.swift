@@ -63,7 +63,7 @@ class MessagesViewController: UITableViewController {
     }
     
     func showChatController(forUser user: User) {
-        let chatVC = ChatController(collectionViewLayout: UICollectionViewFlowLayout())
+        let chatVC = ChatController()
         chatVC.user = user
         chatVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(chatVC, animated: true)
