@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 extension UIViewController {
     //UIViewController 전반에 사용할 수 있도록 extension으로 구현

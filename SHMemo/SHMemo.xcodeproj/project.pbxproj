@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,7 @@
 		359A912826661EE50080E733 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A912726661EE50080E733 /* MainTableViewController.swift */; };
 		359A912A26661F020080E733 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A912926661F020080E733 /* Model.swift */; };
 		359A912D266658400080E733 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359A912C266658400080E733 /* ComposeViewController.swift */; };
+		35F7E5E82795B9390092FAA4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 35F7E5E72795B9390092FAA4 /* SnapKit */; };
 		57B46D3FF381B4A874505EF1 /* Pods_SHMemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 592493557FD8D54463126B5A /* Pods_SHMemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57B46D3FF381B4A874505EF1 /* Pods_SHMemo.framework in Frameworks */,
+				35F7E5E82795B9390092FAA4 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +124,6 @@
 				8EE1A7A486F5EA6F562F3264 /* Pods-SHMemo.debug.xcconfig */,
 				D68D3DD4BE3BC6EBC8503AAA /* Pods-SHMemo.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -144,6 +145,9 @@
 			dependencies = (
 			);
 			name = SHMemo;
+			packageProductDependencies = (
+				35F7E5E72795B9390092FAA4 /* SnapKit */,
+			);
 			productName = SHMemo;
 			productReference = 359A910D26661B0E0080E733 /* SHMemo.app */;
 			productType = "com.apple.product-type.application";
@@ -171,6 +175,9 @@
 				Base,
 			);
 			mainGroup = 359A910426661B0D0080E733;
+			packageReferences = (
+				35F7E5E62795B9390092FAA4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 359A910E26661B0E0080E733 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -452,6 +459,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		35F7E5E62795B9390092FAA4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		35F7E5E72795B9390092FAA4 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35F7E5E62795B9390092FAA4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		359A911926661B0E0080E733 /* SHMemo.xcdatamodeld */ = {

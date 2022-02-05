@@ -1,0 +1,680 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		353E4CA827AE13DA00E822EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4CA727AE13DA00E822EB /* AppDelegate.swift */; };
+		353E4CAA27AE13DA00E822EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4CA927AE13DA00E822EB /* SceneDelegate.swift */; };
+		353E4CB227AE13DA00E822EB /* MyNearConvenienceStoreApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 353E4CB027AE13DA00E822EB /* MyNearConvenienceStoreApp.xcdatamodeld */; };
+		353E4CB427AE13DF00E822EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CB327AE13DF00E822EB /* Assets.xcassets */; };
+		353E4CB727AE13DF00E822EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CB527AE13DF00E822EB /* LaunchScreen.storyboard */; };
+		353E4CE827AE329D00E822EB /* map_pinup_custom@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CC327AE329D00E822EB /* map_pinup_custom@3x.png */; };
+		353E4CE927AE329D00E822EB /* map_pin_custom.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CC427AE329D00E822EB /* map_pin_custom.png */; };
+		353E4CEA27AE329D00E822EB /* shadow_balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CC527AE329D00E822EB /* shadow_balloon.png */; };
+		353E4CEB27AE329D00E822EB /* map_pinup.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CC627AE329D00E822EB /* map_pinup.png */; };
+		353E4CEC27AE329D00E822EB /* detail_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CC727AE329D00E822EB /* detail_button.png */; };
+		353E4CED27AE329D00E822EB /* map_pin_custom@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CC827AE329D00E822EB /* map_pin_custom@3x.png */; };
+		353E4CEE27AE329D00E822EB /* map_pinup@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CC927AE329D00E822EB /* map_pinup@3x.png */; };
+		353E4CEF27AE329D00E822EB /* map_pin_shadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CCA27AE329D00E822EB /* map_pin_shadow@3x.png */; };
+		353E4CF027AE329D00E822EB /* copyright.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CCB27AE329D00E822EB /* copyright.png */; };
+		353E4CF127AE329D00E822EB /* th_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CCC27AE329D00E822EB /* th_line.png */; };
+		353E4CF227AE329D00E822EB /* map_pin_red@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CCD27AE329D00E822EB /* map_pin_red@3x.png */; };
+		353E4CF327AE329D00E822EB /* daum_copyright.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CCE27AE329D00E822EB /* daum_copyright.png */; };
+		353E4CF427AE329D00E822EB /* map_pin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CCF27AE329D00E822EB /* map_pin@3x.png */; };
+		353E4CF527AE329D00E822EB /* map_present_tracking.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CD027AE329D00E822EB /* map_present_tracking.png */; };
+		353E4CF627AE329D00E822EB /* map_pin_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CD127AE329D00E822EB /* map_pin_red.png */; };
+		353E4CF727AE329D00E822EB /* info_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CDB27AE329D00E822EB /* info_box.png */; };
+		353E4CF827AE329D00E822EB /* point_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CDC27AE329D00E822EB /* point_sprite.png */; };
+		353E4CF927AE329D00E822EB /* map_pinup_custom.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CDD27AE329D00E822EB /* map_pinup_custom.png */; };
+		353E4CFA27AE329D00E822EB /* info_box_tail.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CDE27AE329D00E822EB /* info_box_tail.png */; };
+		353E4CFB27AE329D00E822EB /* noimage256.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CDF27AE329D00E822EB /* noimage256.png */; };
+		353E4CFC27AE329D00E822EB /* map_present_direction.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CE027AE329D00E822EB /* map_present_direction.png */; };
+		353E4CFD27AE329D00E822EB /* map_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CE127AE329D00E822EB /* map_pin.png */; };
+		353E4CFE27AE329D00E822EB /* map_present.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CE227AE329D00E822EB /* map_present.png */; };
+		353E4CFF27AE329D00E822EB /* noimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CE327AE329D00E822EB /* noimage.png */; };
+		353E4D0027AE329D00E822EB /* map_present_background_update.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CE427AE329D00E822EB /* map_present_background_update.png */; };
+		353E4D0127AE329D00E822EB /* daum_th_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CE527AE329D00E822EB /* daum_th_line.png */; };
+		353E4D0227AE329D00E822EB /* map_pin_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 353E4CE627AE329D00E822EB /* map_pin_shadow.png */; };
+		353E4D0327AE329D00E822EB /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353E4CE727AE329D00E822EB /* DaumMap.framework */; };
+		353E4D0627AE331000E822EB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353E4D0527AE331000E822EB /* OpenGLES.framework */; };
+		353E4D0827AE335C00E822EB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353E4D0727AE335C00E822EB /* SystemConfiguration.framework */; };
+		353E4D0A27AE336600E822EB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353E4D0927AE336600E822EB /* CoreLocation.framework */; };
+		353E4D0C27AE336F00E822EB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353E4D0B27AE336F00E822EB /* QuartzCore.framework */; };
+		353E4D0E27AE337A00E822EB /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 353E4D0D27AE337A00E822EB /* libc++.tbd */; };
+		353E4D1027AE338500E822EB /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 353E4D0F27AE338500E822EB /* libxml2.tbd */; };
+		353E4D1227AE338D00E822EB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 353E4D1127AE338D00E822EB /* libsqlite3.tbd */; };
+		353E4D1427AE34A700E822EB /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D1327AE34A700E822EB /* LocationData.swift */; };
+		353E4D1727AE34E200E822EB /* KLDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D1627AE34E200E822EB /* KLDocument.swift */; };
+		353E4D1927AE363100E822EB /* DetailListCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D1827AE363100E822EB /* DetailListCellData.swift */; };
+		353E4D1B27AE36B400E822EB /* LocationInfomationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D1A27AE36B400E822EB /* LocationInfomationViewController.swift */; };
+		353E4D1E27AE36F100E822EB /* LocationInfomationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D1D27AE36F100E822EB /* LocationInfomationViewModel.swift */; };
+		353E4D2127AE379800E822EB /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2027AE379800E822EB /* RxBlocking */; };
+		353E4D2327AE379800E822EB /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2227AE379800E822EB /* RxCocoa */; };
+		353E4D2527AE379800E822EB /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2427AE379800E822EB /* RxRelay */; };
+		353E4D2727AE379800E822EB /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2627AE379800E822EB /* RxSwift */; };
+		353E4D2927AE379800E822EB /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2827AE379800E822EB /* RxTest */; };
+		353E4D2C27AE37A500E822EB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2B27AE37A500E822EB /* SnapKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		353E4CA427AE13DA00E822EB /* MyNearConvenienceStoreApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNearConvenienceStoreApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		353E4CA727AE13DA00E822EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		353E4CA927AE13DA00E822EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		353E4CB127AE13DA00E822EB /* MyNearConvenienceStoreApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyNearConvenienceStoreApp.xcdatamodel; sourceTree = "<group>"; };
+		353E4CB327AE13DF00E822EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		353E4CB627AE13DF00E822EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		353E4CB827AE13DF00E822EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		353E4CC327AE329D00E822EB /* map_pinup_custom@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pinup_custom@3x.png"; sourceTree = "<group>"; };
+		353E4CC427AE329D00E822EB /* map_pin_custom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin_custom.png; sourceTree = "<group>"; };
+		353E4CC527AE329D00E822EB /* shadow_balloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow_balloon.png; sourceTree = "<group>"; };
+		353E4CC627AE329D00E822EB /* map_pinup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pinup.png; sourceTree = "<group>"; };
+		353E4CC727AE329D00E822EB /* detail_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_button.png; sourceTree = "<group>"; };
+		353E4CC827AE329D00E822EB /* map_pin_custom@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pin_custom@3x.png"; sourceTree = "<group>"; };
+		353E4CC927AE329D00E822EB /* map_pinup@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pinup@3x.png"; sourceTree = "<group>"; };
+		353E4CCA27AE329D00E822EB /* map_pin_shadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pin_shadow@3x.png"; sourceTree = "<group>"; };
+		353E4CCB27AE329D00E822EB /* copyright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = copyright.png; sourceTree = "<group>"; };
+		353E4CCC27AE329D00E822EB /* th_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = th_line.png; sourceTree = "<group>"; };
+		353E4CCD27AE329D00E822EB /* map_pin_red@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pin_red@3x.png"; sourceTree = "<group>"; };
+		353E4CCE27AE329D00E822EB /* daum_copyright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = daum_copyright.png; sourceTree = "<group>"; };
+		353E4CCF27AE329D00E822EB /* map_pin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pin@3x.png"; sourceTree = "<group>"; };
+		353E4CD027AE329D00E822EB /* map_present_tracking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_present_tracking.png; sourceTree = "<group>"; };
+		353E4CD127AE329D00E822EB /* map_pin_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin_red.png; sourceTree = "<group>"; };
+		353E4CD327AE329D00E822EB /* MTMapPOIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapPOIItem.h; sourceTree = "<group>"; };
+		353E4CD427AE329D00E822EB /* MTMapCameraUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapCameraUpdate.h; sourceTree = "<group>"; };
+		353E4CD527AE329D00E822EB /* MTMapReverseGeoCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapReverseGeoCoder.h; sourceTree = "<group>"; };
+		353E4CD627AE329D00E822EB /* MTMapPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapPolyline.h; sourceTree = "<group>"; };
+		353E4CD727AE329D00E822EB /* MTMapLocationMarkerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapLocationMarkerItem.h; sourceTree = "<group>"; };
+		353E4CD827AE329D00E822EB /* MTMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapView.h; sourceTree = "<group>"; };
+		353E4CD927AE329D00E822EB /* MTMapGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapGeometry.h; sourceTree = "<group>"; };
+		353E4CDA27AE329D00E822EB /* MTMapCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapCircle.h; sourceTree = "<group>"; };
+		353E4CDB27AE329D00E822EB /* info_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_box.png; sourceTree = "<group>"; };
+		353E4CDC27AE329D00E822EB /* point_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = point_sprite.png; sourceTree = "<group>"; };
+		353E4CDD27AE329D00E822EB /* map_pinup_custom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pinup_custom.png; sourceTree = "<group>"; };
+		353E4CDE27AE329D00E822EB /* info_box_tail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_box_tail.png; sourceTree = "<group>"; };
+		353E4CDF27AE329D00E822EB /* noimage256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage256.png; sourceTree = "<group>"; };
+		353E4CE027AE329D00E822EB /* map_present_direction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_present_direction.png; sourceTree = "<group>"; };
+		353E4CE127AE329D00E822EB /* map_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin.png; sourceTree = "<group>"; };
+		353E4CE227AE329D00E822EB /* map_present.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_present.png; sourceTree = "<group>"; };
+		353E4CE327AE329D00E822EB /* noimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage.png; sourceTree = "<group>"; };
+		353E4CE427AE329D00E822EB /* map_present_background_update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_present_background_update.png; sourceTree = "<group>"; };
+		353E4CE527AE329D00E822EB /* daum_th_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = daum_th_line.png; sourceTree = "<group>"; };
+		353E4CE627AE329D00E822EB /* map_pin_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin_shadow.png; sourceTree = "<group>"; };
+		353E4CE727AE329D00E822EB /* DaumMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DaumMap.framework; sourceTree = "<group>"; };
+		353E4D0427AE32CE00E822EB /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		353E4D0527AE331000E822EB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		353E4D0727AE335C00E822EB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		353E4D0927AE336600E822EB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		353E4D0B27AE336F00E822EB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		353E4D0D27AE337A00E822EB /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		353E4D0F27AE338500E822EB /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		353E4D1127AE338D00E822EB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		353E4D1327AE34A700E822EB /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
+		353E4D1627AE34E200E822EB /* KLDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KLDocument.swift; sourceTree = "<group>"; };
+		353E4D1827AE363100E822EB /* DetailListCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListCellData.swift; sourceTree = "<group>"; };
+		353E4D1A27AE36B400E822EB /* LocationInfomationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfomationViewController.swift; sourceTree = "<group>"; };
+		353E4D1D27AE36F100E822EB /* LocationInfomationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfomationViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		353E4CA127AE13DA00E822EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				353E4D2927AE379800E822EB /* RxTest in Frameworks */,
+				353E4D1227AE338D00E822EB /* libsqlite3.tbd in Frameworks */,
+				353E4D2127AE379800E822EB /* RxBlocking in Frameworks */,
+				353E4D2C27AE37A500E822EB /* SnapKit in Frameworks */,
+				353E4D2327AE379800E822EB /* RxCocoa in Frameworks */,
+				353E4D1027AE338500E822EB /* libxml2.tbd in Frameworks */,
+				353E4D0E27AE337A00E822EB /* libc++.tbd in Frameworks */,
+				353E4D0C27AE336F00E822EB /* QuartzCore.framework in Frameworks */,
+				353E4D2727AE379800E822EB /* RxSwift in Frameworks */,
+				353E4D0A27AE336600E822EB /* CoreLocation.framework in Frameworks */,
+				353E4D0827AE335C00E822EB /* SystemConfiguration.framework in Frameworks */,
+				353E4D0627AE331000E822EB /* OpenGLES.framework in Frameworks */,
+				353E4D0327AE329D00E822EB /* DaumMap.framework in Frameworks */,
+				353E4D2527AE379800E822EB /* RxRelay in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		353E4C9B27AE13DA00E822EB = {
+			isa = PBXGroup;
+			children = (
+				353E4CA627AE13DA00E822EB /* MyNearConvenienceStoreApp */,
+				353E4CA527AE13DA00E822EB /* Products */,
+				353E4CBE27AE324300E822EB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		353E4CA527AE13DA00E822EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				353E4CA427AE13DA00E822EB /* MyNearConvenienceStoreApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		353E4CA627AE13DA00E822EB /* MyNearConvenienceStoreApp */ = {
+			isa = PBXGroup;
+			children = (
+				353E4D1527AE34AE00E822EB /* Entity */,
+				353E4D1C27AE36D200E822EB /* Presentation */,
+				353E4CA727AE13DA00E822EB /* AppDelegate.swift */,
+				353E4CA927AE13DA00E822EB /* SceneDelegate.swift */,
+				353E4CB327AE13DF00E822EB /* Assets.xcassets */,
+				353E4CB527AE13DF00E822EB /* LaunchScreen.storyboard */,
+				353E4CB827AE13DF00E822EB /* Info.plist */,
+				353E4CB027AE13DA00E822EB /* MyNearConvenienceStoreApp.xcdatamodeld */,
+				353E4D0427AE32CE00E822EB /* BridgingHeader.h */,
+			);
+			path = MyNearConvenienceStoreApp;
+			sourceTree = "<group>";
+		};
+		353E4CBE27AE324300E822EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				353E4D1127AE338D00E822EB /* libsqlite3.tbd */,
+				353E4D0F27AE338500E822EB /* libxml2.tbd */,
+				353E4D0D27AE337A00E822EB /* libc++.tbd */,
+				353E4D0B27AE336F00E822EB /* QuartzCore.framework */,
+				353E4D0927AE336600E822EB /* CoreLocation.framework */,
+				353E4D0727AE335C00E822EB /* SystemConfiguration.framework */,
+				353E4D0527AE331000E822EB /* OpenGLES.framework */,
+				353E4CC127AE329D00E822EB /* DaumMap.embeddedframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		353E4CC127AE329D00E822EB /* DaumMap.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				353E4CC227AE329D00E822EB /* Resources */,
+				353E4CE727AE329D00E822EB /* DaumMap.framework */,
+			);
+			path = DaumMap.embeddedframework;
+			sourceTree = "<group>";
+		};
+		353E4CC227AE329D00E822EB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				353E4CC327AE329D00E822EB /* map_pinup_custom@3x.png */,
+				353E4CC427AE329D00E822EB /* map_pin_custom.png */,
+				353E4CC527AE329D00E822EB /* shadow_balloon.png */,
+				353E4CC627AE329D00E822EB /* map_pinup.png */,
+				353E4CC727AE329D00E822EB /* detail_button.png */,
+				353E4CC827AE329D00E822EB /* map_pin_custom@3x.png */,
+				353E4CC927AE329D00E822EB /* map_pinup@3x.png */,
+				353E4CCA27AE329D00E822EB /* map_pin_shadow@3x.png */,
+				353E4CCB27AE329D00E822EB /* copyright.png */,
+				353E4CCC27AE329D00E822EB /* th_line.png */,
+				353E4CCD27AE329D00E822EB /* map_pin_red@3x.png */,
+				353E4CCE27AE329D00E822EB /* daum_copyright.png */,
+				353E4CCF27AE329D00E822EB /* map_pin@3x.png */,
+				353E4CD027AE329D00E822EB /* map_present_tracking.png */,
+				353E4CD127AE329D00E822EB /* map_pin_red.png */,
+				353E4CD227AE329D00E822EB /* Headers */,
+				353E4CDB27AE329D00E822EB /* info_box.png */,
+				353E4CDC27AE329D00E822EB /* point_sprite.png */,
+				353E4CDD27AE329D00E822EB /* map_pinup_custom.png */,
+				353E4CDE27AE329D00E822EB /* info_box_tail.png */,
+				353E4CDF27AE329D00E822EB /* noimage256.png */,
+				353E4CE027AE329D00E822EB /* map_present_direction.png */,
+				353E4CE127AE329D00E822EB /* map_pin.png */,
+				353E4CE227AE329D00E822EB /* map_present.png */,
+				353E4CE327AE329D00E822EB /* noimage.png */,
+				353E4CE427AE329D00E822EB /* map_present_background_update.png */,
+				353E4CE527AE329D00E822EB /* daum_th_line.png */,
+				353E4CE627AE329D00E822EB /* map_pin_shadow.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		353E4CD227AE329D00E822EB /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				353E4CD327AE329D00E822EB /* MTMapPOIItem.h */,
+				353E4CD427AE329D00E822EB /* MTMapCameraUpdate.h */,
+				353E4CD527AE329D00E822EB /* MTMapReverseGeoCoder.h */,
+				353E4CD627AE329D00E822EB /* MTMapPolyline.h */,
+				353E4CD727AE329D00E822EB /* MTMapLocationMarkerItem.h */,
+				353E4CD827AE329D00E822EB /* MTMapView.h */,
+				353E4CD927AE329D00E822EB /* MTMapGeometry.h */,
+				353E4CDA27AE329D00E822EB /* MTMapCircle.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		353E4D1527AE34AE00E822EB /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				353E4D1327AE34A700E822EB /* LocationData.swift */,
+				353E4D1627AE34E200E822EB /* KLDocument.swift */,
+				353E4D1827AE363100E822EB /* DetailListCellData.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		353E4D1C27AE36D200E822EB /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				353E4D1A27AE36B400E822EB /* LocationInfomationViewController.swift */,
+				353E4D1D27AE36F100E822EB /* LocationInfomationViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		353E4CA327AE13DA00E822EB /* MyNearConvenienceStoreApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 353E4CBB27AE13DF00E822EB /* Build configuration list for PBXNativeTarget "MyNearConvenienceStoreApp" */;
+			buildPhases = (
+				353E4CA027AE13DA00E822EB /* Sources */,
+				353E4CA127AE13DA00E822EB /* Frameworks */,
+				353E4CA227AE13DA00E822EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyNearConvenienceStoreApp;
+			packageProductDependencies = (
+				353E4D2027AE379800E822EB /* RxBlocking */,
+				353E4D2227AE379800E822EB /* RxCocoa */,
+				353E4D2427AE379800E822EB /* RxRelay */,
+				353E4D2627AE379800E822EB /* RxSwift */,
+				353E4D2827AE379800E822EB /* RxTest */,
+				353E4D2B27AE37A500E822EB /* SnapKit */,
+			);
+			productName = MyNearConvenienceStoreApp;
+			productReference = 353E4CA427AE13DA00E822EB /* MyNearConvenienceStoreApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		353E4C9C27AE13DA00E822EB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					353E4CA327AE13DA00E822EB = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 353E4C9F27AE13DA00E822EB /* Build configuration list for PBXProject "MyNearConvenienceStoreApp" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 353E4C9B27AE13DA00E822EB;
+			packageReferences = (
+				353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */,
+				353E4D2A27AE37A500E822EB /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
+			productRefGroup = 353E4CA527AE13DA00E822EB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				353E4CA327AE13DA00E822EB /* MyNearConvenienceStoreApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		353E4CA227AE13DA00E822EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				353E4CFE27AE329D00E822EB /* map_present.png in Resources */,
+				353E4CF427AE329D00E822EB /* map_pin@3x.png in Resources */,
+				353E4CF227AE329D00E822EB /* map_pin_red@3x.png in Resources */,
+				353E4CFD27AE329D00E822EB /* map_pin.png in Resources */,
+				353E4CF627AE329D00E822EB /* map_pin_red.png in Resources */,
+				353E4CE827AE329D00E822EB /* map_pinup_custom@3x.png in Resources */,
+				353E4CF027AE329D00E822EB /* copyright.png in Resources */,
+				353E4CEF27AE329D00E822EB /* map_pin_shadow@3x.png in Resources */,
+				353E4CB727AE13DF00E822EB /* LaunchScreen.storyboard in Resources */,
+				353E4CF327AE329D00E822EB /* daum_copyright.png in Resources */,
+				353E4CF727AE329D00E822EB /* info_box.png in Resources */,
+				353E4CED27AE329D00E822EB /* map_pin_custom@3x.png in Resources */,
+				353E4D0227AE329D00E822EB /* map_pin_shadow.png in Resources */,
+				353E4CF527AE329D00E822EB /* map_present_tracking.png in Resources */,
+				353E4CEC27AE329D00E822EB /* detail_button.png in Resources */,
+				353E4CFF27AE329D00E822EB /* noimage.png in Resources */,
+				353E4CF127AE329D00E822EB /* th_line.png in Resources */,
+				353E4CFA27AE329D00E822EB /* info_box_tail.png in Resources */,
+				353E4CE927AE329D00E822EB /* map_pin_custom.png in Resources */,
+				353E4CF927AE329D00E822EB /* map_pinup_custom.png in Resources */,
+				353E4CEE27AE329D00E822EB /* map_pinup@3x.png in Resources */,
+				353E4CF827AE329D00E822EB /* point_sprite.png in Resources */,
+				353E4D0027AE329D00E822EB /* map_present_background_update.png in Resources */,
+				353E4CFC27AE329D00E822EB /* map_present_direction.png in Resources */,
+				353E4CFB27AE329D00E822EB /* noimage256.png in Resources */,
+				353E4CEA27AE329D00E822EB /* shadow_balloon.png in Resources */,
+				353E4CB427AE13DF00E822EB /* Assets.xcassets in Resources */,
+				353E4D0127AE329D00E822EB /* daum_th_line.png in Resources */,
+				353E4CEB27AE329D00E822EB /* map_pinup.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		353E4CA027AE13DA00E822EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				353E4D1927AE363100E822EB /* DetailListCellData.swift in Sources */,
+				353E4CB227AE13DA00E822EB /* MyNearConvenienceStoreApp.xcdatamodeld in Sources */,
+				353E4CA827AE13DA00E822EB /* AppDelegate.swift in Sources */,
+				353E4CAA27AE13DA00E822EB /* SceneDelegate.swift in Sources */,
+				353E4D1427AE34A700E822EB /* LocationData.swift in Sources */,
+				353E4D1727AE34E200E822EB /* KLDocument.swift in Sources */,
+				353E4D1B27AE36B400E822EB /* LocationInfomationViewController.swift in Sources */,
+				353E4D1E27AE36F100E822EB /* LocationInfomationViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		353E4CB527AE13DF00E822EB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				353E4CB627AE13DF00E822EB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		353E4CB927AE13DF00E822EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		353E4CBA27AE13DF00E822EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		353E4CBC27AE13DF00E822EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 96H5TT55S4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DaumMap.embeddedframework",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyNearConvenienceStoreApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.derek1119.MyNearConvenienceStoreApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/shhong/Documents/GitHub/miniProjects/MyNearConvenienceStoreApp/MyNearConvenienceStoreApp/BridgingHeader.h;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		353E4CBD27AE13DF00E822EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 96H5TT55S4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DaumMap.embeddedframework",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyNearConvenienceStoreApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.derek1119.MyNearConvenienceStoreApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/shhong/Documents/GitHub/miniProjects/MyNearConvenienceStoreApp/MyNearConvenienceStoreApp/BridgingHeader.h;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		353E4C9F27AE13DA00E822EB /* Build configuration list for PBXProject "MyNearConvenienceStoreApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				353E4CB927AE13DF00E822EB /* Debug */,
+				353E4CBA27AE13DF00E822EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		353E4CBB27AE13DF00E822EB /* Build configuration list for PBXNativeTarget "MyNearConvenienceStoreApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				353E4CBC27AE13DF00E822EB /* Debug */,
+				353E4CBD27AE13DF00E822EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		353E4D2A27AE37A500E822EB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		353E4D2027AE379800E822EB /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		353E4D2227AE379800E822EB /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		353E4D2427AE379800E822EB /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		353E4D2627AE379800E822EB /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		353E4D2827AE379800E822EB /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
+		};
+		353E4D2B27AE37A500E822EB /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D2A27AE37A500E822EB /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		353E4CB027AE13DA00E822EB /* MyNearConvenienceStoreApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				353E4CB127AE13DA00E822EB /* MyNearConvenienceStoreApp.xcdatamodel */,
+			);
+			currentVersion = 353E4CB127AE13DA00E822EB /* MyNearConvenienceStoreApp.xcdatamodel */;
+			path = MyNearConvenienceStoreApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 353E4C9C27AE13DA00E822EB /* Project object */;
+}
