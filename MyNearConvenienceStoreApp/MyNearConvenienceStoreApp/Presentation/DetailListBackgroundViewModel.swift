@@ -14,4 +14,9 @@ struct DetailListBackgroundViewModel {
     
     // 외부에서 전달받은 값
     let shouldHideStatusLabel = PublishSubject<Bool>()
+    
+    init() {
+        isStatusLabelHidden = shouldHideStatusLabel
+            .asSignal(onErrorJustReturn: false)
+    }
 }
