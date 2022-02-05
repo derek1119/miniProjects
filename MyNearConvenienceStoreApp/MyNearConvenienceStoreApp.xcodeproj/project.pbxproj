@@ -59,6 +59,9 @@
 		353E4D2927AE379800E822EB /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2827AE379800E822EB /* RxTest */; };
 		353E4D2C27AE37A500E822EB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2B27AE37A500E822EB /* SnapKit */; };
 		353E4D2E27AE3EE700E822EB /* MTMapViewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D2D27AE3EE700E822EB /* MTMapViewError.swift */; };
+		353E4D3227AE4A8100E822EB /* DetailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D3127AE4A8100E822EB /* DetailListCell.swift */; };
+		353E4D3427AE4C1D00E822EB /* DetailListBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D3327AE4C1D00E822EB /* DetailListBackgroundView.swift */; };
+		353E4D3627AE4C2A00E822EB /* DetailListBackgroundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D3527AE4C2900E822EB /* DetailListBackgroundViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +122,9 @@
 		353E4D1A27AE36B400E822EB /* LocationInfomationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfomationViewController.swift; sourceTree = "<group>"; };
 		353E4D1D27AE36F100E822EB /* LocationInfomationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfomationViewModel.swift; sourceTree = "<group>"; };
 		353E4D2D27AE3EE700E822EB /* MTMapViewError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTMapViewError.swift; sourceTree = "<group>"; };
+		353E4D3127AE4A8100E822EB /* DetailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListCell.swift; sourceTree = "<group>"; };
+		353E4D3327AE4C1D00E822EB /* DetailListBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListBackgroundView.swift; sourceTree = "<group>"; };
+		353E4D3527AE4C2900E822EB /* DetailListBackgroundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListBackgroundViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +275,9 @@
 			children = (
 				353E4D1A27AE36B400E822EB /* LocationInfomationViewController.swift */,
 				353E4D1D27AE36F100E822EB /* LocationInfomationViewModel.swift */,
+				353E4D3127AE4A8100E822EB /* DetailListCell.swift */,
+				353E4D3327AE4C1D00E822EB /* DetailListBackgroundView.swift */,
+				353E4D3527AE4C2900E822EB /* DetailListBackgroundViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -384,11 +393,14 @@
 			files = (
 				353E4D1927AE363100E822EB /* DetailListCellData.swift in Sources */,
 				353E4CB227AE13DA00E822EB /* MyNearConvenienceStoreApp.xcdatamodeld in Sources */,
+				353E4D3227AE4A8100E822EB /* DetailListCell.swift in Sources */,
 				353E4CA827AE13DA00E822EB /* AppDelegate.swift in Sources */,
+				353E4D3427AE4C1D00E822EB /* DetailListBackgroundView.swift in Sources */,
 				353E4CAA27AE13DA00E822EB /* SceneDelegate.swift in Sources */,
 				353E4D1427AE34A700E822EB /* LocationData.swift in Sources */,
 				353E4D1727AE34E200E822EB /* KLDocument.swift in Sources */,
 				353E4D1B27AE36B400E822EB /* LocationInfomationViewController.swift in Sources */,
+				353E4D3627AE4C2A00E822EB /* DetailListBackgroundViewModel.swift in Sources */,
 				353E4D2E27AE3EE700E822EB /* MTMapViewError.swift in Sources */,
 				353E4D1E27AE36F100E822EB /* LocationInfomationViewModel.swift in Sources */,
 			);
