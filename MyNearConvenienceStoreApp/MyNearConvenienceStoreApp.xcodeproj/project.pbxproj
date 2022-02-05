@@ -58,6 +58,7 @@
 		353E4D2727AE379800E822EB /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2627AE379800E822EB /* RxSwift */; };
 		353E4D2927AE379800E822EB /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2827AE379800E822EB /* RxTest */; };
 		353E4D2C27AE37A500E822EB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2B27AE37A500E822EB /* SnapKit */; };
+		353E4D2E27AE3EE700E822EB /* MTMapViewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D2D27AE3EE700E822EB /* MTMapViewError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,7 @@
 		353E4D1827AE363100E822EB /* DetailListCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListCellData.swift; sourceTree = "<group>"; };
 		353E4D1A27AE36B400E822EB /* LocationInfomationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfomationViewController.swift; sourceTree = "<group>"; };
 		353E4D1D27AE36F100E822EB /* LocationInfomationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfomationViewModel.swift; sourceTree = "<group>"; };
+		353E4D2D27AE3EE700E822EB /* MTMapViewError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTMapViewError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +259,7 @@
 				353E4D1327AE34A700E822EB /* LocationData.swift */,
 				353E4D1627AE34E200E822EB /* KLDocument.swift */,
 				353E4D1827AE363100E822EB /* DetailListCellData.swift */,
+				353E4D2D27AE3EE700E822EB /* MTMapViewError.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				353E4D1427AE34A700E822EB /* LocationData.swift in Sources */,
 				353E4D1727AE34E200E822EB /* KLDocument.swift in Sources */,
 				353E4D1B27AE36B400E822EB /* LocationInfomationViewController.swift in Sources */,
+				353E4D2E27AE3EE700E822EB /* MTMapViewError.swift in Sources */,
 				353E4D1E27AE36F100E822EB /* LocationInfomationViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,7 +459,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -510,7 +514,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
