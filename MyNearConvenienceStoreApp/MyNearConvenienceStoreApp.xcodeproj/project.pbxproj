@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		352D54A827AF908D009FA90F /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352D54A727AF908D009FA90F /* Dummy.swift */; };
+		352D54AA27AF91BF009FA90F /* LocationInformationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352D54A927AF91BF009FA90F /* LocationInformationModelTests.swift */; };
+		352D54AC27AF9727009FA90F /* LocationInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352D54AB27AF9726009FA90F /* LocationInformationViewModelTests.swift */; };
 		353E4CA827AE13DA00E822EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4CA727AE13DA00E822EB /* AppDelegate.swift */; };
 		353E4CAA27AE13DA00E822EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4CA927AE13DA00E822EB /* SceneDelegate.swift */; };
 		353E4CB227AE13DA00E822EB /* MyNearConvenienceStoreApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 353E4CB027AE13DA00E822EB /* MyNearConvenienceStoreApp.xcdatamodeld */; };
@@ -52,11 +55,6 @@
 		353E4D1927AE363100E822EB /* DetailListCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D1827AE363100E822EB /* DetailListCellData.swift */; };
 		353E4D1B27AE36B400E822EB /* LocationInfomationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D1A27AE36B400E822EB /* LocationInfomationViewController.swift */; };
 		353E4D1E27AE36F100E822EB /* LocationInfomationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D1D27AE36F100E822EB /* LocationInfomationViewModel.swift */; };
-		353E4D2127AE379800E822EB /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2027AE379800E822EB /* RxBlocking */; };
-		353E4D2327AE379800E822EB /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2227AE379800E822EB /* RxCocoa */; };
-		353E4D2527AE379800E822EB /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2427AE379800E822EB /* RxRelay */; };
-		353E4D2727AE379800E822EB /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2627AE379800E822EB /* RxSwift */; };
-		353E4D2927AE379800E822EB /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2827AE379800E822EB /* RxTest */; };
 		353E4D2C27AE37A500E822EB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D2B27AE37A500E822EB /* SnapKit */; };
 		353E4D2E27AE3EE700E822EB /* MTMapViewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D2D27AE3EE700E822EB /* MTMapViewError.swift */; };
 		353E4D3227AE4A8100E822EB /* DetailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D3127AE4A8100E822EB /* DetailListCell.swift */; };
@@ -65,9 +63,31 @@
 		353E4D3827AE6B5F00E822EB /* LocalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D3727AE6B5F00E822EB /* LocalAPI.swift */; };
 		353E4D3B27AEAE5300E822EB /* LocalNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D3A27AEAE5300E822EB /* LocalNetwork.swift */; };
 		353E4D3D27AEB07600E822EB /* LocationInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D3C27AEB07600E822EB /* LocationInformationModel.swift */; };
+		353E4D6527AF8E7D00E822EB /* LocalNetworkStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E4D6427AF8E7D00E822EB /* LocalNetworkStub.swift */; };
+		353E4D6827AF8EDE00E822EB /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D6727AF8EDE00E822EB /* RxBlocking */; };
+		353E4D6A27AF8EDE00E822EB /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D6927AF8EDE00E822EB /* RxCocoa */; };
+		353E4D6C27AF8EDE00E822EB /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D6B27AF8EDE00E822EB /* RxRelay */; };
+		353E4D6E27AF8EDE00E822EB /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D6D27AF8EDE00E822EB /* RxSwift */; };
+		353E4D7027AF8EDE00E822EB /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D6F27AF8EDE00E822EB /* RxTest */; };
+		353E4D7327AF8F1300E822EB /* Stubber in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D7227AF8F1300E822EB /* Stubber */; };
+		353E4D7627AF8F5100E822EB /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 353E4D7527AF8F5100E822EB /* Nimble */; };
+		353E4D7827AF900200E822EB /* networkDummy.json in Resources */ = {isa = PBXBuildFile; fileRef = 353E4D7727AF900200E822EB /* networkDummy.json */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		353E4D5F27AF8E4A00E822EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 353E4C9C27AE13DA00E822EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 353E4CA327AE13DA00E822EB;
+			remoteInfo = MyNearConvenienceStoreApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		352D54A727AF908D009FA90F /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		352D54A927AF91BF009FA90F /* LocationInformationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInformationModelTests.swift; sourceTree = "<group>"; };
+		352D54AB27AF9726009FA90F /* LocationInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInformationViewModelTests.swift; sourceTree = "<group>"; };
 		353E4CA427AE13DA00E822EB /* MyNearConvenienceStoreApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNearConvenienceStoreApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		353E4CA727AE13DA00E822EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		353E4CA927AE13DA00E822EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +151,9 @@
 		353E4D3727AE6B5F00E822EB /* LocalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAPI.swift; sourceTree = "<group>"; };
 		353E4D3A27AEAE5300E822EB /* LocalNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNetwork.swift; sourceTree = "<group>"; };
 		353E4D3C27AEB07600E822EB /* LocationInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInformationModel.swift; sourceTree = "<group>"; };
+		353E4D5B27AF8E4A00E822EB /* MyNearConvenienceStoreAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyNearConvenienceStoreAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		353E4D6427AF8E7D00E822EB /* LocalNetworkStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNetworkStub.swift; sourceTree = "<group>"; };
+		353E4D7727AF900200E822EB /* networkDummy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = networkDummy.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,20 +161,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				353E4D2927AE379800E822EB /* RxTest in Frameworks */,
 				353E4D1227AE338D00E822EB /* libsqlite3.tbd in Frameworks */,
-				353E4D2127AE379800E822EB /* RxBlocking in Frameworks */,
 				353E4D2C27AE37A500E822EB /* SnapKit in Frameworks */,
-				353E4D2327AE379800E822EB /* RxCocoa in Frameworks */,
+				353E4D6A27AF8EDE00E822EB /* RxCocoa in Frameworks */,
 				353E4D1027AE338500E822EB /* libxml2.tbd in Frameworks */,
 				353E4D0E27AE337A00E822EB /* libc++.tbd in Frameworks */,
 				353E4D0C27AE336F00E822EB /* QuartzCore.framework in Frameworks */,
-				353E4D2727AE379800E822EB /* RxSwift in Frameworks */,
+				353E4D6E27AF8EDE00E822EB /* RxSwift in Frameworks */,
 				353E4D0A27AE336600E822EB /* CoreLocation.framework in Frameworks */,
 				353E4D0827AE335C00E822EB /* SystemConfiguration.framework in Frameworks */,
 				353E4D0627AE331000E822EB /* OpenGLES.framework in Frameworks */,
 				353E4D0327AE329D00E822EB /* DaumMap.framework in Frameworks */,
-				353E4D2527AE379800E822EB /* RxRelay in Frameworks */,
+				353E4D6C27AF8EDE00E822EB /* RxRelay in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		353E4D5827AF8E4A00E822EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				353E4D7327AF8F1300E822EB /* Stubber in Frameworks */,
+				353E4D7627AF8F5100E822EB /* Nimble in Frameworks */,
+				353E4D7027AF8EDE00E822EB /* RxTest in Frameworks */,
+				353E4D6827AF8EDE00E822EB /* RxBlocking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				353E4CA627AE13DA00E822EB /* MyNearConvenienceStoreApp */,
+				353E4D5C27AF8E4A00E822EB /* MyNearConvenienceStoreAppTests */,
 				353E4CA527AE13DA00E822EB /* Products */,
 				353E4CBE27AE324300E822EB /* Frameworks */,
 			);
@@ -171,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				353E4CA427AE13DA00E822EB /* MyNearConvenienceStoreApp.app */,
+				353E4D5B27AF8E4A00E822EB /* MyNearConvenienceStoreAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -307,6 +341,18 @@
 			path = LocationInfo;
 			sourceTree = "<group>";
 		};
+		353E4D5C27AF8E4A00E822EB /* MyNearConvenienceStoreAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				353E4D7727AF900200E822EB /* networkDummy.json */,
+				352D54A727AF908D009FA90F /* Dummy.swift */,
+				353E4D6427AF8E7D00E822EB /* LocalNetworkStub.swift */,
+				352D54A927AF91BF009FA90F /* LocationInformationModelTests.swift */,
+				352D54AB27AF9726009FA90F /* LocationInformationViewModelTests.swift */,
+			);
+			path = MyNearConvenienceStoreAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -324,16 +370,38 @@
 			);
 			name = MyNearConvenienceStoreApp;
 			packageProductDependencies = (
-				353E4D2027AE379800E822EB /* RxBlocking */,
-				353E4D2227AE379800E822EB /* RxCocoa */,
-				353E4D2427AE379800E822EB /* RxRelay */,
-				353E4D2627AE379800E822EB /* RxSwift */,
-				353E4D2827AE379800E822EB /* RxTest */,
 				353E4D2B27AE37A500E822EB /* SnapKit */,
+				353E4D6927AF8EDE00E822EB /* RxCocoa */,
+				353E4D6B27AF8EDE00E822EB /* RxRelay */,
+				353E4D6D27AF8EDE00E822EB /* RxSwift */,
 			);
 			productName = MyNearConvenienceStoreApp;
 			productReference = 353E4CA427AE13DA00E822EB /* MyNearConvenienceStoreApp.app */;
 			productType = "com.apple.product-type.application";
+		};
+		353E4D5A27AF8E4A00E822EB /* MyNearConvenienceStoreAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 353E4D6127AF8E4A00E822EB /* Build configuration list for PBXNativeTarget "MyNearConvenienceStoreAppTests" */;
+			buildPhases = (
+				353E4D5727AF8E4A00E822EB /* Sources */,
+				353E4D5827AF8E4A00E822EB /* Frameworks */,
+				353E4D5927AF8E4A00E822EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				353E4D6027AF8E4A00E822EB /* PBXTargetDependency */,
+			);
+			name = MyNearConvenienceStoreAppTests;
+			packageProductDependencies = (
+				353E4D6727AF8EDE00E822EB /* RxBlocking */,
+				353E4D6F27AF8EDE00E822EB /* RxTest */,
+				353E4D7227AF8F1300E822EB /* Stubber */,
+				353E4D7527AF8F5100E822EB /* Nimble */,
+			);
+			productName = MyNearConvenienceStoreAppTests;
+			productReference = 353E4D5B27AF8E4A00E822EB /* MyNearConvenienceStoreAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -348,6 +416,11 @@
 					353E4CA327AE13DA00E822EB = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
+					353E4D5A27AF8E4A00E822EB = {
+						CreatedOnToolsVersion = 13.2.1;
+						LastSwiftMigration = 1320;
+						TestTargetID = 353E4CA327AE13DA00E822EB;
+					};
 				};
 			};
 			buildConfigurationList = 353E4C9F27AE13DA00E822EB /* Build configuration list for PBXProject "MyNearConvenienceStoreApp" */;
@@ -360,14 +433,17 @@
 			);
 			mainGroup = 353E4C9B27AE13DA00E822EB;
 			packageReferences = (
-				353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */,
 				353E4D2A27AE37A500E822EB /* XCRemoteSwiftPackageReference "SnapKit" */,
+				353E4D6627AF8EDE00E822EB /* XCRemoteSwiftPackageReference "RxSwift" */,
+				353E4D7127AF8F1300E822EB /* XCRemoteSwiftPackageReference "Stubber" */,
+				353E4D7427AF8F5100E822EB /* XCRemoteSwiftPackageReference "Nimble" */,
 			);
 			productRefGroup = 353E4CA527AE13DA00E822EB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				353E4CA327AE13DA00E822EB /* MyNearConvenienceStoreApp */,
+				353E4D5A27AF8E4A00E822EB /* MyNearConvenienceStoreAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -409,6 +485,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		353E4D5927AF8E4A00E822EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				353E4D7827AF900200E822EB /* networkDummy.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -434,7 +518,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		353E4D5727AF8E4A00E822EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				352D54AC27AF9727009FA90F /* LocationInformationViewModelTests.swift in Sources */,
+				352D54A827AF908D009FA90F /* Dummy.swift in Sources */,
+				353E4D6527AF8E7D00E822EB /* LocalNetworkStub.swift in Sources */,
+				352D54AA27AF91BF009FA90F /* LocationInformationModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		353E4D6027AF8E4A00E822EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 353E4CA327AE13DA00E822EB /* MyNearConvenienceStoreApp */;
+			targetProxy = 353E4D5F27AF8E4A00E822EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		353E4CB527AE13DF00E822EB /* LaunchScreen.storyboard */ = {
@@ -581,14 +684,17 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyNearConvenienceStoreApp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "내 주변의 편의점 정보를 불러오려면 현재 위치가 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					"$(PLATFORM_DIR)/Developer/usr/lib",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.derek1119.MyNearConvenienceStoreApp;
@@ -616,14 +722,17 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyNearConvenienceStoreApp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "내 주변의 편의점 정보를 불러오려면 현재 위치가 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					"$(PLATFORM_DIR)/Developer/usr/lib",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.derek1119.MyNearConvenienceStoreApp;
@@ -632,6 +741,59 @@
 				SWIFT_OBJC_BRIDGING_HEADER = /Users/shhong/Documents/GitHub/miniProjects/MyNearConvenienceStoreApp/MyNearConvenienceStoreApp/BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		353E4D6227AF8E4A00E822EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 96H5TT55S4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.derek1119.MyNearConvenienceStoreAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyNearConvenienceStoreApp.app/MyNearConvenienceStoreApp";
+			};
+			name = Debug;
+		};
+		353E4D6327AF8E4A00E822EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 96H5TT55S4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.derek1119.MyNearConvenienceStoreAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyNearConvenienceStoreApp.app/MyNearConvenienceStoreApp";
 			};
 			name = Release;
 		};
@@ -656,17 +818,18 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		353E4D6127AF8E4A00E822EB /* Build configuration list for PBXNativeTarget "MyNearConvenienceStoreAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				353E4D6227AF8E4A00E822EB /* Debug */,
+				353E4D6327AF8E4A00E822EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
 		353E4D2A27AE37A500E822EB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -675,38 +838,72 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		353E4D6627AF8EDE00E822EB /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		353E4D7127AF8F1300E822EB /* XCRemoteSwiftPackageReference "Stubber" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Stubber";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		353E4D7427AF8F5100E822EB /* XCRemoteSwiftPackageReference "Nimble" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Nimble";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		353E4D2027AE379800E822EB /* RxBlocking */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxBlocking;
-		};
-		353E4D2227AE379800E822EB /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		353E4D2427AE379800E822EB /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
-		};
-		353E4D2627AE379800E822EB /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-		353E4D2827AE379800E822EB /* RxTest */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 353E4D1F27AE379800E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxTest;
-		};
 		353E4D2B27AE37A500E822EB /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 353E4D2A27AE37A500E822EB /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		353E4D6727AF8EDE00E822EB /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D6627AF8EDE00E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		353E4D6927AF8EDE00E822EB /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D6627AF8EDE00E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		353E4D6B27AF8EDE00E822EB /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D6627AF8EDE00E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		353E4D6D27AF8EDE00E822EB /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D6627AF8EDE00E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		353E4D6F27AF8EDE00E822EB /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D6627AF8EDE00E822EB /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
+		};
+		353E4D7227AF8F1300E822EB /* Stubber */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D7127AF8F1300E822EB /* XCRemoteSwiftPackageReference "Stubber" */;
+			productName = Stubber;
+		};
+		353E4D7527AF8F5100E822EB /* Nimble */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 353E4D7427AF8F5100E822EB /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
 		};
 /* End XCSwiftPackageProductDependency section */
 
