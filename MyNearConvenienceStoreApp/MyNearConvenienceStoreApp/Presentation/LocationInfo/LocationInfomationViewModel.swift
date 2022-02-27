@@ -68,7 +68,9 @@ struct LocationInfomationViewModel {
         
         //MARK: 지도 중심점 설정
         let selectDetailListItem = detailListItemSelected
-            .withLatestFrom(documentData) { $1[$0] }
+            .withLatestFrom(documentData) { selectedIndex, datas in
+                datas[selectedIndex]
+            }
             .map { data -> MTMapPoint in
                 guard let longitude = Double(data.x),
                       let latitude = Double(data.y) else { return MTMapPoint() }
